@@ -2,6 +2,8 @@ import THREE from 'three'
 import assign from 'object-assign'
 import loop from 'raf-loop'
 
+import Player from './player'
+
 const width = 300;
 const height = 500;
 
@@ -9,7 +11,7 @@ const canvas = document.createElement('canvas')
 canvas.width = width;
 canvas.height = height;
 
-    document.body.appendChild(canvas);
+document.body.appendChild(canvas);
 
 const renderer = new THREE.WebGLRenderer(assign({
     canvas: canvas
@@ -18,10 +20,7 @@ const renderer = new THREE.WebGLRenderer(assign({
 const gl = renderer.getContext()
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 70, width / height, 1, 1000);
-camera.position.z = 6;
-camera.position.y = 0;
-camera.position.x = 0;
+const player = new Player(null, null);
 
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( width, height );
@@ -39,7 +38,7 @@ r.rotation.y = Math.PI / 2;
 scene.add(r);
 
 console.log(p);
-console.log(camera);
+console.log(player.camera);
 
 const mat2 = new THREE.MeshBasicMaterial({color: 0xff00ff, side: THREE.DoubleSide });
 const floor = new THREE.Mesh(geo, mat2);
@@ -58,7 +57,7 @@ r2.position.z = 9;
 scene.add(r2);
 
 console.log(p2);
-console.log(camera);
+console.log(player.camera);
 
 const mat3 = new THREE.MeshBasicMaterial({color: 0xff0000, side: THREE.DoubleSide });
 const floor2 = new THREE.Mesh(geo, mat3);
@@ -71,38 +70,7 @@ scene.add(floor2);
 
 function render() {
     requestAnimationFrame( render );
-    renderer.render( scene, camera );
+    renderer.render( scene, player.camera );
 }
 render();
 
-let facing = 0;
-
-function moveCamera(back=false) { 
-    let mult = 1;
-    if(back) { mult = -1; }
-    if(facing == 0) {
-        camera.position.z -= 6 * mult;
-    } else if(facing == 1) {
-        camera.position.x -= 6 * mult;
-    } else if(facing == 2) { 
-        camera.position.z += 6* mult;
-    } else if (facing == 3) {
-        camera.position.x += 6 * mult;
-    }
-}
-
-document.addEventListener('keydown', function(event) { 
-    if(event.keyCode == 37) {
-        camera.rotation.y += Math.PI / 2;
-        facing += 1; 
-        if(facing > 3) { facing = 0; }
-    } else if(event.keyCode == 38) {
-        moveCamera();
-    } else if(event.keyCode == 39) {
-        camera.rotation.y -= Math.PI / 2;
-        facing -= 1;
-        if(facing < 0) { facing = 3; }
-    } else if(event.keyCode == 40) {
-        moveCamera(true);
-    }
-});
