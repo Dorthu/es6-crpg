@@ -6,7 +6,7 @@ import Grid from './grid'
 import Wall from './wall'
 import Space from './space'
 
-const width = 300;
+const width = 600;
 const height = 500;
 
 const canvas = document.createElement('canvas')
@@ -20,7 +20,7 @@ const renderer = new THREE.WebGLRenderer(assign({
 }))
 
 const grid = new Grid();
-const player = new Player(null, null);
+const player = new Player(grid, { x: 0, y: 0, z: 0 });
 
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( width, height );
