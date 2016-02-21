@@ -1,4 +1,5 @@
 import THREE from 'three'
+import assign from 'object-assign'
 
 class Space {
     constructor(grid, loc, mat, geo) {
@@ -7,9 +8,14 @@ class Space {
 
         this.meshes = [ new THREE.Mesh(geo, mat) ];
 
-        this.meshes[0].position.x = loc.x;
-        this.meshes[0].position.y -= 3;
-        this.meshes[0].position.z = loc.z;
+        let pos = {};
+        assign(pos, this.loc);
+        pos.y -= .5;
+        pos = this.grid.translate(pos);
+
+        this.meshes[0].position.x = pos.x;
+        this.meshes[0].position.y = pos.y;
+        this.meshes[0].position.z = pos.z;
         this.meshes[0].rotation.x = Math.PI / 2;
         
         this.grid.scene.add(this.meshes[0]);

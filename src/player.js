@@ -11,6 +11,7 @@ class Player {
         this.camera.position.y = loc.y;
         this.camera.position.z = loc.z;
 
+        this.position_camera();
         document.addEventListener('keydown', ent => this.input(ent));
     }
 
@@ -18,21 +19,22 @@ class Player {
         let mult = 1;
         if(back) { mult = -1; }
         if(this.facing == 0) {
-            this.loc.z -= 6 * mult;
+            this.loc.z -= 1 * mult;
         } else if(this.facing == 1) {
-            this.loc.x -= 6 * mult;
+            this.loc.x -= 1 * mult;
         } else if(this.facing == 2) {
-            this.loc.z += 6* mult;
+            this.loc.z += 1 * mult;
         } else if(this.facing == 3) {
-            this.loc.x += 6 * mult;
+            this.loc.x += 1 * mult;
         }
         this.position_camera();
     }
 
     position_camera() {
-        this.camera.position.x = this.loc.x;
-        this.camera.position.y = this.loc.y;
-        this.camera.position.z = this.loc.z;
+        let c = this.grid.translate(this.loc);
+        this.camera.position.x = c.x;
+        this.camera.position.y = c.y;
+        this.camera.position.z = c.z;
         this.camera.rotation.y = this.facing * (Math.PI / 2);
 
         if(this.facing == 0) {

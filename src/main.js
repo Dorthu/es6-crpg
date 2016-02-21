@@ -28,25 +28,27 @@ renderer.setSize( width, height );
 const geo = new THREE.PlaneGeometry(6,6);
 const mat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide });
 const mat2 = new THREE.MeshBasicMaterial({color: 0xff00ff, side: THREE.DoubleSide });
+const mat3 = new THREE.MeshBasicMaterial({color: 0xff0000, side: THREE.DoubleSide });
 
 const floors = [
     new Space(grid, { x: 0, y: 0, z: 0 }, mat2, geo),
-    new Space(grid, { x: 0, y: 0, z: 6 }, mat2, geo),
-    new Space(grid, { x: 0, y: 0, z: 12 }, mat2, geo),
-    new Space(grid, { x: 6, y: 0, z: 12 }, mat2, geo),
-    new Space(grid, { x: 12, y: 0, z: 12 }, mat2, geo),
+    new Space(grid, { x: 0, y: 0, z: 1 }, mat2, geo),
+    new Space(grid, { x: 0, y: 0, z: 2 }, mat2, geo),
+    new Space(grid, { x: 1, y: 0, z: 2 }, mat2, geo),
+    new Space(grid, { x: 2, y: 0, z: 2 }, mat2, geo),
+    new Space(grid, { x: 0, y: 0, z: -1 }, mat3, geo),
 ];
 
 const walls = [
-    new Wall(grid, { x: 6, y: 0, z: 0 }, mat, geo),
-    new Wall(grid, { x: -6, y: 0, z: 0 }, mat, geo),
-    new Wall(grid, { x: 6, y: 0, z: 6 }, mat, geo),
-    new Wall(grid, { x: -6, y: 0, z: 6 }, mat, geo),
-    new Wall(grid, { x: -6, y: 0, z: 12 }, mat, geo),
-    new Wall(grid, { x: 0, y: 0, z: 18 }, mat, geo),
-    new Wall(grid, { x: 6, y: 0, z: 18 }, mat, geo),
-    new Wall(grid, { x: 12, y: 0, z: 18 }, mat, geo),
-    new Wall(grid, { x: 12, y: 0, z: 6 }, mat, geo),
+    new Wall(grid, { x: 1, y: 0, z: 0 }, mat, geo),
+    new Wall(grid, { x: -1, y: 0, z: 0 }, mat, geo),
+    new Wall(grid, { x: 1, y: 0, z: 1 }, mat, geo),
+    new Wall(grid, { x: -1, y: 0, z: 1 }, mat, geo),
+    new Wall(grid, { x: -1, y: 0, z: 2 }, mat, geo),
+    new Wall(grid, { x: 0, y: 0, z: 3 }, mat, geo),
+    new Wall(grid, { x: 1, y: 0, z: 3 }, mat, geo),
+    new Wall(grid, { x: 2, y: 0, z: 3 }, mat, geo),
+    new Wall(grid, { x: 2, y: 0, z: 1 }, mat, geo),
 ];
 
 for ( let w of walls ) { console.log(w); console.log(w.meshes[0]); }
