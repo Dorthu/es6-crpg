@@ -1,6 +1,5 @@
 import THREE from 'three'
 import assign from 'object-assign'
-import loop from 'raf-loop'
 
 import Player from './player'
 import Grid from './grid'
@@ -19,8 +18,6 @@ document.body.appendChild(canvas);
 const renderer = new THREE.WebGLRenderer(assign({
     canvas: canvas
 }))
-
-const gl = renderer.getContext()
 
 const grid = new Grid();
 const player = new Player(null, null);
