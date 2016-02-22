@@ -30,29 +30,29 @@ const mat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide
 const mat2 = new THREE.MeshBasicMaterial({color: 0xff00ff, side: THREE.DoubleSide });
 const mat3 = new THREE.MeshBasicMaterial({color: 0xff0000, side: THREE.DoubleSide });
 
+const floor_params = [mat2, geo];
 const floors = [
-    new Space(grid, { x: 0, y: 0, z: 0 }, mat2, geo),
-    new Space(grid, { x: 0, y: 0, z: 1 }, mat2, geo),
-    new Space(grid, { x: 0, y: 0, z: 2 }, mat2, geo),
-    new Space(grid, { x: 1, y: 0, z: 2 }, mat2, geo),
-    new Space(grid, { x: 2, y: 0, z: 2 }, mat2, geo),
-    new Space(grid, { x: 0, y: 0, z: -1 }, mat3, geo),
+    grid.create(Space, { x: 0, y: 0, z: 0 }, floor_params),
+    grid.create(Space, { x: 0, y: 0, z: 1 }, floor_params),
+    grid.create(Space, { x: 0, y: 0, z: 2 }, floor_params),
+    grid.create(Space, { x: 1, y: 0, z: 2 }, floor_params),
+    grid.create(Space, { x: 2, y: 0, z: 2 }, floor_params),
+    grid.create(Space, { x: 0, y: 0, z: -1 }, [mat3, geo]),
 ];
 
+const wall_params = [mat, geo];
 const walls = [
-    new Wall(grid, { x: 1, y: 0, z: 0 }, mat, geo),
-    new Wall(grid, { x: -1, y: 0, z: 0 }, mat, geo),
-    new Wall(grid, { x: 1, y: 0, z: 1 }, mat, geo),
-    new Wall(grid, { x: -1, y: 0, z: 1 }, mat, geo),
-    new Wall(grid, { x: -1, y: 0, z: 2 }, mat, geo),
-    new Wall(grid, { x: 0, y: 0, z: 3 }, mat, geo),
-    new Wall(grid, { x: 1, y: 0, z: 3 }, mat, geo),
-    new Wall(grid, { x: 2, y: 0, z: 3 }, mat, geo),
-    new Wall(grid, { x: 2, y: 0, z: 1 }, mat, geo),
+    grid.create(Wall, { x: 1, y: 0, z: 0 }, wall_params),
+    grid.create(Wall, { x: -1, y: 0, z: 0 }, wall_params),
+    grid.create(Wall, { x: 1, y: 0, z: 1 }, wall_params),
+    grid.create(Wall, { x: -1, y: 0, z: 1 }, wall_params),
+    grid.create(Wall, { x: -1, y: 0, z: 2 }, wall_params),
+    grid.create(Wall, { x: 0, y: 0, z: 3 }, wall_params),
+    grid.create(Wall, { x: 1, y: 0, z: 3 }, wall_params),
+    grid.create(Wall, { x: 2, y: 0, z: 3 }, wall_params),
+    grid.create(Wall, { x: 2, y: 0, z: 1 }, wall_params),
+    grid.create(Wall, {x: 0, z: -2}, wall_params),
 ];
-
-for ( let w of walls ) { console.log(w); console.log(w.meshes[0]); }
-
 
 function render() {
     requestAnimationFrame( render );

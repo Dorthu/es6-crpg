@@ -1,4 +1,5 @@
 import THREE from 'three'
+import assign from 'object-assign'
 
 class Player {
     constructor(grid, loc, facing=0) {
@@ -16,17 +17,21 @@ class Player {
     }
 
     move(back=false) {
+        let nloc = {};
+        assign(nloc, this.loc);
         let mult = 1;
         if(back) { mult = -1; }
         if(this.facing == 0) {
-            this.loc.z -= 1 * mult;
+            nloc.z -= 1 * mult;
         } else if(this.facing == 1) {
-            this.loc.x -= 1 * mult;
+            nloc.x -= 1 * mult;
         } else if(this.facing == 2) {
-            this.loc.z += 1 * mult;
+            nloc.z += 1 * mult;
         } else if(this.facing == 3) {
-            this.loc.x += 1 * mult;
+            nloc.x += 1 * mult;
         }
+        if(this.grid.can_move_to(nloc)) { this.loc = nloc; }
+
         this.position_camera();
     }
 
