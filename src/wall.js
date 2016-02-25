@@ -1,4 +1,4 @@
-import THREE from 'three'
+import THREE from './Three'
 import assign from 'object-assign'
 
 class Wall {
