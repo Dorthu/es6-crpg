@@ -19,7 +19,6 @@ class Grid {
     put(x, y, thing) {
         if(this.grid[x] == null) { this.grid[x] = []; }
         this.grid[x][y] = thing;
-        console.log("Putting " + thing + " at ("+x+","+y+")");
     }
 
     get(x, y) {

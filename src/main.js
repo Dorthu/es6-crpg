@@ -26,11 +26,20 @@ renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( width, height );
 
 const geo = new THREE.PlaneGeometry(6,6);
-const mat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide });
-const mat2 = new THREE.MeshBasicMaterial({color: 0xff00ff, side: THREE.DoubleSide });
-const mat3 = new THREE.MeshBasicMaterial({color: 0xff0000, side: THREE.DoubleSide });
+const mat = new THREE.MeshLambertMaterial({color: 0xffff00, side: THREE.DoubleSide });
+const mat2 = new THREE.MeshLambertMaterial({color: 0xff00ff, side: THREE.DoubleSide });
+const mat3 = new THREE.MeshLambertMaterial({color: 0xff0000, side: THREE.DoubleSide });
 
-const floor_params = [mat2, geo];
+const light = new THREE.AmbientLight( 0xBBBBBB ); // soft white light
+grid.scene.add( light ); console.log(light);
+const texture = new THREE.ImageUtils.loadTexture('resources/textures/debug.png');
+const texture_mat = new THREE.MeshLambertMaterial({map: texture, side: THREE.DoubleSide});
+const walltex = new THREE.TextureLoader().load('resources/textures/debug-2.png');
+const wall_mat = new THREE.MeshLambertMaterial({map: walltex, side: THREE.DoubleSide});
+console.log(texture);
+console.log(texture_mat);
+
+const floor_params = [texture_mat, geo];
 const floors = [
     grid.create(Space, { x: 0, y: 0, z: 0 }, floor_params),
     grid.create(Space, { x: 0, y: 0, z: 1 }, floor_params),
@@ -40,7 +49,7 @@ const floors = [
     grid.create(Space, { x: 0, y: 0, z: -1 }, [mat3, geo]),
 ];
 
-const wall_params = [mat, geo];
+const wall_params = [wall_mat, geo];
 const walls = [
     grid.create(Wall, { x: 1, y: 0, z: 0 }, wall_params),
     grid.create(Wall, { x: -1, y: 0, z: 0 }, wall_params),
@@ -59,4 +68,3 @@ function render() {
     renderer.render( grid.scene, player.camera );
 }
 render();
-
