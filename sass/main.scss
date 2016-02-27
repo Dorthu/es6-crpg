@@ -7,15 +7,24 @@ body {
         color: white;
         overflow: scroll;
         height: 50px;
-        
+
         p {
             margin-bottom: 0px;
             padding-bottom: 0px;
         }
     }
 
-    #inventory { 
+    #inventory {
         background-color: grey;
         height: 500px;
+
+        .invitem {
+            border: 1px solid black;
+            border-radius: 5px;
+            height: 50px;
+            &:hover {
+                background-color: blue;
+            }
+        }
     }
 }

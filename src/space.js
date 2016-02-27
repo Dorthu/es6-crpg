@@ -1,8 +1,10 @@
 import THREE from './Three'
 import assign from 'object-assign'
+import GridObject from './grid_object'
 
-class Space {
+class Space extends GridObject {
     constructor(grid, loc, mat, geo) {
+        super();
         this.grid = grid;
         this.loc = loc;
 

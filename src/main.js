@@ -6,6 +6,7 @@ import Player from './player'
 import Grid from './grid'
 import Wall from './wall'
 import Space from './space'
+import CeilingSpace from './ceiling_space'
 
 const width = 600;
 const height = 500;
@@ -38,14 +39,14 @@ const texture_mat = new THREE.MeshLambertMaterial({map: texture, side: THREE.Dou
 const walltex = new THREE.TextureLoader().load('resources/textures/debug-2.png');
 const wall_mat = new THREE.MeshLambertMaterial({map: walltex, side: THREE.DoubleSide});
 
-const floor_params = [texture_mat, geo];
+const floor_params = [texture_mat, geo, mat2];
 const floors = [
-    grid.create(Space, { x: 0, y: 0, z: 0 }, floor_params),
-    grid.create(Space, { x: 0, y: 0, z: 1 }, floor_params),
-    grid.create(Space, { x: 0, y: 0, z: 2 }, floor_params),
-    grid.create(Space, { x: 1, y: 0, z: 2 }, floor_params),
-    grid.create(Space, { x: 2, y: 0, z: 2 }, floor_params),
-    grid.create(Space, { x: 0, y: 0, z: -1 }, [mat3, geo]),
+    grid.create(CeilingSpace, { x: 0, y: 0, z: 0 }, floor_params),
+    grid.create(CeilingSpace, { x: 0, y: 0, z: 1 }, floor_params),
+    grid.create(CeilingSpace, { x: 0, y: 0, z: 2 }, floor_params),
+    grid.create(CeilingSpace, { x: 1, y: 0, z: 2 }, floor_params),
+    grid.create(CeilingSpace, { x: 2, y: 0, z: 2 }, floor_params),
+    grid.create(CeilingSpace, { x: 0, y: 0, z: -1 }, [mat3, geo, mat2]),
 ];
 
 const wall_params = [wall_mat, geo];
