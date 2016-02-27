@@ -2,8 +2,6 @@ require('../sass/main.scss');
 import THREE from './Three'
 import assign from 'object-assign'
 
-console.log("something something");
-
 import Player from './player'
 import Grid from './grid'
 import Wall from './wall'
@@ -34,13 +32,11 @@ const mat2 = new THREE.MeshLambertMaterial({color: 0xff00ff, side: THREE.DoubleS
 const mat3 = new THREE.MeshLambertMaterial({color: 0xff0000, side: THREE.DoubleSide });
 
 const light = new THREE.AmbientLight( 0xBBBBBB ); // soft white light
-grid.scene.add( light ); console.log(light);
+grid.scene.add( light );
 const texture = new THREE.ImageUtils.loadTexture('resources/textures/debug.png');
 const texture_mat = new THREE.MeshLambertMaterial({map: texture, side: THREE.DoubleSide});
 const walltex = new THREE.TextureLoader().load('resources/textures/debug-2.png');
 const wall_mat = new THREE.MeshLambertMaterial({map: walltex, side: THREE.DoubleSide});
-console.log(texture);
-console.log(texture_mat);
 
 const floor_params = [texture_mat, geo];
 const floors = [

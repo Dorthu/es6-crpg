@@ -1,8 +1,11 @@
 import THREE from './Three'
 import assign from 'object-assign'
+import SolidObject from './solid'
 
-class Wall {
+class Wall extends SolidObject {
     constructor(grid, loc, mat, geo) {
+        super();
+
         this.grid = grid;
         this.loc = loc;
 

@@ -1,7 +1,6 @@
 
 class LogBox {
     constructor() {
-        console.log("this is the log box speaking");
         this.ele = document.getElementById("textbox");
     }
 

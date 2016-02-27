@@ -18,7 +18,6 @@ class Player {
         this.position_camera();
         document.addEventListener('keydown', ent => this.input(ent));
 
-console.log("made player");
         this.logbox = new LogBox();
     }
 
@@ -36,10 +35,12 @@ console.log("made player");
         } else if(this.facing == 3) {
             nloc.x += 1 * mult;
         }
-        if(this.grid.can_move_to(nloc)) { this.loc = nloc; }
+        if(this.grid.can_move_to(nloc)) {
+            this.loc = nloc;
+            this.logbox.add_message('moves '+dirs[this.facing]);
+        }
 
         this.position_camera();
-        this.logbox.add_message('moves '+dirs[this.facing]);
     }
 
     position_camera() {

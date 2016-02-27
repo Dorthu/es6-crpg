@@ -22,7 +22,7 @@ class Grid {
     }
 
     get(x, y) {
-        if(this.grid.length < x) { return null; }
+        if(this.grid.length <= x) { return null; }
         return this.grid[x][y];
     }
 
@@ -31,8 +31,9 @@ class Grid {
     }
 
     can_move_to(pos) {
-        ///obvious TODO
-        return this.get(pos.x, pos.z).constructor.name === 'Space';
+        let loc = this.get(pos.x, pos.z);
+        if(!loc) { return false; }
+        return !loc.solid;
     }
 }
 
