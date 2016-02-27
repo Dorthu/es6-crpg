@@ -1,5 +1,8 @@
+require('../sass/main.scss');
 import THREE from './Three'
 import assign from 'object-assign'
+
+console.log("something something");
 
 import Player from './player'
 import Grid from './grid'
@@ -13,7 +16,7 @@ const canvas = document.createElement('canvas')
 canvas.width = width;
 canvas.height = height;
 
-document.body.appendChild(canvas);
+document.getElementById("canvas_goes_here").appendChild(canvas);
 
 const renderer = new THREE.WebGLRenderer(assign({
     canvas: canvas

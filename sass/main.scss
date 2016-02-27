@@ -1,0 +1,21 @@
+$body_bg: lightgrey;
+
+body {
+    background-color: $body_bg;
+    #textbox {
+        background-color: black;
+        color: white;
+        overflow: scroll;
+        height: 50px;
+        
+        p {
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+        }
+    }
+
+    #inventory { 
+        background-color: grey;
+        height: 500px;
+    }
+}

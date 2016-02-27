@@ -1,10 +1,18 @@
 <html>
 <head><title>dev site</title>
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
 </head>
 <body>
 
-    <script src="bundle.js"></script>
-    <div id="canvas_goes_here"></div>
+    <div class='container'>
+        <div class='row'>
+            <div class='col-md-6' id="canvas_goes_here"></div>
+            <div class='col-md-6' id="inventory"></div>
+            <div class='col-md-12' id="textbox"></div>
+        </div>
+    </div>
 
+    <script src="bundle.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js" />
 </body>
 </html>

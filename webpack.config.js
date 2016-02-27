@@ -1,3 +1,4 @@
+require('es6-promise').polyfill();
 var path = require('path');
 module.exports = {
     entry: './src/main.js',
@@ -14,6 +15,10 @@ module.exports = {
               query: {
                   presets: ['es2015']
               }
+            },
+            {
+                test: /\.scss$/,
+                loader: "style!css!sass"
             }
         ]
     }

@@ -1,5 +1,8 @@
 import THREE from './Three'
 import assign from 'object-assign'
+import LogBox from './logbox'
+
+const dirs = [ 'north', 'east', 'south', 'west' ];
 
 class Player {
     constructor(grid, loc, facing=0) {
@@ -14,6 +17,9 @@ class Player {
 
         this.position_camera();
         document.addEventListener('keydown', ent => this.input(ent));
+
+console.log("made player");
+        this.logbox = new LogBox();
     }
 
     move(back=false) {
@@ -33,6 +39,7 @@ class Player {
         if(this.grid.can_move_to(nloc)) { this.loc = nloc; }
 
         this.position_camera();
+        this.logbox.add_message('moves '+dirs[this.facing]);
     }
 
     position_camera() {
@@ -57,12 +64,14 @@ class Player {
         if(event.keyCode == 37) {
             this.facing += 1;
             if(this.facing > 3) { this.facing = 0; }
+            this.logbox.add_message('faces '+dirs[this.facing]);
             this.position_camera();
         } else if(event.keyCode == 38) {
             this.move();
         } else if(event.keyCode == 39) {
             this.facing -= 1;
             if(this.facing < 0) { this.facing = 3; }
+            this.logbox.add_message('faces '+dirs[this.facing]);
             this.position_camera();
         } else if(event.keyCode == 40) {
             this.move(true);
