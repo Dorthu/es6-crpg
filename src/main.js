@@ -38,6 +38,8 @@ const texture = new THREE.ImageUtils.loadTexture('resources/textures/debug.png')
 const texture_mat = new THREE.MeshLambertMaterial({map: texture, side: THREE.DoubleSide});
 const walltex = new THREE.TextureLoader().load('resources/textures/debug-2.png');
 const wall_mat = new THREE.MeshLambertMaterial({map: walltex, side: THREE.DoubleSide});
+const doortex = new THREE.TextureLoader().load('resources/textures/debug-door.png');
+const door_mat = new THREE.MeshLambertMaterial({map: doortex, side: THREE.DoubleSide});
 
 const floor_params = [texture_mat, geo, mat2];
 const floors = [
@@ -50,6 +52,7 @@ const floors = [
 ];
 
 const wall_params = [wall_mat, geo];
+const door_params = [door_mat, geo];
 const walls = [
     grid.create(Wall, { x: 1, y: 0, z: 0 }, wall_params),
     grid.create(Wall, { x: -1, y: 0, z: 0 }, wall_params),
@@ -61,6 +64,7 @@ const walls = [
     grid.create(Wall, { x: 2, y: 0, z: 3 }, wall_params),
     grid.create(Wall, { x: 2, y: 0, z: 1 }, wall_params),
     grid.create(Wall, {x: 0, z: -2}, wall_params),
+    grid.create(Wall, {x: 3, z: 2}, door_params),
 ];
 
 function render() {
