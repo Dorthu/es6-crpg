@@ -27,17 +27,23 @@ class Player {
         let mult = 1;
         if(back) { mult = -1; }
         if(this.facing == 0) {
-            nloc.z -= 1 * mult;
-        } else if(this.facing == 1) {
-            nloc.x -= 1 * mult;
-        } else if(this.facing == 2) {
             nloc.z += 1 * mult;
-        } else if(this.facing == 3) {
+        } else if(this.facing == 1) {
             nloc.x += 1 * mult;
+        } else if(this.facing == 2) {
+            nloc.z -= 1 * mult;
+        } else if(this.facing == 3) {
+            nloc.x -= 1 * mult;
         }
         if(this.grid.can_move_to(nloc)) {
             this.loc = nloc;
-            this.logbox.add_message('moves '+dirs[this.facing]);
+            if(back) {
+                this.logbox.add_message('moves '+dirs[this.facing]);
+            } else {
+                let f = this.facing + 2;
+                if(f > 3) { f -= 4; }
+                this.logbox.add_message('moves '+dirs[f]);
+            }
         }
 
         this.position_camera();
@@ -61,6 +67,23 @@ class Player {
         }
     }
 
+    look() {
+        let target = {};
+        assign(target, this.loc);
+
+        this.facing == 0 ? target.z -= 1 :
+        this.facing == 1 ? target.x -= 1 :
+        this.facing == 2 ? target.z += 1 :
+                           target.x += 1 ;
+
+        let obj = this.grid.get(target.x, target.z);
+
+        this.logbox.add_message('looks..');
+        if(obj && obj.desc) {
+            this.logbox.add_message(obj.desc);
+        }
+    }
+
     input(event) {
         if(event.keyCode == 37) {
             this.facing += 1;
@@ -68,14 +91,16 @@ class Player {
             this.logbox.add_message('faces '+dirs[this.facing]);
             this.position_camera();
         } else if(event.keyCode == 38) {
-            this.move();
+            this.move(true);
         } else if(event.keyCode == 39) {
             this.facing -= 1;
             if(this.facing < 0) { this.facing = 3; }
             this.logbox.add_message('faces '+dirs[this.facing]);
             this.position_camera();
         } else if(event.keyCode == 40) {
-            this.move(true);
+            this.move();
+        } else if(event.keyCode == 76) {
+            this.look();
         }
     }
 

@@ -3,8 +3,8 @@ import assign from 'object-assign'
 import Space from './space'
 
 class CeilingSpace extends Space {
-    constructor(grid, loc, mat, geo, cmat) { 
-        super(grid, loc, mat, geo);
+    constructor(grid, loc, mat, geo, desc, cmat) {
+        super(grid, loc, mat, geo, desc);
 
         let pos = {};
         assign(pos, this.loc);
@@ -16,7 +16,7 @@ class CeilingSpace extends Space {
         this.meshes[1].position.y = pos.y;
         this.meshes[1].position.z = pos.z;
         this.meshes[1].rotation.x = Math.PI / 2;
-        
+
         this.grid.scene.add(this.meshes[1]);
     }
 }

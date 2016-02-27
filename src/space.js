@@ -3,10 +3,11 @@ import assign from 'object-assign'
 import GridObject from './grid_object'
 
 class Space extends GridObject {
-    constructor(grid, loc, mat, geo) {
+    constructor(grid, loc, mat, geo, desc) {
         super();
         this.grid = grid;
         this.loc = loc;
+        this.desc = desc;
 
         this.meshes = [ new THREE.Mesh(geo, mat) ];
 

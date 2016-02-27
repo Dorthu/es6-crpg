@@ -3,11 +3,12 @@ import assign from 'object-assign'
 import SolidObject from './solid'
 
 class Wall extends SolidObject {
-    constructor(grid, loc, mat, geo) {
+    constructor(grid, loc, mat, geo, desc) {
         super();
 
         this.grid = grid;
         this.loc = loc;
+        this.desc = desc;
 
         this.meshes = [
             new THREE.Mesh(geo, mat),

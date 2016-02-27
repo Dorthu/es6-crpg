@@ -41,30 +41,32 @@ const wall_mat = new THREE.MeshLambertMaterial({map: walltex, side: THREE.Double
 const doortex = new THREE.TextureLoader().load('resources/textures/debug-door.png');
 const door_mat = new THREE.MeshLambertMaterial({map: doortex, side: THREE.DoubleSide});
 
-const floor_params = [texture_mat, geo, mat2];
+const floor_params = [texture_mat, geo, '', mat2];
 const floors = [
     grid.create(CeilingSpace, { x: 0, y: 0, z: 0 }, floor_params),
     grid.create(CeilingSpace, { x: 0, y: 0, z: 1 }, floor_params),
     grid.create(CeilingSpace, { x: 0, y: 0, z: 2 }, floor_params),
     grid.create(CeilingSpace, { x: 1, y: 0, z: 2 }, floor_params),
     grid.create(CeilingSpace, { x: 2, y: 0, z: 2 }, floor_params),
-    grid.create(CeilingSpace, { x: 0, y: 0, z: -1 }, [mat3, geo, mat2]),
+    grid.create(CeilingSpace, { x: 0, y: 0, z: -1 }, [mat3, geo, 'The floor is a weird color.', mat2]),
 ];
 
 const wall_params = [wall_mat, geo];
 const door_params = [door_mat, geo];
 const walls = [
-    grid.create(Wall, { x: 1, y: 0, z: 0 }, wall_params),
-    grid.create(Wall, { x: -1, y: 0, z: 0 }, wall_params),
-    grid.create(Wall, { x: 1, y: 0, z: 1 }, wall_params),
-    grid.create(Wall, { x: -1, y: 0, z: 1 }, wall_params),
-    grid.create(Wall, { x: -1, y: 0, z: 2 }, wall_params),
-    grid.create(Wall, { x: 0, y: 0, z: 3 }, wall_params),
-    grid.create(Wall, { x: 1, y: 0, z: 3 }, wall_params),
-    grid.create(Wall, { x: 2, y: 0, z: 3 }, wall_params),
-    grid.create(Wall, { x: 2, y: 0, z: 1 }, wall_params),
+    grid.create(Wall, { x: 1, z: 0 }, wall_params),
+    grid.create(Wall, { x: -1, z: 0 }, wall_params),
+    grid.create(Wall, { x: 1, z: 1 }, wall_params),
+    grid.create(Wall, { x: -1, z: 1 }, wall_params),
+    grid.create(Wall, { x: -1, z: 2 }, wall_params),
+    grid.create(Wall, { x: 0, z: 3 }, wall_params),
+    grid.create(Wall, { x: 1, z: 3 }, wall_params),
+    grid.create(Wall, { x: 2, z: 3 }, wall_params),
+    grid.create(Wall, { x: 2, z: 1 }, wall_params),
     grid.create(Wall, {x: 0, z: -2}, wall_params),
-    grid.create(Wall, {x: 3, z: 2}, door_params),
+    grid.create(Wall, {x: 3, z: 2}, door_params.concat("It isn't a real door, it's just painted on the wall")),
+    grid.create(Wall, {x: 1, z: -1}, wall_params),
+    grid.create(Wall, {x: -1, z: -1}, wall_params),
 ];
 
 function render() {
