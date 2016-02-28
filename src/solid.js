@@ -1,8 +1,8 @@
 import GridObject from './grid_object'
 
 class SolidObject extends GridObject {
-    constructor() {
-        super();
+    constructor(grid, loc, mats, desc, extra) {
+        super(grid, loc, mats, desc, extra);
         this.solid = true;
     }
 }

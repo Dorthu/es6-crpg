@@ -1,20 +1,16 @@
-import THREE from './Three'
+import { THREE, geo } from './Three'
 import assign from 'object-assign'
 import SolidObject from './solid'
 
 class Wall extends SolidObject {
-    constructor(grid, loc, mat, geo, desc) {
-        super();
-
-        this.grid = grid;
-        this.loc = loc;
-        this.desc = desc;
+    constructor(grid, loc, mats, desc, extra) {
+        super(grid, loc, mats, desc, extra);
 
         this.meshes = [
-            new THREE.Mesh(geo, mat),
-            new THREE.Mesh(geo, mat),
-            new THREE.Mesh(geo, mat),
-            new THREE.Mesh(geo, mat)
+            new THREE.Mesh(geo, mats[0]),
+            new THREE.Mesh(geo, mats[0]),
+            new THREE.Mesh(geo, mats[0]),
+            new THREE.Mesh(geo, mats[0])
         ];
 
         for (let i=0; i<4; i++) {

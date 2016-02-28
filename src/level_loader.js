@@ -1,4 +1,4 @@
-import THREE from './Three'
+import { THREE, geo } from './Three'
 
 import Grid from './grid'
 import Wall from './wall'
@@ -11,7 +11,6 @@ const obj_map = {
     'enclosed': CeilingSpace
 }
 
-const geo = new THREE.PlaneGeometry(6,6);
 const texture = new THREE.ImageUtils.loadTexture('resources/textures/debug.png');
 const walltex = new THREE.TextureLoader().load('resources/textures/debug-2.png');
 const doortex = new THREE.TextureLoader().load('resources/textures/debug-door.png');
@@ -39,7 +38,7 @@ class LevelLoader {
             for(let j=0; j<curr.length; j++) {
                 let cur = curr[j];
                 if(cur) {
-                    grid.create(obj_map[cur.type], { x: j, z: i }, [ mat_map[cur.mat], geo ]);
+                    grid.create(obj_map[cur.type], { x: j, z: i }, [ mat_map[cur.mat] ], cur.desc, cur.extra);
                 }
             }
         }

@@ -1,4 +1,4 @@
-import THREE from './Three'
+import { THREE } from './Three'
 import assign from 'object-assign'
 import LogBox from './logbox'
 import Inventory from './inventory'

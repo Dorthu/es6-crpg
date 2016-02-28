@@ -1,5 +1,5 @@
 require('../sass/main.scss');
-import THREE from './Three'
+import { THREE } from './Three'
 import assign from 'object-assign'
 
 import Player from './player'
@@ -27,10 +27,10 @@ renderer.setSize( width, height );
 
 let grid = new LevelLoader().load_level([
     [ , { type: 'wall', mat: 'wall_mat' } ],
-    [ {type: 'wall', mat: 'wall_mat'}, { type: 'space', mat: 'mat2' }, { type: 'wall', mat: 'wall_mat' } ],
+    [ {type: 'wall', mat: 'wall_mat'}, { type: 'space', mat: 'mat2', desc: 'The floor is a different color.'  }, { type: 'wall', mat: 'wall_mat' } ],
     [ {type: 'wall', mat: 'wall_mat'}, { type: 'space', mat: 'floor_mat' }, { type: 'wall', mat: 'wall_mat' } ],
     [ {type: 'wall', mat: 'wall_mat'}, { type: 'space', mat: 'floor_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' } ],
-    [ {type: 'wall', mat: 'wall_mat'}, { type: 'space', mat: 'floor_mat' }, { type: 'space', mat: 'floor_mat' }, { type: 'space', mat: 'floor_mat' },{ type: 'space', mat: 'floor_mat' }, { type: 'wall', mat: 'door_mat' } ],
+    [ {type: 'wall', mat: 'wall_mat'}, { type: 'space', mat: 'floor_mat' }, { type: 'space', mat: 'floor_mat' }, { type: 'space', mat: 'floor_mat' },{ type: 'space', mat: 'floor_mat' }, { type: 'wall', mat: 'door_mat', desc: "It's not a door, it's painted on the wall.." } ],
     [ , { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' } ]
 ]);
 

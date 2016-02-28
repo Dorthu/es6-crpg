@@ -1,4 +1,4 @@
-import THREE from './Three'
+import { THREE } from './Three'
 import EventManager from './event_manager'
 
 class Grid {
@@ -8,8 +8,8 @@ class Grid {
         this.eventManager = new EventManager();
     }
 
-    create(cls, loc, args) {
-        let n = new cls(this, loc, ...args);
+    create(cls, loc, mats, desc, extra) {
+        let n = new cls(this, loc, mats, desc, extra);
         this.put(loc.x, loc.z, n);
         return n;
     }
