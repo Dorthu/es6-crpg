@@ -11,7 +11,7 @@ class Space extends GridObject {
 
         this.meshes = [ new THREE.Mesh(geo, mat) ];
 
-        let pos = {};
+        let pos = {y: 0};
         assign(pos, this.loc);
         pos.y -= .5;
         pos = this.grid.translate(pos);
