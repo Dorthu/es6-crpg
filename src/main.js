@@ -26,12 +26,12 @@ renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( width, height );
 
 let grid = new LevelLoader().load_level([
-    [ , { type: 'wall', mat: 'wall_mat' } ],
-    [ {type: 'wall', mat: 'wall_mat'}, { type: 'space', mat: 'mat2', desc: 'The floor is a different color.'  }, { type: 'wall', mat: 'wall_mat' } ],
-    [ {type: 'wall', mat: 'wall_mat'}, { type: 'space', mat: 'floor_mat' }, { type: 'wall', mat: 'wall_mat' } ],
-    [ {type: 'wall', mat: 'wall_mat'}, { type: 'space', mat: 'floor_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' } ],
-    [ {type: 'wall', mat: 'wall_mat'}, { type: 'space', mat: 'floor_mat' }, { type: 'space', mat: 'floor_mat' }, { type: 'space', mat: 'floor_mat' },{ type: 'space', mat: 'floor_mat' }, { type: 'wall', mat: 'door_mat', desc: "It's not a door, it's painted on the wall.." } ],
-    [ , { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' } ]
+    [ , { type: 'wall', mats: ['wall_mat'] } ],
+    [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['mat3', 'mat2'], desc: 'The floor is a different color.'  }, { type: 'wall', mats: ['wall_mat'] } ],
+    [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2'] }, { type: 'wall', mats: ['wall_mat'] } ],
+    [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2'] }, { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] } ],
+    [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2'] }, { type: 'enclosed', mats: ['floor_mat', 'mat2'] }, { type: 'enclosed', mats: ['floor_mat', 'mat2'] },{ type: 'enclosed', mats: ['floor_mat', 'mat2'] }, { type: 'wall', mats: ['door_mat'], desc: "It's not a door, it's painted on the wall.." } ],
+    [ , { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] } ]
 ]);
 
 const player = new Player(grid, { x: 1, y: 0, z: 1 });

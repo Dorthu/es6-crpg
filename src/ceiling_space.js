@@ -6,7 +6,7 @@ class CeilingSpace extends Space {
     constructor(grid, loc, mats, desc, extra) {
         super(grid, loc, mats, desc, extra);
 
-        let pos = {};
+        let pos = {y: 0};
         assign(pos, this.loc);
         pos.y += .5;
         pos = this.grid.translate(pos);
