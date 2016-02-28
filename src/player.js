@@ -47,6 +47,7 @@ class Player {
         }
 
         this.position_camera();
+        this.grid.eventManager.dispatchPlayerMoved(this);
     }
 
     position_camera() {
@@ -102,6 +103,8 @@ class Player {
         } else if(event.keyCode == 76) {
             this.look();
         }
+
+        this.grid.eventManager.dispatchPassTurn();
     }
 
 }

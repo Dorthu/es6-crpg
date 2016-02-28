@@ -1,9 +1,11 @@
 import THREE from './Three'
+import EventManager from './event_manager'
 
 class Grid {
     constructor() {
         this.grid = [];    
         this.scene = new THREE.Scene();
+        this.eventManager = new EventManager();
     }
 
     create(cls, loc, args) {
