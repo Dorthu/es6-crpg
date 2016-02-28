@@ -1,6 +1,7 @@
 import THREE from './Three'
 import assign from 'object-assign'
 import LogBox from './logbox'
+import Inventory from './inventory'
 
 const dirs = [ 'north', 'east', 'south', 'west' ];
 
@@ -9,6 +10,7 @@ class Player {
         this.grid = grid;
         this.loc = loc;
         this.facing = facing;
+        this.inv_mode = false;
 
         this.camera = new THREE.PerspectiveCamera( 70, 600/500, 1, 1000);
         this.camera.position.x = loc.x;
@@ -19,6 +21,13 @@ class Player {
         document.addEventListener('keydown', ent => this.input(ent));
 
         this.logbox = new LogBox();
+        this.inventory = new Inventory();
+
+        /* testing */
+        this.inventory.add_item({name: 'item1'});
+        this.inventory.add_item({name: 'item2'});
+        this.inventory.add_item({name: 'item3'});
+        this.inventory.add_item({name: 'item4'});
     }
 
     move(back=false) {
@@ -86,6 +95,15 @@ class Player {
     }
 
     input(event) {
+        if(this.inv_mode) {
+            if(event.keyCode == 73) {
+                this.inv_mode = false;
+            } else {
+                this.inventory.input(event);
+            }
+            return;
+        }
+
         if(event.keyCode == 37) {
             this.facing += 1;
             if(this.facing > 3) { this.facing = 0; }
@@ -102,6 +120,8 @@ class Player {
             this.move();
         } else if(event.keyCode == 76) {
             this.look();
+        } else if(event.keyCode == 73) {
+            this.inv_mode = true;
         }
 
         this.grid.eventManager.dispatchPassTurn();

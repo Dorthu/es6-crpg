@@ -32,11 +32,6 @@ class Wall extends SolidObject {
             m.position.z = c.z;
 
             this.grid.scene.add(m);
-
-            this.grid.eventManager.subscribe('player_moved', function(e) {
-                console.log("got player moved!");
-                console.log(e);
-            });
         }
     }
 }
