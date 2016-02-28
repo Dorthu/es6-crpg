@@ -34,18 +34,12 @@ class LevelLoader {
     load_level(data) {
         let grid = new Grid();
 
-        console.log('loading '+data);
-        console.log(data);
-
         for(let i=0; i<data.length; i++) {
             let curr = data[i];
-            console.log("looking at "+curr);
             for(let j=0; j<curr.length; j++) {
                 let cur = curr[j];
-                console.log("got "+cur);
                 if(cur) {
-                    console.log("creating it");
-                    grid.create(obj_map[cur.type], { x: i, z: j }, [ mat_map[cur.mat], geo ]);
+                    grid.create(obj_map[cur.type], { x: j, z: i }, [ mat_map[cur.mat], geo ]);
                 }
             }
         }

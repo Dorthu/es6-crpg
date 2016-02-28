@@ -9,8 +9,6 @@ class Grid {
     }
 
     create(cls, loc, args) {
-        console.log("creating "+cls+" at "+loc+" with "+args);
-
         let n = new cls(this, loc, ...args);
         this.put(loc.x, loc.z, n);
         return n;

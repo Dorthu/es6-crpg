@@ -27,8 +27,11 @@ renderer.setSize( width, height );
 
 let grid = new LevelLoader().load_level([
     [ , { type: 'wall', mat: 'wall_mat' } ],
+    [ {type: 'wall', mat: 'wall_mat'}, { type: 'space', mat: 'mat2' }, { type: 'wall', mat: 'wall_mat' } ],
     [ {type: 'wall', mat: 'wall_mat'}, { type: 'space', mat: 'floor_mat' }, { type: 'wall', mat: 'wall_mat' } ],
-    [ , { type: 'wall', mat: 'wall_mat' } ]
+    [ {type: 'wall', mat: 'wall_mat'}, { type: 'space', mat: 'floor_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' } ],
+    [ {type: 'wall', mat: 'wall_mat'}, { type: 'space', mat: 'floor_mat' }, { type: 'space', mat: 'floor_mat' }, { type: 'space', mat: 'floor_mat' },{ type: 'space', mat: 'floor_mat' }, { type: 'wall', mat: 'door_mat' } ],
+    [ , { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' }, { type: 'wall', mat: 'wall_mat' } ]
 ]);
 
 const player = new Player(grid, { x: 1, y: 0, z: 1 });
