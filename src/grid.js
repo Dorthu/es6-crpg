@@ -3,9 +3,11 @@ import EventManager from './event_manager'
 
 class Grid {
     constructor() {
-        this.grid = [];    
+        this.grid = [];
         this.scene = new THREE.Scene();
-        this.eventManager = new EventManager();
+        this.event_manager = new EventManager();
+        this.event_manager.subscribe('transition_level', ent => this.transition(ent));
+        this.scene_change_callback = null;
     }
 
     create(cls, loc, mats, desc, extra) {
@@ -28,7 +30,7 @@ class Grid {
         return this.grid[x][y];
     }
 
-    remove(x, y) { 
+    remove(x, y) {
         this.put(x, y, null);
     }
 
@@ -36,6 +38,16 @@ class Grid {
         let loc = this.get(pos.x, pos.z);
         if(!loc) { return false; }
         return !loc.solid;
+    }
+
+    transition(event) {
+        if(this.scene_change_callback) {
+            this.scene_change_callback();
+        }
+    }
+
+    set_scene_change_callback(func) {
+        this.scene_change_callback = func;
     }
 }
 

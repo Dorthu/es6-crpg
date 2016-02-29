@@ -20,6 +20,10 @@ class EventManager {
     dispatchPassTurn() { 
         this.elm.dispatchEvent(new CustomEvent('pass_turn', {}));
     }
+
+    dispatchTransitionLevel(to) {
+        this.elm.dispatchEvent(new CustomEvent('transition_level', { to: to }));
+    }
 }
 
 export default EventManager;

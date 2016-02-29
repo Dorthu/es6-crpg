@@ -4,7 +4,9 @@ class GridObject {
         this.grid = grid;
         this.loc = loc;
         this.desc = desc;
+        this.extra = extra;
         this.solid = false;
+        this.usable = false;
     }
 }
 

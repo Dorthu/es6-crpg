@@ -30,41 +30,33 @@ let grid = new LevelLoader().load_level([
     [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['mat3', 'mat2'], desc: 'The floor is a different color.'  }, { type: 'wall', mats: ['wall_mat'] } ],
     [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2'] }, { type: 'wall', mats: ['wall_mat'] } ],
     [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2'] }, { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] } ],
-    [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2'] }, { type: 'enclosed', mats: ['floor_mat', 'mat2'] }, { type: 'enclosed', mats: ['floor_mat', 'mat2'] },{ type: 'enclosed', mats: ['floor_mat', 'mat2'] }, { type: 'wall', mats: ['door_mat'], desc: "It's not a door, it's painted on the wall.." } ],
+    [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2'] }, { type: 'enclosed', mats: ['floor_mat', 'mat2'] }, { type: 'enclosed', mats: ['floor_mat', 'mat2'] },{ type: 'enclosed', mats: ['floor_mat', 'mat2'] }, { type: 'door', mats: ['door_mat'], desc: "It's a real door!  Woohoo!", extra: { to: 'some_level' } } ],
     [ , { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] } ]
 ]);
 
-const player = new Player(grid, { x: 1, y: 0, z: 1 });
-const light = new THREE.AmbientLight( 0xBBBBBB ); // soft white light
+let player = new Player(grid, { x: 1, y: 0, z: 1 });
+let light = new THREE.AmbientLight( 0xBBBBBB ); // soft white light
 grid.scene.add( light );
 
-//const floor_params = [texture_mat, geo, '', mat2];
-//const floors = [
-//    grid.create(CeilingSpace, { x: 0, y: 0, z: 0 }, floor_params),
-//    grid.create(CeilingSpace, { x: 0, y: 0, z: 1 }, floor_params),
-//    grid.create(CeilingSpace, { x: 0, y: 0, z: 2 }, floor_params),
-//    grid.create(CeilingSpace, { x: 1, y: 0, z: 2 }, floor_params),
-//    grid.create(CeilingSpace, { x: 2, y: 0, z: 2 }, floor_params),
-//    grid.create(CeilingSpace, { x: 0, y: 0, z: -1 }, [mat3, geo, 'The floor is a weird color.', mat2]),
-//];
-//
-//const wall_params = [wall_mat, geo];
-//const door_params = [door_mat, geo];
-//const walls = [
-//    grid.create(Wall, { x: 1, z: 0 }, wall_params),
-//    grid.create(Wall, { x: -1, z: 0 }, wall_params),
-//    grid.create(Wall, { x: 1, z: 1 }, wall_params),
-//    grid.create(Wall, { x: -1, z: 1 }, wall_params),
-//    grid.create(Wall, { x: -1, z: 2 }, wall_params),
-//    grid.create(Wall, { x: 0, z: 3 }, wall_params),
-//    grid.create(Wall, { x: 1, z: 3 }, wall_params),
-//    grid.create(Wall, { x: 2, z: 3 }, wall_params),
-//    grid.create(Wall, { x: 2, z: 1 }, wall_params),
-//    grid.create(Wall, {x: 0, z: -2}, wall_params),
-//    grid.create(Wall, {x: 3, z: 2}, door_params.concat("It isn't a real door, it's just painted on the wall")),
-//    grid.create(Wall, {x: 1, z: -1}, wall_params),
-//    grid.create(Wall, {x: -1, z: -1}, wall_params),
-//];
+const load_level_2 = function() {
+    player.destroy();
+    player = null;
+    grid.scene = null;
+    grid = null;
+    light = null;
+
+    grid = new LevelLoader().load_level([
+        [ {type: 'wall', mats: ['mat2'] },{type: 'wall', mats: ['mat2'] },{type: 'wall', mats: ['mat2'] },{type: 'wall', mats: ['mat2'] } ],
+        [ {type: 'wall', mats: ['mat2'] },{type: 'enclosed', mats: ['floor_mat', 'mat3'] },{type: 'enclosed', mats: ['floor_mat', 'mat3'] },{type: 'wall', mats: ['mat2'] } ],
+        [ {type: 'wall', mats: ['mat2'] },{type: 'enclosed', mats: ['floor_mat', 'mat3'] },{type: 'enclosed', mats: ['floor_mat', 'mat3'] },{type: 'wall', mats: ['mat2'] } ],
+        [ {type: 'wall', mats: ['mat2'] },{type: 'wall', mats: ['door_mat'], desc: "It's not a door this time.  Sorry." },{type: 'wall', mats: ['mat2'] },{type: 'wall', mats: ['mat2'] } ],
+    ]);
+    player = new Player(grid, { x: 1, y: 0, z: 2});
+    light = new THREE.AmbientLight( 0xA9BEA9 );
+    grid.scene.add( light );
+};
+
+grid.set_scene_change_callback(load_level_2);
 
 function render() {
     requestAnimationFrame( render );

@@ -4,11 +4,13 @@ import Grid from './grid'
 import Wall from './wall'
 import Space from './space'
 import CeilingSpace from './ceiling_space'
+import Door from './door'
 
 const obj_map = {
     'space':    Space,
     'wall':     Wall,
-    'enclosed': CeilingSpace
+    'enclosed': CeilingSpace,
+    'door': Door
 }
 
 const texture = new THREE.ImageUtils.loadTexture('resources/textures/debug.png');
