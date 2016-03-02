@@ -9,13 +9,14 @@ class Player {
     constructor(grid, loc, facing=0) {
         this.grid = grid;
         this.loc = loc;
+        this.loc.y = 0;
         this.facing = facing;
         this.inv_mode = false;
 
         this.camera = new THREE.PerspectiveCamera( 70, 600/500, 1, 1000);
-        this.camera.position.x = loc.x;
-        this.camera.position.y = loc.y;
-        this.camera.position.z = loc.z;
+        this.camera.position.x = this.loc.x;
+        this.camera.position.y = this.loc.y;
+        this.camera.position.z = this.loc.z;
 
         this.position_camera();
         this.input_listener = ent => this.input(ent);

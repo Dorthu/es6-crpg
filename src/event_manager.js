@@ -22,7 +22,7 @@ class EventManager {
     }
 
     dispatchTransitionLevel(to) {
-        this.elm.dispatchEvent(new CustomEvent('transition_level', { to: to }));
+        this.elm.dispatchEvent(new CustomEvent('transition_level', { detail: { data: to } }));
     }
 }
 

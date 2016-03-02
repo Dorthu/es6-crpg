@@ -42,7 +42,7 @@ class Grid {
 
     transition(event) {
         if(this.scene_change_callback) {
-            this.scene_change_callback();
+            this.scene_change_callback(event.detail.data);
         }
     }
 
