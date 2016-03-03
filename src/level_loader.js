@@ -16,6 +16,7 @@ const obj_map = {
 const texture = new THREE.ImageUtils.loadTexture('resources/textures/debug.png');
 const walltex = new THREE.TextureLoader().load('resources/textures/debug-2.png');
 const doortex = new THREE.TextureLoader().load('resources/textures/debug-door.png');
+const itemtex = new THREE.TextureLoader().load('resources/textures/item.png');
 
 const mat_map = {
 
@@ -24,7 +25,8 @@ const mat_map = {
     mat3: new THREE.MeshLambertMaterial({color: 0xff0000, side: THREE.DoubleSide }),
     floor_mat: new THREE.MeshLambertMaterial({map: texture, side: THREE.DoubleSide}),
     wall_mat: new THREE.MeshLambertMaterial({map: walltex, side: THREE.DoubleSide}),
-    door_mat: new THREE.MeshLambertMaterial({map: doortex, side: THREE.DoubleSide})
+    door_mat: new THREE.MeshLambertMaterial({map: doortex, side: THREE.DoubleSide}),
+    sprite_mat: new THREE.SpriteMaterial({map: itemtex, side: THREE.DoubleSide})
 }
 
 class LevelLoader {
@@ -42,6 +44,11 @@ class LevelLoader {
                 if(cur) {
                     let mats = [];
                     for(let m of cur.mats) { mats.push(mat_map[m]); }
+                    if(cur['extra'] && cur.extra['object'] &&  cur.extra.object['mats']) { 
+                        let imats = [];
+                        for(let m of cur.extra.object.mats) { imats.push(mat_map[m]); }
+                        cur.extra.object.mats = imats;
+                    }
                     grid.create(obj_map[cur.type], { x: j, z: i }, mats, cur.desc, cur.extra);
                 }
             }

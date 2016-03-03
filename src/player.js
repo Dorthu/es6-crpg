@@ -98,6 +98,9 @@ class Player {
         let obj = this.grid.get(target.x, target.z);
 
         this.logbox.add_message('looks..');
+        if(obj && obj.object && obj.object.desc) { 
+            this.logbox.add_message(obj.object.desc);
+        }
         if(obj && obj.desc) {
             this.logbox.add_message(obj.desc);
         }
