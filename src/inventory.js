@@ -24,7 +24,7 @@ class Inventory {
     }
 
     _get_item_html(item, selected=false) {
-        return '<div class="col-md-4 invitem '+(selected ? 'invselected' : '')+'">Item</div>';
+        return '<div class="col-md-4 invitem '+(selected ? 'invselected' : '')+'">'+item.name+'</div>';
     }
 
     input(event) {

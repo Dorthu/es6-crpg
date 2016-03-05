@@ -3,6 +3,7 @@ import assign from 'object-assign'
 import GridObject from './grid_object'
 import SpriteObject from './sprite_object'
 import { get_material } from './texture_lookup'
+import Pickup from './pickup'
 
 class Space extends GridObject {
     constructor(grid, loc, mats, desc, extra) {
@@ -12,7 +13,8 @@ class Space extends GridObject {
         this.object = null;
 
         if(extra && extra['object']) { 
-            this.object = new SpriteObject(this.grid, this.loc, extra.object['mats'], extra.object['desc']);
+            this.object = new Pickup(this.grid, this.loc, extra.object['mats'], extra.object['desc'], 
+                extra.object['extra']);
             console.log(this.object);
         }
 

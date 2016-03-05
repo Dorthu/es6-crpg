@@ -24,12 +24,7 @@ class Player {
 
         this.logbox = new LogBox();
         this.inventory = new Inventory();
-
-        /* testing */
-        this.inventory.add_item({name: 'item1'});
-        this.inventory.add_item({name: 'item2'});
-        this.inventory.add_item({name: 'item3'});
-        this.inventory.add_item({name: 'item4'});
+        this.inventory.update();
     }
 
     move(back=false) {
@@ -106,6 +101,23 @@ class Player {
         }
     }
 
+    use() {
+        let target = {};
+        assign(target, this.loc);
+
+        this.facing == 0 ? target.z -= 1 :
+        this.facing == 1 ? target.x -= 1 :
+        this.facing == 2 ? target.z += 1 :
+                           target.x += 1 ;
+
+        let obj = this.grid.get(target.x, target.z);
+
+        this.logbox.add_message('uses..');
+        if(obj && obj.object && obj.object.useable) { 
+            obj.object.use(this);
+        }
+    }
+
     input(event) {
         if(this.inv_mode) {
             if(event.keyCode == 73) {
@@ -134,6 +146,8 @@ class Player {
             this.look();
         } else if(event.keyCode == 73) {
             this.inv_mode = true;
+        } else if(event.keyCode == 85) {
+            this.use();
         }
 
         this.grid.event_manager.dispatchPassTurn();
