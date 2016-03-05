@@ -5,9 +5,7 @@ import assign from 'object-assign'
 import Player from './player'
 import LevelLoader from './level_loader'
 import Grid from './grid'
-import Wall from './wall'
-import Space from './space'
-import CeilingSpace from './ceiling_space'
+import Inventory from './inventory'
 import { init_textures } from './texture_lookup'
 
 const width = 600;
@@ -73,6 +71,9 @@ let grid= null;
 let player = null;
 let light = null;
 
+const inventory = new Inventory();
+inventory.update();
+
 const switch_level = function(info) {
     if(player) player.destroy();
     player = null;
@@ -83,7 +84,7 @@ const switch_level = function(info) {
     light = null;
 
     grid = new LevelLoader().load_level(levels[info.to]);
-    player = new Player(grid, info.player_pos, info.player_facing);
+    player = new Player(grid, info.player_pos, inventory, info.player_facing);
     light = new THREE.AmbientLight( 0xA9BEA9 );
     grid.scene.add( light );
     grid.set_scene_change_callback(switch_level);

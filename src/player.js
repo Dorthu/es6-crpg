@@ -1,17 +1,17 @@
 import { THREE } from './Three'
 import assign from 'object-assign'
 import LogBox from './logbox'
-import Inventory from './inventory'
 
 const dirs = [ 'north', 'east', 'south', 'west' ];
 
 class Player {
-    constructor(grid, loc, facing=0) {
+    constructor(grid, loc, inventory, facing=0) {
         this.grid = grid;
         this.loc = loc;
         this.loc.y = 0;
         this.facing = facing;
         this.inv_mode = false;
+        this.inventory = inventory;
 
         this.camera = new THREE.PerspectiveCamera( 70, 600/500, 1, 1000);
         this.camera.position.x = this.loc.x;
@@ -23,8 +23,6 @@ class Player {
         document.addEventListener('keydown', this.input_listener);
 
         this.logbox = new LogBox();
-        this.inventory = new Inventory();
-        this.inventory.update();
     }
 
     move(back=false) {
