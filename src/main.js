@@ -88,11 +88,13 @@ let light = null;
 const inventory = new Inventory();
 inventory.update();
 
-const editor_mode = true;
+let player_class = Player;
+const editor_mode = window.location.href.indexOf('editor') > -1;
 if(editor_mode) {
     inventory.add_item({name: 'enclosed', mats: ['floor_mat', 'mat3']});
     inventory.add_item({name: 'wall', mats: ['mat2']});
     inventory.add_item({name: 'space', mats: ['floor_mat']});
+    player_class = EditorPlayer;
 }
 
 const switch_level = function(info) {
@@ -105,7 +107,7 @@ const switch_level = function(info) {
     light = null;
 
     grid = new LevelLoader().load_level(levels[info.to]);
-    player = new EditorPlayer(grid, info.player_pos, inventory, info.player_facing);
+    player = new player_class(grid, info.player_pos, inventory, info.player_facing);
     light = new THREE.AmbientLight( 0xA9BEA9 );
     grid.scene.add( light );
     grid.set_scene_change_callback(switch_level);
