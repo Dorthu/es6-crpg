@@ -2,12 +2,23 @@ import { THREE } from './Three'
 
 let mat_map = null;
 
+function load_texture(file) {
+    let t = new THREE.TextureLoader().load(file);
+    t.magFilter = THREE.NearestFilter;
+    return t;
+}
+
 export function init_textures() {
-    const texture = new THREE.ImageUtils.loadTexture('resources/textures/debug.png');
-    const walltex = new THREE.TextureLoader().load('resources/textures/debug-2.png');
-    const doortex = new THREE.TextureLoader().load('resources/textures/debug-door.png');
-    const itemtex = new THREE.TextureLoader().load('resources/textures/itemsm.png');
-    const solidobjtex = new THREE.TextureLoader().load('resources/textures/solidobj.png');
+    const texture = load_texture('resources/textures/debug.png');
+    const walltex = load_texture('resources/textures/debug-2.png');
+    const doortex = load_texture('resources/textures/debug-door.png');
+    const itemtex = load_texture('resources/textures/itemsm.png');
+    const solidobjtex = load_texture('resources/textures/solidobj.png');
+    texture.magFilter = THREE.NearestFilter;
+    doortex.magFilter = THREE.NearestFilter;
+    itemtex.magFilter = THREE.NearestFilter;
+    solidobjtex.magFilter = THREE.NearestFilter;
+    walltex.magFilter = THREE.NearestFilter;
 
     mat_map = {
         mat1: new THREE.MeshLambertMaterial({color: 0xffff00, side: THREE.DoubleSide }),
