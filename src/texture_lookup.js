@@ -14,11 +14,7 @@ export function init_textures() {
     const doortex = load_texture('resources/textures/debug-door.png');
     const itemtex = load_texture('resources/textures/itemsm.png');
     const solidobjtex = load_texture('resources/textures/solidobj.png');
-    texture.magFilter = THREE.NearestFilter;
-    doortex.magFilter = THREE.NearestFilter;
-    itemtex.magFilter = THREE.NearestFilter;
-    solidobjtex.magFilter = THREE.NearestFilter;
-    walltex.magFilter = THREE.NearestFilter;
+    const treewalltex = load_texture('resources/textures/treewall.png');
 
     mat_map = {
         mat1: new THREE.MeshLambertMaterial({color: 0xffff00, side: THREE.DoubleSide }),
@@ -28,11 +24,13 @@ export function init_textures() {
         wall_mat: new THREE.MeshLambertMaterial({map: walltex, side: THREE.DoubleSide}),
         door_mat: new THREE.MeshLambertMaterial({map: doortex, side: THREE.DoubleSide}),
         sprite_mat: new THREE.SpriteMaterial({map: itemtex, side: THREE.DoubleSide}),
-        tree_mat: new THREE.SpriteMaterial({map: solidobjtex, side:THREE.SingleSide})
+        tree_mat: new THREE.SpriteMaterial({map: solidobjtex, side:THREE.SingleSide}),
+        treewall_mat: new THREE.MeshLambertMaterial({map: treewalltex, side: THREE.DoubleSide, transparent: true})
     };
 };
 
 export function get_material(name) {
+    console.log('getting material for '+name);
     return mat_map[name];
 };
 
