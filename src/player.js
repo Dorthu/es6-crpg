@@ -101,7 +101,7 @@ class Player {
         if(obj && obj.object && obj.object.desc) { 
             this.logbox.add_message(obj.object.desc);
         }
-        if(obj && obj.desc) {
+        else if(obj && obj.desc) {
             this.logbox.add_message(obj.desc);
         }
     }

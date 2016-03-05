@@ -7,6 +7,8 @@ class GridObject {
         this.extra = extra;
         this.solid = false;
         this.usable = false;
+
+        console.log(this.constructor.name);
     }
 }
 

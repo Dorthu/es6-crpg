@@ -8,6 +8,7 @@ import Grid from './grid'
 import Wall from './wall'
 import Space from './space'
 import CeilingSpace from './ceiling_space'
+import { init_textures } from './texture_lookup'
 
 const width = 600;
 const height = 500;
@@ -25,14 +26,16 @@ const renderer = new THREE.WebGLRenderer(assign({
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( width, height );
 
+init_textures();
+
 const levels = {
     entry_hall: [
         [ , { type: 'wall', mats: ['wall_mat'] } ],
         [ {type: 'wall', mats: ['wall_mat']},
-            { type: 'enclosed', mats: ['mat3', 'mat2'], desc: 'The floor is a different color.'  },
+            { type: 'enclosed', mats: ['mat3', 'mat2'], desc: 'The floor is a different color.',
+                extra: { object: { desc: "There's something here..", mats: ['sprite_mat'] } }  },
             { type: 'wall', mats: ['wall_mat'] } ],
-        [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2'], 
-                extra: { object: { desc: "There's something here..", mats: ['sprite_mat'] } } },
+        [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2']  },
             { type: 'wall', mats: ['wall_mat'] } ],
         [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2'] },
             { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] },

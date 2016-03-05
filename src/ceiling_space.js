@@ -1,6 +1,7 @@
 import { THREE, geo } from './Three'
 import assign from 'object-assign'
 import Space from './space'
+import { get_material } from './texture_lookup'
 
 class CeilingSpace extends Space {
     constructor(grid, loc, mats, desc, extra) {
@@ -11,7 +12,7 @@ class CeilingSpace extends Space {
         pos.y += .5;
         pos = this.grid.translate(pos);
 
-        this.meshes[1] = new THREE.Mesh(geo, mats[1]);
+        this.meshes[1] = new THREE.Mesh(geo, get_material(mats[1]));
         this.meshes[1].position.x = pos.x;
         this.meshes[1].position.y = pos.y;
         this.meshes[1].position.z = pos.z;

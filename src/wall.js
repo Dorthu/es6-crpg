@@ -1,16 +1,18 @@
 import { THREE, geo } from './Three'
 import assign from 'object-assign'
 import SolidObject from './solid'
+import { get_material } from './texture_lookup'
 
 class Wall extends SolidObject {
     constructor(grid, loc, mats, desc, extra) {
         super(grid, loc, mats, desc, extra);
 
+        let m = get_material(mats[0]);
         this.meshes = [
-            new THREE.Mesh(geo, mats[0]),
-            new THREE.Mesh(geo, mats[0]),
-            new THREE.Mesh(geo, mats[0]),
-            new THREE.Mesh(geo, mats[0])
+            new THREE.Mesh(geo, m),
+            new THREE.Mesh(geo, m),
+            new THREE.Mesh(geo, m),
+            new THREE.Mesh(geo, m)
         ];
 
         for (let i=0; i<4; i++) {

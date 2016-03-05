@@ -2,12 +2,13 @@ import { THREE, geo } from './Three'
 import assign from 'object-assign'
 import GridObject from './grid_object'
 import SpriteObject from './sprite_object'
+import { get_material } from './texture_lookup'
 
 class Space extends GridObject {
     constructor(grid, loc, mats, desc, extra) {
         super(grid, loc, mats, desc, extra);
 
-        this.meshes = [ new THREE.Mesh(geo, mats[0]) ];
+        this.meshes = [ new THREE.Mesh(geo, get_material(mats[0])) ];
         this.object = null;
 
         if(extra && extra['object']) { 
