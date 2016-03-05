@@ -50,6 +50,7 @@ const levels = {
     ],
     small_room: [
         [ {type: 'wall', mats: ['mat2'] },{type: 'wall', mats: ['mat2'] },
+            {type: 'wall', mats: ['mat2'] },{type: 'wall', mats: ['mat2'] },
             {type: 'wall', mats: ['mat2'] },{type: 'wall', mats: ['mat2'] } ],
         [ {type: 'wall', mats: ['mat2'] },{type: 'enclosed', mats: ['floor_mat', 'mat3'] },
             {type: 'enclosed', mats: ['floor_mat', 'mat3'],
@@ -57,12 +58,16 @@ const levels = {
                     extra: { dialog: [ 'I am only a tree', 'Why are you talking to a tree?',
                         'I had a bird in my branches yesterday..', 'It was most impolite',
                         'It pecked at my bark all day long.', 'But I could not stop it because..' ] } } } },
+            {type: 'enclosed', mats: ['floor_mat', 'mat3'], extra: { object: { type: 'solid', mats: ['tree_mat'] } } },
             {type: 'wall', mats: ['mat2'] } ],
         [ {type: 'wall', mats: ['mat2'] },{type: 'enclosed', mats: ['floor_mat', 'mat3'] },
+            {type: 'enclosed', mats: ['floor_mat', 'mat3'], extra: { object: { type: 'solid', mats: ['tree_mat']  } } },
+            {type: 'enclosed', mats: ['floor_mat', 'mat3'], extra: { object: { type: 'solid', mats: ['tree_mat']  } } },
             {type: 'enclosed', mats: ['floor_mat', 'mat3'] },{type: 'wall', mats: ['mat2'] } ],
         [ {type: 'wall', mats: ['mat2'] },
             {type: 'door', mats: ['door_mat'], desc: "It's also a door!  Woo!", extra: { to: 'entry_hall',
                 player_pos: { x: 4, z: 4 }, player_facing: 1 } },
+            {type: 'wall', mats: ['mat2'] },{type: 'wall', mats: ['mat2'] },
             {type: 'wall', mats: ['mat2'] },{type: 'wall', mats: ['mat2'] } ],
     ]
 };
