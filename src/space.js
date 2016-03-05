@@ -4,6 +4,7 @@ import GridObject from './grid_object'
 import SpriteObject from './sprite_object'
 import { get_material } from './texture_lookup'
 import Pickup from './pickup'
+import { obj_map } from './level_loader'
 
 class Space extends GridObject {
     constructor(grid, loc, mats, desc, extra) {
@@ -13,9 +14,9 @@ class Space extends GridObject {
         this.object = null;
 
         if(extra && extra['object']) { 
-            this.object = new Pickup(this.grid, this.loc, extra.object['mats'], extra.object['desc'], 
+            this.object = new obj_map[this.extra.object.type](this.grid, this.loc,
+                extra.object['mats'], extra.object['desc'], 
                 extra.object['extra']);
-            console.log(this.object);
         }
 
         let pos = {y: 0};

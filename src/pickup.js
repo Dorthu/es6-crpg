@@ -9,7 +9,6 @@ class Pickup extends SpriteObject {
     }
 
     use(player) {
-        console.log('using');
         let o = this.grid.get(this.loc.x, this.loc.z);
         o.object = null;
 

@@ -5,12 +5,18 @@ import Wall from './wall'
 import Space from './space'
 import CeilingSpace from './ceiling_space'
 import Door from './door'
+import Pickup from './pickup'
+import SolidItem from './solid_item'
+import NPC from './npc'
 
-const obj_map = {
+export const obj_map = {
     'space':    Space,
     'wall':     Wall,
     'enclosed': CeilingSpace,
-    'door': Door
+    'door': Door,
+    'pickup': Pickup,
+    'solid': SolidItem,
+    'npc': NPC
 }
 
 

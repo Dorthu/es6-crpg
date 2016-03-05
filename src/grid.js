@@ -37,6 +37,8 @@ class Grid {
     can_move_to(pos) {
         let loc = this.get(pos.x, pos.z);
         if(!loc) { return false; }
+        if(loc['object'])
+            return !loc.solid && !loc.object.solid;
         return !loc.solid;
     }
 

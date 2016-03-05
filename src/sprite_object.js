@@ -10,8 +10,8 @@ class SpriteObject extends GridObject {
         this.useable = false;
 
         this.meshes = [ new THREE.Sprite(get_material(mats[0])) ];
-        this.meshes[0].scale.set(2, 2, 1);
-        let pos = {y: .16};
+        this.meshes[0].scale.set(6, 6, 1);
+        let pos = {y: .45};
         assign(pos, this.loc);
         pos.y -= .5;
         pos = this.grid.translate(pos);
