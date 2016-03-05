@@ -22,6 +22,7 @@ class Grid {
 
     put(x, y, thing) {
         if(this.grid[x] == null) { this.grid[x] = []; }
+        if(this.get(x, y)) { this.get(x,y).destroy(); }
         this.grid[x][y] = thing;
     }
 

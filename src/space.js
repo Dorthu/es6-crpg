@@ -31,6 +31,11 @@ class Space extends GridObject {
 
         this.grid.scene.add(this.meshes[0]);
     }
+
+    destroy() {
+        if(this.object) { this.object.destroy(); }
+        super.destroy();
+    }
 }
 
 export default Space;

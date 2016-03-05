@@ -3,6 +3,7 @@ import { THREE } from './Three'
 import assign from 'object-assign'
 
 import Player from './player'
+import EditorPlayer from './editor/player'
 import LevelLoader from './level_loader'
 import Grid from './grid'
 import Inventory from './inventory'
@@ -87,6 +88,13 @@ let light = null;
 const inventory = new Inventory();
 inventory.update();
 
+const editor_mode = true;
+if(editor_mode) {
+    inventory.add_item({name: 'enclosed', mats: ['floor_mat', 'mat3']});
+    inventory.add_item({name: 'wall', mats: ['mat2']});
+    inventory.add_item({name: 'space', mats: ['floor_mat']});
+}
+
 const switch_level = function(info) {
     if(player) player.destroy();
     player = null;
@@ -97,7 +105,7 @@ const switch_level = function(info) {
     light = null;
 
     grid = new LevelLoader().load_level(levels[info.to]);
-    player = new Player(grid, info.player_pos, inventory, info.player_facing);
+    player = new EditorPlayer(grid, info.player_pos, inventory, info.player_facing);
     light = new THREE.AmbientLight( 0xA9BEA9 );
     grid.scene.add( light );
     grid.set_scene_change_callback(switch_level);

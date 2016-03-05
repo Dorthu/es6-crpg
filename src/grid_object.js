@@ -7,6 +7,13 @@ class GridObject {
         this.extra = extra;
         this.solid = false;
         this.usable = false;
+        this.meshes = [];
+    }
+
+    destroy() {
+        for(let m of this.meshes) {
+            this.grid.scene.remove(m);
+        }
     }
 }
 

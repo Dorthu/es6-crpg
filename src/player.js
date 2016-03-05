@@ -79,7 +79,7 @@ class Player {
         }
     }
 
-    look() {
+    _point_in_front() {
         let target = {};
         assign(target, this.loc);
 
@@ -88,6 +88,11 @@ class Player {
         this.facing == 2 ? target.z += 1 :
                            target.x += 1 ;
 
+        return target;
+    }
+
+    look() {
+        let target = this._point_in_front();
         let obj = this.grid.get(target.x, target.z);
 
         this.logbox.add_message('looks..');
