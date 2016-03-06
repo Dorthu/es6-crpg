@@ -86,7 +86,8 @@ let player = null;
 let light = null;
 
 const inventory = new Inventory();
-inventory.update();
+inventory.add_item({name: 'helmet', equips_to: 'head'});
+inventory.add_item({name: 'hamlet', equips_to: 'head'});
 
 let player_class = Player;
 const editor_mode = window.location.href.indexOf('editor') > -1;

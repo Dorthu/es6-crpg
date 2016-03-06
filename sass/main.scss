@@ -14,18 +14,35 @@ body {
         }
     }
 
-    #inventory {
-        background-color: grey;
+    #canvas_goes_here {
+        canvas {
+            margin-left: -15px;
+        }
+    }
+
+    #right-side {
+        background-color: lightgrey;
         height: 500px;
 
-        .invitem {
-            border: 1px solid black;
-            border-radius: 5px;
-            height: 50px;
+        #equipped {
+            border-bottom: 1px solid black;
+
+            div {
+                margin-bottom: 5px;
+            }
         }
 
-        .invselected {
-            background-color: blue;
+        #inventory {
+            padding-top: 20px; 
+            .invitem {
+                border: 1px solid black;
+                border-radius: 5px;
+                height: 50px;
+            }
+
+            .invselected {
+                background-color: blue;
+            }
         }
     }
 }
