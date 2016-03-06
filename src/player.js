@@ -164,6 +164,8 @@ class Player {
         } else if(event.keyCode > 48 && event.keyCode < 58) { ///number
             this._inv_hotbar(event.keyCode-48);
             console.log('the business');
+        } else if(event.keyCode == 69) {
+            this.inventory.equip();
         }
 
         this.grid.event_manager.dispatchPassTurn();

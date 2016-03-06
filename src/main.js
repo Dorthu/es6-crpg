@@ -7,6 +7,7 @@ import EditorPlayer from './editor/player'
 import LevelLoader from './level_loader'
 import Grid from './grid'
 import Inventory from './inventory'
+import EditorInventory from './editor/inventory'
 import { init_textures } from './texture_lookup'
 
 const width = 600;
@@ -85,13 +86,12 @@ let grid= null;
 let player = null;
 let light = null;
 
-const inventory = new Inventory();
-inventory.add_item({name: 'helmet', equips_to: 'head'});
-inventory.add_item({name: 'hamlet', equips_to: 'head'});
+let inventory = new Inventory();
 
 let player_class = Player;
 const editor_mode = window.location.href.indexOf('editor') > -1;
 if(editor_mode) {
+    inventory = new EditorInventory();
     inventory.add_item({name: 'enclosed', mats: ['floor_mat', 'mat3']});
     inventory.add_item({name: 'wall', mats: ['mat2']});
     inventory.add_item({name: 'space', mats: ['floor_mat']});

@@ -1,6 +1,6 @@
 import { THREE } from './Three'
 
-let mat_map = null;
+export let mat_map = null;
 
 function load_texture(file) {
     let t = new THREE.TextureLoader().load(file);
