@@ -19,7 +19,7 @@ export const obj_map = {
     'npc': NPC
 }
 
-
+///why is this a class?
 class LevelLoader {
     constructor() {
         //pass

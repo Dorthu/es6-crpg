@@ -121,6 +121,16 @@ class Player {
         }
     }
 
+    _inv_hotbar(slot) {
+        console.log(slot);
+        console.log(this.inventory.items.length);
+        if(this.inventory.items.length >= slot) {
+            this.inventory.selected = slot-1;
+            this.inventory.update();
+            console.log("i did it");
+        }
+    }
+
     input(event) {
         if(this.inv_mode) {
             if(event.keyCode == 73) {
@@ -151,6 +161,9 @@ class Player {
             this.inv_mode = true;
         } else if(event.keyCode == 85) {
             this.use();
+        } else if(event.keyCode > 48 && event.keyCode < 58) { ///number
+            this._inv_hotbar(event.keyCode-48);
+            console.log('the business');
         }
 
         this.grid.event_manager.dispatchPassTurn();

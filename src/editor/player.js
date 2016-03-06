@@ -10,9 +10,16 @@ class EditorPlayer extends Player {
            target, ci.mats, 'editor created this');
     }
 
+    remove() { 
+        let target = this._point_in_front();
+        this.grid.remove(target.x, target.z);
+    }
+
     input(event) {
         if(event.keyCode == 85) {
             this.make();
+        } else if(event.keyCode == 68) {
+            this.remove();
         }
         else {
             super.input(event);

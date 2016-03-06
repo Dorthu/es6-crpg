@@ -11,6 +11,7 @@ class Grid {
     }
 
     create(cls, loc, mats, desc, extra) {
+        if(loc.x<0 || loc.z<0) { console.log("Creating a thing to at a negative index!"); return; }
         let n = new cls(this, loc, mats, desc, extra);
         this.put(loc.x, loc.z, n);
         return n;
@@ -21,6 +22,7 @@ class Grid {
     }
 
     put(x, y, thing) {
+        if(x<0 || y<0) { console.log("Adding a thing to a negative index!"); return; }
         if(this.grid[x] == null) { this.grid[x] = []; }
         if(this.get(x, y)) { this.get(x,y).destroy(); }
         this.grid[x][y] = thing;
