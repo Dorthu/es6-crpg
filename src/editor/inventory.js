@@ -21,6 +21,32 @@ class EditorInventory extends Inventory {
             this.add_item({ name: c, equips_to: 'mat_1'});
         }
     }
+
+    _mat_2_equip() {
+        let i = this.items[this.selected];
+        if (i['equips_to'] && i.equips_to === 'mat_1') {
+            let tmp = this.equipped['mat_2'];
+            this.equipped['mat_2'] = i;
+            if(tmp) {
+                this.items[this.selected] = tmp;
+            } else {
+                this.items.splice(this.selected, 1);
+                this.selected--;
+                if(this.selected == -1 && this.items.length) {
+                    this.selected = 0;
+                }
+            }
+            console.log("Equipped");
+        }
+    }
+
+    input(event) {
+        if(event.keyCode == 82) {
+            this._mat_2_equip();
+        } else {
+            super.input(event);
+        }
+    }
 }
 
 export default EditorInventory;

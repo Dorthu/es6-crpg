@@ -133,7 +133,7 @@ class Player {
 
     input(event) {
         if(this.inv_mode) {
-            if(event.keyCode == 73) {
+            if(event.keyCode == 73 || event.keyCode == 27) {
                 this.inv_mode = false;
             } else {
                 this.inventory.input(event);
