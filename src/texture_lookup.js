@@ -30,7 +30,5 @@ export function init_textures() {
 };
 
 export function get_material(name) {
-    console.log('getting material for '+name);
     return mat_map[name];
 };
-

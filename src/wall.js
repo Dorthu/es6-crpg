@@ -8,7 +8,6 @@ class Wall extends SolidObject {
         super(grid, loc, mats, desc, extra);
 
         let m = get_material(mats[0]);
-        console.log(m);
         this.meshes = [
             new THREE.Mesh(geo, m),
             new THREE.Mesh(geo, m),

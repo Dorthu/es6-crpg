@@ -1,5 +1,6 @@
 import Player from '../player'
 import { obj_map } from '../level_loader'
+import LevelSerializer from './level_serializer'
 
 class EditorPlayer extends Player {
 
@@ -9,7 +10,6 @@ class EditorPlayer extends Player {
         if(!ci) { console.log('no tiles selected'); return; }
         let mats = [ this.inventory.equipped['mat_1'].name,
             this.inventory.equipped['mat_2'] ? this.inventory.equipped['mat_2'].name : null ];
-        console.log(mats);
         let o = this.grid.create(obj_map[ci.name], 
            target, mats, 'editor created this');
     }
@@ -24,8 +24,9 @@ class EditorPlayer extends Player {
             this.make();
         } else if(event.keyCode == 68) {
             this.remove();
-        }
-        else {
+        } else if(event.keyCode == 83) {
+            new LevelSerializer(this.grid).serialize_level();
+        } else {
             super.input(event);
         }
     }

@@ -9,6 +9,8 @@ import Grid from './grid'
 import Inventory from './inventory'
 import EditorInventory from './editor/inventory'
 import { init_textures } from './texture_lookup'
+import { init_serializer } from './editor/level_serializer'
+import { obj_map } from './level_loader'
 
 const width = 600;
 const height = 500;
@@ -92,9 +94,7 @@ let player_class = Player;
 const editor_mode = window.location.href.indexOf('editor') > -1;
 if(editor_mode) {
     inventory = new EditorInventory();
-    inventory.add_item({name: 'enclosed', mats: ['floor_mat', 'mat3']});
-    inventory.add_item({name: 'wall', mats: ['mat2']});
-    inventory.add_item({name: 'space', mats: ['floor_mat']});
+    init_serializer(obj_map);
     player_class = EditorPlayer;
 }
 

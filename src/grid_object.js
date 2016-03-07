@@ -8,6 +8,7 @@ class GridObject {
         this.solid = false;
         this.usable = false;
         this.meshes = [];
+        this._mats = mats;
     }
 
     destroy() {
