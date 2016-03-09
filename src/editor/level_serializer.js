@@ -20,16 +20,12 @@ class LevelSerializer {
 
     serialize_level() {
         let serial = [];
-        for(let e of this.grid.grid) {
-            let row = [];
-            for(let c of e) {
-                if(c) {
-                    row.push(this.serialize(c));
-                } else {
-                    row.push(null);
-                }
+        for(let x = 0; x < this.grid.grid.length; x++ ) {
+            for(let z = 0; z < this.grid.grid[x].length; z++) {
+                if(!this.grid.grid[x][z]) { continue; }
+                if(!serial[z]) { serial[z] = []; }
+                serial[z][x] = this.serialize(this.grid.grid[x][z]);
             }
-            serial.push(row.reverse());
         }
 
         let e = document.createElement("div");
