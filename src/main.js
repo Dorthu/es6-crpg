@@ -123,6 +123,16 @@ const levels = {
             {"type":"wall","mats":["treewall_mat",null] },
             {"type":"wall","mats":["treewall_mat",null] },
             {"type":"wall","mats":["treewall_mat",null] }, {"type":"wall","mats":["mat2"] } ]
+    ],
+    entry_hall_update: [[null,{"type":"wall","mats":["wall_mat"]}],
+        [{"type":"wall","mats":["wall_mat"]},{"type":"enclosed","mats":["mat3","mat2"]},{"type":"wall","mats":["wall_mat"]}],
+        [{"type":"wall","mats":["wall_mat"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["wall_mat"]}],
+        [{"type":"wall","mats":["wall_mat"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["wall_mat"]},{"type":"wall","mats":["wall_mat"]},{"type":"wall","mats":["wall_mat"]},null,null,null,{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"door","mats":["door_mat","mat2"]}],
+        [{"type":"wall","mats":["wall_mat"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"door","mats":["door_mat"]},null,{"type":"wall","mats":["wall_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]}],
+        [null,{"type":"wall","mats":["wall_mat"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["wall_mat"]},{"type":"wall","mats":["wall_mat"]},{"type":"wall","mats":["wall_mat"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]}],
+        [null,{"type":"wall","mats":["wall_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]}],
+        [null,null,{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"enclosed","mats":["mat3","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]}],
+        [null,null,null,null,null,null,null,null,null,null,{"type":"wall","mats":["wall_mat","mat2"]}]
     ]
 };
 
@@ -156,7 +166,7 @@ const switch_level = function(info) {
     grid.set_scene_change_callback(switch_level);
 };
 
-switch_level({ to: 'entry_hall', player_pos: { x: 1, z: 2 }, player_facing: 2 });
+switch_level({ to: 'entry_hall_update', player_pos: { x: 1, z: 2 }, player_facing: 2 });
 
 function render() {
     requestAnimationFrame( render );

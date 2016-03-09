@@ -38,6 +38,7 @@ class EditorInventory extends Inventory {
             }
             console.log("Equipped");
         }
+        this.update();
     }
 
     input(event) {

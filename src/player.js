@@ -12,6 +12,7 @@ class Player {
         this.facing = facing;
         this.inv_mode = false;
         this.inventory = inventory;
+        this.inventory.update();
 
         this.camera = new THREE.PerspectiveCamera( 70, 600/500, 1, 1000);
         this.camera.position.x = this.loc.x;
@@ -166,6 +167,7 @@ class Player {
             console.log('the business');
         } else if(event.keyCode == 69) {
             this.inventory.equip();
+            this.inventory.update();
         }
 
         this.grid.event_manager.dispatchPassTurn();
