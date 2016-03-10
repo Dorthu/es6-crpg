@@ -115,7 +115,8 @@ const levels = {
         [ {"type":"wall","mats":["treewall_mat",null] },
             {"type":"enclosed","mats":["floor_mat","mat3"] },
             {"type":"enclosed","mats":["floor_mat","mat3"] },
-            {"type":"enclosed","mats":["floor_mat","mat3"] },
+            {"type":"enclosed","mats":["floor_mat","mat3"], extra: { object: {
+                    type: 'ai', mats: ['tree_mat'] } } },
             {"type":"enclosed","mats":["floor_mat","mat3"] },
             {"type":"wall","mats":["treewall_mat",null] } ],
         [ {"type":"wall","mats":["mat2"] }, {"type":"door","mats":["door_mat"],
