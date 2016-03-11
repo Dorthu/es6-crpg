@@ -15,6 +15,9 @@ export function init_textures() {
     const itemtex = load_texture('resources/textures/itemsm.png');
     const solidobjtex = load_texture('resources/textures/solidobj.png');
     const treewalltex = load_texture('resources/textures/treewall.png');
+    const dogtex = load_texture('resources/textures/dog.png');
+    const bricktex = load_texture('resources/textures/brickwall.png');
+    const planttex = load_texture('resources/textures/plant.png');
 
     mat_map = {
         mat1: new THREE.MeshLambertMaterial({color: 0xffff00, side: THREE.DoubleSide }),
@@ -25,7 +28,10 @@ export function init_textures() {
         door_mat: new THREE.MeshLambertMaterial({map: doortex, side: THREE.DoubleSide}),
         sprite_mat: new THREE.SpriteMaterial({map: itemtex, side: THREE.DoubleSide}),
         tree_mat: new THREE.SpriteMaterial({map: solidobjtex, side:THREE.SingleSide}),
-        treewall_mat: new THREE.MeshLambertMaterial({map: treewalltex, side: THREE.DoubleSide, transparent: true})
+        treewall_mat: new THREE.MeshLambertMaterial({map: treewalltex, side: THREE.DoubleSide, transparent: true}),
+        dog_mat: new THREE.SpriteMaterial({map: dogtex, side:THREE.SingleSide}),
+        plant_mat: new THREE.SpriteMaterial({map: planttex, side:THREE.SingleSide}),
+        brick_mat: new THREE.MeshLambertMaterial({map: bricktex, side: THREE.DoubleSide})
     };
 };
 

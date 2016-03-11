@@ -32,26 +32,26 @@ init_textures();
 
 const levels = {
     entry_hall: [
-        [ , { type: 'wall', mats: ['wall_mat'] } ],
-        [ {type: 'wall', mats: ['wall_mat']},
+        [ , { type: 'wall', mats: ['brick_mat'] } ],
+        [ {type: 'wall', mats: ['brick_mat']},
             { type: 'enclosed', mats: ['mat3', 'mat2'], desc: 'The floor is a different color.',
                 extra: { object: { type: 'pickup', desc: "There's something here..", mats: ['sprite_mat'],
                     extra: { name: 'potion' } } }  },
-            { type: 'wall', mats: ['wall_mat'] } ],
-        [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2']  },
-            { type: 'wall', mats: ['wall_mat'] } ],
-        [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2'] },
-            { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] },
-            { type: 'wall', mats: ['wall_mat'] } ],
-        [ {type: 'wall', mats: ['wall_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2'] },
+            { type: 'wall', mats: ['brick_mat'] } ],
+        [ {type: 'wall', mats: ['brick_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2']  },
+            { type: 'wall', mats: ['brick_mat'] } ],
+        [ {type: 'wall', mats: ['brick_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2'] },
+            { type: 'wall', mats: ['brick_mat'] }, { type: 'wall', mats: ['brick_mat'] },
+            { type: 'wall', mats: ['brick_mat'] } ],
+        [ {type: 'wall', mats: ['brick_mat']}, { type: 'enclosed', mats: ['floor_mat', 'mat2'] },
             { type: 'enclosed', mats: ['floor_mat', 'mat2'] }, { type: 'enclosed', mats: ['floor_mat', 'mat2'] },
             { type: 'enclosed', mats: ['floor_mat', 'mat2'] },
             { type: 'door', mats: ['door_mat'], desc: "It's a real door!  Woohoo!",
                 extra: { to: 'forest',
                 player_pos: { x: 1, z: 4 }, player_facing: 0 } } ],
-        [ , { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] },
-            { type: 'wall', mats: ['wall_mat'] }, { type: 'wall', mats: ['wall_mat'] },
-            { type: 'wall', mats: ['wall_mat'] } ]
+        [ , { type: 'wall', mats: ['brick_mat'] }, { type: 'wall', mats: ['brick_mat'] },
+            { type: 'wall', mats: ['brick_mat'] }, { type: 'wall', mats: ['brick_mat'] },
+            { type: 'wall', mats: ['brick_mat'] } ]
     ],
     small_room: [
         [ {type: 'wall', mats: ['mat2'] },{type: 'wall', mats: ['mat2'] },
@@ -116,7 +116,7 @@ const levels = {
             {"type":"enclosed","mats":["floor_mat","mat3"] },
             {"type":"enclosed","mats":["floor_mat","mat3"] },
             {"type":"enclosed","mats":["floor_mat","mat3"], extra: { object: {
-                    type: 'ai', mats: ['tree_mat'] } } },
+                    type: 'ai', mats: ['dog_mat'] } } },
             {"type":"enclosed","mats":["floor_mat","mat3"] },
             {"type":"wall","mats":["treewall_mat",null] } ],
         [ {"type":"wall","mats":["mat2"] }, {"type":"door","mats":["door_mat"],
@@ -125,15 +125,23 @@ const levels = {
             {"type":"wall","mats":["treewall_mat",null] },
             {"type":"wall","mats":["treewall_mat",null] }, {"type":"wall","mats":["mat2"] } ]
     ],
-    entry_hall_update: [[null,{"type":"wall","mats":["wall_mat"]}],
-        [{"type":"wall","mats":["wall_mat"]},{"type":"enclosed","mats":["mat3","mat2"]},{"type":"wall","mats":["wall_mat"]}],
-        [{"type":"wall","mats":["wall_mat"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["wall_mat"]}],
-        [{"type":"wall","mats":["wall_mat"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["wall_mat"]},{"type":"wall","mats":["wall_mat"]},{"type":"wall","mats":["wall_mat"]},null,null,null,{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"door","mats":["door_mat","mat2"]}],
-        [{"type":"wall","mats":["wall_mat"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"door","mats":["door_mat"]},null,{"type":"wall","mats":["wall_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]}],
-        [null,{"type":"wall","mats":["wall_mat"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["wall_mat"]},{"type":"wall","mats":["wall_mat"]},{"type":"wall","mats":["wall_mat"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]}],
-        [null,{"type":"wall","mats":["wall_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]}],
-        [null,null,{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]},{"type":"enclosed","mats":["mat3","mat2"]},{"type":"wall","mats":["wall_mat","mat2"]}],
-        [null,null,null,null,null,null,null,null,null,null,{"type":"wall","mats":["wall_mat","mat2"]}]
+    entry_hall_update: [[null,{"type":"wall","mats":["brick_mat"]}],
+        [{"type":"wall","mats":["brick_mat"]},{"type":"enclosed","mats":["mat3","mat2"]},{"type":"wall","mats":["brick_mat"]}],
+        [{"type":"wall","mats":["brick_mat"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["brick_mat"]}],
+        [{"type":"wall","mats":["brick_mat"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["brick_mat"]},{"type":"wall","mats":["brick_mat"]},{"type":"wall","mats":["brick_mat"]},null,null,null,{"type":"wall","mats":["brick_mat","mat2"]},{"type":"wall","mats":["brick_mat","mat2"]},
+                {"type":"door","mats":["door_mat","mat2"], 
+                    extra: { to: 'save_test', player_pos: { x: 1, z: 0 }, player_facing: 0 }}],
+        [{"type":"wall","mats":["brick_mat"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},
+                {"type":"door","mats":["door_mat"], desc: "I wonder where this goes..",
+                    extra: { to: 'small_room', player_pos: { x: 1, z: 4 }, player_facing: 0 } },
+                null,{"type":"wall","mats":["brick_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["brick_mat","mat2"]}],
+        [null,{"type":"wall","mats":["brick_mat"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["brick_mat"]},{"type":"wall","mats":["brick_mat"]},{"type":"wall","mats":["brick_mat"]},{"type":"wall","mats":["brick_mat","mat2"]},{"type":"wall","mats":["brick_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["brick_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["brick_mat","mat2"]}],
+        [null,{"type":"wall","mats":["brick_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"enclosed","mats":["floor_mat","mat2"]},{"type":"wall","mats":["brick_mat","mat2"]}],
+        [null,null,{"type":"wall","mats":["brick_mat","mat2"]},{"type":"wall","mats":["brick_mat","mat2"]},{"type":"wall","mats":["brick_mat","mat2"]},{"type":"wall","mats":["brick_mat","mat2"]},{"type":"wall","mats":["brick_mat","mat2"]},{"type":"wall","mats":["brick_mat","mat2"]},{"type":"wall","mats":["brick_mat","mat2"]},{"type":"wall","mats":["brick_mat","mat2"]},
+            {"type":"enclosed","mats":["mat3","mat2"], extra: { object: { type: 'solid',
+                mats: ['plant_mat'], desc: 'What a lovely plant!' } } },
+            {"type":"wall","mats":["brick_mat","mat2"]}],
+        [null,null,null,null,null,null,null,null,null,null,{"type":"wall","mats":["brick_mat","mat2"]}]
     ]
 };
 
