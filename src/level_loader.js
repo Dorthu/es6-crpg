@@ -9,6 +9,7 @@ import Pickup from './pickup'
 import SolidItem from './solid_item'
 import NPC from './npc'
 import AI from './game/ai'
+import TallSprite from './tall_sprite'
 
 export const obj_map = {
     'space':    Space,
@@ -18,7 +19,8 @@ export const obj_map = {
     'pickup': Pickup,
     'solid': SolidItem,
     'npc': NPC,
-    'ai': AI
+    'ai': AI,
+    'tall': TallSprite
 }
 
 ///why is this a class?
