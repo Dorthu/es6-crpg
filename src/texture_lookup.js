@@ -17,6 +17,8 @@ export function init_textures() {
     const treewalltex = load_texture('resources/textures/treewall.png');
     const dogtex = load_texture('resources/textures/dog.png');
     const bricktex = load_texture('resources/textures/brickwall.png');
+    const sidewalktex = load_texture('resources/textures/sidewalk.png');
+    const sidewalktex2 = load_texture('resources/textures/sidewalk-2.png');
     const planttex = load_texture('resources/textures/plant.png');
 
     mat_map = {
@@ -31,10 +33,22 @@ export function init_textures() {
         treewall_mat: new THREE.MeshLambertMaterial({map: treewalltex, side: THREE.DoubleSide, transparent: true}),
         dog_mat: new THREE.SpriteMaterial({map: dogtex, side:THREE.SingleSide}),
         plant_mat: new THREE.SpriteMaterial({map: planttex, side:THREE.SingleSide}),
-        brick_mat: new THREE.MeshLambertMaterial({map: bricktex, side: THREE.DoubleSide})
+        brick_mat: new THREE.MeshLambertMaterial({map: bricktex, side: THREE.DoubleSide}),
+        sidewalk_mat: [
+            new THREE.MeshLambertMaterial({map: sidewalktex, side: THREE.DoubleSide}),
+            new THREE.MeshLambertMaterial({map: sidewalktex2, side: THREE.DoubleSide}),
+        ]
     };
 };
 
-export function get_material(name) {
-    return mat_map[name];
+export function get_material(name, pos={x: 0, z: 0}) {
+    let m = mat_map[name];
+    if(Array.isArray(m)) {
+        let i = pos.x + pos.z;
+        console.log("pos is "+pos.x + ", "+pos.z);
+        i = i % m.length;
+        m = m[i];
+        console.log("it was an array..returning index "+i);
+    }
+    return m;
 };
