@@ -12,6 +12,12 @@ class TallSprite extends SpriteObject {
         pos = this.grid.translate(pos);
 
         this.meshes[0].position.y = pos.y;
+
+        if(extra) {
+            if(extra['solid']) {
+                this.solid = true;
+            }
+        }
     }
 }
 
