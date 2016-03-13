@@ -8,7 +8,7 @@ import LevelLoader from './level_loader'
 import Grid from './grid'
 import Inventory from './inventory'
 import EditorInventory from './editor/inventory'
-import { init_textures } from './texture_lookup'
+import { init_textures, get_material } from './texture_lookup'
 import { init_serializer } from './editor/level_serializer'
 import { obj_map } from './level_loader'
 
@@ -165,7 +165,7 @@ if(editor_mode) {
 
 ///tmp for testing
 const skygeo = new THREE.CubeGeometry(500, 500, 500);
-const skymat = new THREE.MeshBasicMaterial({color: 0x9898ED, side: THREE.BackSide });
+const skymat = get_material('sky_mat');
 let skybox = null;
 
 const switch_level = function(info) {
@@ -183,6 +183,7 @@ const switch_level = function(info) {
     light = new THREE.AmbientLight( 0xA9BEA9 );
     grid.scene.add( light );
     skybox = new THREE.Mesh(skygeo, skymat);
+    skybox.position.y = 200;
     grid.scene.add(skybox);
 
     grid.set_scene_change_callback(switch_level);

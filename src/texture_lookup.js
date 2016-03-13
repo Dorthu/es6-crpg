@@ -18,6 +18,7 @@ export function init_textures() {
     const dogtex = load_texture('resources/textures/dog.png');
     const talltex = load_texture('resources/textures/tall.png');
     const bricktex = load_texture('resources/textures/brickwall.png');
+    const skytex = load_texture('resources/textures/sky.png');
     const sidewalktex = load_texture('resources/textures/sidewalk.png');
     const sidewalktex2 = load_texture('resources/textures/sidewalk-2.png');
     const planttex = load_texture('resources/textures/plant.png');
@@ -36,6 +37,7 @@ export function init_textures() {
         tall_mat: new THREE.SpriteMaterial({map: talltex, side:THREE.SingleSide}),
         plant_mat: new THREE.SpriteMaterial({map: planttex, side:THREE.SingleSide}),
         brick_mat: new THREE.MeshLambertMaterial({map: bricktex, side: THREE.DoubleSide}),
+        sky_mat: new THREE.MeshBasicMaterial({map: skytex, side: THREE.BackSide}),
         sidewalk_mat: [
             new THREE.MeshLambertMaterial({map: sidewalktex, side: THREE.DoubleSide}),
             new THREE.MeshLambertMaterial({map: sidewalktex2, side: THREE.DoubleSide}),
