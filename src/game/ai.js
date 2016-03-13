@@ -12,14 +12,17 @@ class AI extends SolidItem {
             This is where AI behavior happens.
             In the base AI class, this will do nothing.
         */
-        this.ai_walk();
+        this.ai_wander();
     }
 
-    ai_walk() {
+    /*
+        Below are generic behaviors that other AIs may use.  The intention is that
+        an AI subclass with manage states and switch between these behaviors, possibly
+        with a few of its own behaviors defined as well.
+    */
+    ai_wander() {
         /*
-            This is the default walk behavior for an AI.
-            This will cause the AI to wander around the area
-            as is allowed.
+            This will cause the AI to wander around the area.
         */
         const dirs = [ { x: 0, z: 1 }, { x: 1, z: 0 }, { x: 0, z: -1 }, { x: -1, z: 0 } ];
         let options = [ { x: 0, z: 0 } ];
