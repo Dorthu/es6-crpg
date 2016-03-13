@@ -45,6 +45,19 @@ class Grid {
         return !loc.solid;
     }
 
+    object_move(thing, pos) {
+        /*
+            This is for moving objects within spaces - do not remove thing
+            from the grid when using this operation.
+        */
+        let o = this.get(thing.loc.x, thing.loc.z);
+        o.object = null;
+        let dest = this.get(pos.x, pos.z);
+        dest.object = thing;
+        thing.loc = pos;
+        thing.update_meshes();
+    }
+
     transition(event) {
         if(this.scene_change_callback) {
             this.scene_change_callback(event.detail.data);
