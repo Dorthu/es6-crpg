@@ -24,6 +24,8 @@ class Player {
         document.addEventListener('keydown', this.input_listener);
 
         this.logbox = new LogBox();
+
+        this.grid.player = this;
     }
 
     move(back=false) {

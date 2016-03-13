@@ -8,6 +8,7 @@ class Grid {
         this.event_manager = new EventManager();
         this.event_manager.subscribe('transition_level', ent => this.transition(ent));
         this.scene_change_callback = null;
+        this.player = null;
     }
 
     create(cls, loc, mats, desc, extra) {
@@ -40,6 +41,9 @@ class Grid {
     can_move_to(pos) {
         let loc = this.get(pos.x, pos.z);
         if(!loc) { return false; }
+        if(this.player && this.player.loc.x == pos.x
+                && this.player.loc.z == pos.z)
+            return false;
         if(loc['object'])
             return !loc.solid && !loc.object.solid;
         return !loc.solid;
