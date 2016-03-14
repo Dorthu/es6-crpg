@@ -23,6 +23,11 @@ body {
     #right-side {
         background-color: lightgrey;
         height: 500px;
+        overflow: hidden;
+
+        #player_status {
+            border-bottom: 1px solid black;
+        }
 
         #equipped {
             border-bottom: 1px solid black;
@@ -34,6 +39,7 @@ body {
 
         #inventory {
             padding-top: 20px; 
+
             .invitem {
                 border: 1px solid black;
                 border-radius: 5px;

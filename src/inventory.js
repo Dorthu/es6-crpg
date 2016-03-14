@@ -5,14 +5,7 @@ class Inventory {
         this.inve = document.getElementById("inventory");
         this.items = [];
         this.selected = -1;
-        this.equipped = {
-            head: null,
-            body: null,
-            left_hand: null,
-            right_hand: null,
-            feet: null,
-            accessory: null
-        };
+        this.equipped = { };
     }
 
     add_item(item) {
