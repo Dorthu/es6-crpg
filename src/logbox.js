@@ -8,7 +8,7 @@ class LogBox {
         let nel = document.createElement('p');
         nel.innerHTML = msg;
         this.ele.appendChild(nel);
-        this.ele.scrollTo(0, this.ele.scrollHeight);
+        this.ele.scrollTop = this.ele.scrollHeight;
     }
 }
 
