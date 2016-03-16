@@ -9,6 +9,8 @@ class Inventory {
     }
 
     add_item(item) {
+        console.log("adding item to inventory..");
+        console.log(item);
         this.items.push(item);
         if(this.selected === -1) { this.selected = 0; }
         this.update();
@@ -35,7 +37,17 @@ class Inventory {
     }
 
     _get_item_html(item, selected=false) {
-        return '<div class="col-md-4 invitem '+(selected ? 'invselected' : '')+'">'+item.name+'</div>';
+        return '<div class="col-md-4 invitem '+(selected ? 'invselected' : '')+'">'
+                    +this._get_icon_for_item(item)
+                    +item.name
+                +'</div>';
+    }
+
+    _get_icon_for_item(item) {
+        if(item['icon']) {
+            return '<img src="/resources/inventory/'+item.icon+'.png"/>';
+        }
+        return '<img src="/resources/inventory/_not_found.png"/>';
     }
 
     _get_equipped_html(slot) {

@@ -15,10 +15,10 @@ class EditorInventory extends Inventory {
         };
 
         for(let c of Object.keys(obj_map)) {
-            this.add_item({ name: c, equips_to: 'tile' });
+            this.add_item({ name: c, equips_to: 'tile'});
         }
         for(let c of Object.keys(mat_map)) {
-            this.add_item({ name: c, equips_to: 'mat_1'});
+           this.add_item({ name: c, equips_to: 'mat_1', icon: c });
         }
     }
 
@@ -39,6 +39,13 @@ class EditorInventory extends Inventory {
             console.log("Equipped");
         }
         this.update();
+    }
+
+    _get_icon_for_item(item) {
+        if(item['icon']) {
+            return '<img src="/resources/textures/'+item.icon+'.png"/>';
+        }
+        return '<img src="/resources/inventory/_not_found.png"/>';
     }
 
     input(event) {

@@ -9,6 +9,10 @@ function load_texture(file) {
 }
 
 export function init_textures() {
+    /*
+        TODO: make this work on a webpack meta-function that dumps the contents of
+        resources/textures and resources/sprites into a dict for further processing
+    */
     const texture = load_texture('resources/textures/debug.png');
     const walltex = load_texture('resources/textures/debug-2.png');
     const doortex = load_texture('resources/textures/debug-door.png');
@@ -16,8 +20,11 @@ export function init_textures() {
     const solidobjtex = load_texture('resources/textures/solidobj.png');
     const treewalltex = load_texture('resources/textures/treewall.png');
     const dogtex = load_texture('resources/textures/dog.png');
+    const dudetex = load_texture('resources/textures/dude.png');
+    const revolvertex = load_texture('resources/textures/revolver.png');
     const talltex = load_texture('resources/textures/tall.png');
     const bricktex = load_texture('resources/textures/brickwall.png');
+    const pavementtex = load_texture('resources/textures/pavement.png');
     const skytex = load_texture('resources/textures/sky.png');
     const sidewalktex = load_texture('resources/textures/sidewalk.png');
     const sidewalktex2 = load_texture('resources/textures/sidewalk-2.png');
@@ -34,9 +41,12 @@ export function init_textures() {
         tree_mat: new THREE.SpriteMaterial({map: solidobjtex, side:THREE.SingleSide}),
         treewall_mat: new THREE.MeshLambertMaterial({map: treewalltex, side: THREE.DoubleSide, transparent: true}),
         dog_mat: new THREE.SpriteMaterial({map: dogtex, side:THREE.SingleSide}),
+        dude_mat: new THREE.SpriteMaterial({map: dudetex, side:THREE.SingleSide}),
+        revolver: new THREE.SpriteMaterial({map: revolvertex, side:THREE.SingleSide}),
         tall_mat: new THREE.SpriteMaterial({map: talltex, side:THREE.SingleSide}),
         plant_mat: new THREE.SpriteMaterial({map: planttex, side:THREE.SingleSide}),
         brick_mat: new THREE.MeshLambertMaterial({map: bricktex, side: THREE.DoubleSide}),
+        pavement_mat: new THREE.MeshLambertMaterial({map: pavementtex, side: THREE.DoubleSide}),
         sky_mat: new THREE.MeshBasicMaterial({map: skytex, side: THREE.BackSide}),
         sidewalk_mat: [
             new THREE.MeshLambertMaterial({map: sidewalktex, side: THREE.DoubleSide}),

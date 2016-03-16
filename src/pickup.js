@@ -14,7 +14,15 @@ class Pickup extends SpriteObject {
 
         this.grid.scene.remove(this.meshes[0]);
 
-        player.inventory.add_item({name: this.name});
+        let inv_item = {
+            name: this.name,
+            icon: this._mats[0]
+        };
+        if(this.extra['equips_to']) {
+            inv_item['equips_to'] = this.extra.equips_to;
+        }
+
+        player.inventory.add_item(inv_item);
     }
 }
 
