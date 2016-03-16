@@ -27,7 +27,7 @@ class Space extends GridObject {
         this.meshes[0].position.x = pos.x;
         this.meshes[0].position.y = pos.y;
         this.meshes[0].position.z = pos.z;
-        this.meshes[0].rotation.x = Math.PI / 2;
+        this.meshes[0].rotation.x = Math.PI / -2;
 
         this.grid.scene.add(this.meshes[0]);
     }

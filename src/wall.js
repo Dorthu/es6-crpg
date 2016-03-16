@@ -22,8 +22,8 @@ class Wall extends SolidObject {
 
             let mod = 1;
             if (i > 1) { mod = -1; }
-            if (i%2) { c.x += .5 * mod; m.rotation.y = Math.PI / 2;}
-            else { c.z += .5 * mod; }
+            if (i%2) { c.x += .5 * mod; m.rotation.y = Math.PI / 2 * mod;}
+            else { c.z += .5 * mod; m.rotation.y = ( mod > 0 ? 0 : Math.PI * mod ); }
 
             c = this.grid.translate(c);
             m.position.x = c.x;
