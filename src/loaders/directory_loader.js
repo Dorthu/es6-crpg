@@ -18,5 +18,5 @@ module.exports = function(source) {
         result[cdir] = fs.readdirSync('resources/'+cdir);
     });
 
-    return "'"+JSON.stringify(result)+"'"; 
+    return "module.exports="+JSON.stringify(result)+";"; 
 }

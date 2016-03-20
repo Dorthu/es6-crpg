@@ -8,9 +8,36 @@ function load_texture(file) {
     return t;
 }
 
-let output = require('./loaders/directory_loader!./empty');
+function make_material(texture, type) {
+    if(type == 'sprites') {
+        return new THREE.SpriteMaterial({map: texture, side: THREE.SingleSide});
+    } else if(type == 'doublesided') {
+        return  new THREE.MeshLambertMaterial({map: texture, side: THREE.DoubleSide, transparent: true});
+    } else if(type == 'skybox') {
+        return new THREE.MeshBasicMaterial({map: texture, side: THREE.BackSide});
+    } else {
+        return new THREE.MeshLambertMaterial({map: texture, side: THREE.SingleSide});
+    }
+}
+
+const resources = require('./loaders/directory_loader!./empty');
 
 export function init_textures() {
+    console.log(resources);
+    mat_map={};
+    for(let cdir of Object.keys(resources)) {
+        console.log("looking at "+cdir);
+        console.log(resources[cdir]);
+        for(let cimg of resources[cdir]) {
+            let ikey = cimg.substring(0, cimg.length-4); //lop off extension
+            let tex = load_texture('resources/'+cdir+'/'+cimg);
+            mat_map[ikey] = make_material(tex, cdir);
+        }
+    }
+    console.log(mat_map);
+}
+
+export function init_textures_old() {
     /*
         TODO: make this work on a webpack meta-function that dumps the contents of
         resources/textures and resources/sprites into a dict for further processing
