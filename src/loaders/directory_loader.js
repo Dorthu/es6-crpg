@@ -10,6 +10,7 @@ module.exports = function(source) {
         reference them in dynamically-generated html and stuff.. oh just look,
         you'll see what this mess is for).
     */
+    this.cacheable && this.cacheable();
     
     result = {};
     fs.readdirSync('resources').forEach(function(cdir) {
