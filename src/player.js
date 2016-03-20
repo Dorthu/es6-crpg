@@ -56,7 +56,7 @@ class Player {
             let o = this.grid.get(nloc.x, nloc.z);
             if(o.usable) {
                 this.logbox.add_message('uses');
-                o.use();
+                o.use(this);
             }
         }
 

@@ -36,6 +36,24 @@ class Inventory {
         this.equipe.innerHTML = serial;
     }
 
+    has(name) {
+        for(let c of this.items) {
+            if(c['name'] && c.name == name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    remove(name) {
+        for(let c=0; c<this.items.length; c++) {
+            if(this.items[c]['name'] && this.items[c].name == name) {
+                this.items = this.items.splice(c, 1);
+                return;
+            }
+        }
+    }
+
     _get_item_html(item, selected=false) {
         return '<div class="col-md-4 invitem '+(selected ? 'invselected' : '')+'">'
                     +this._get_icon_for_item(item)

@@ -46,9 +46,9 @@ const levels = {
         [ {type: 'wall', mats: ['brick']}, { type: 'space', mats: ['pavement', 'debug-2'] },
             { type: 'space', mats: ['pavement', 'debug-2'] }, { type: 'space', mats: ['pavement', 'debug-2'] },
             { type: 'space', mats: ['pavement', 'debug-2'] },
-            { type: 'door', mats: ['debug-door'], desc: "It's a real door!  Woohoo!",
+            { type: 'locked', mats: ['debug-door-locked', 'debug-door'], desc: "It's a locked door..",
                 extra: { to: 'forest',
-                player_pos: { x: 1, z: 4 }, player_facing: 0 } } ],
+                player_pos: { x: 1, z: 4 }, player_facing: 0, key: 'Revolver' } } ],
         [ , { type: 'wall', mats: ['brick'] }, { type: 'wall', mats: ['brick'] },
             { type: 'wall', mats: ['brick'] }, { type: 'wall', mats: ['brick'] },
             { type: 'wall', mats: ['brick'] } ]

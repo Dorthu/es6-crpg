@@ -7,7 +7,7 @@ class Door extends Wall {
         this.usable = true;
     }
 
-    use() {
+    use(player) {
         this.grid.event_manager.dispatchTransitionLevel(this.extra);
     }
 }
