@@ -120,7 +120,7 @@ const levels = {
             {"type":"space","mats":["grass","debug-2"] },
             {"type":"space","mats":["grass","debug-2"] },
             {"type":"space","mats":["grass","debug-2"], extra: { object: {
-                    type: 'ai', mats: ['dude'] } } },
+                    type: 'ai', mats: ['baddie'] } } },
             {"type":"space","mats":["grass","debug-2"] },
             {"type":"wall","mats":["treewall",null] } ],
         [ {"type":"wall","mats":["debug-2"] }, {"type":"door","mats":["debug-door"],
