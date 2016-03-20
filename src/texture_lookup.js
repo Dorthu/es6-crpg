@@ -8,6 +8,8 @@ function load_texture(file) {
     return t;
 }
 
+let output = require('./loaders/directory_loader!./empty');
+
 export function init_textures() {
     /*
         TODO: make this work on a webpack meta-function that dumps the contents of
