@@ -8,6 +8,7 @@ import LevelLoader from './level_loader'
 import Grid from './grid'
 import Inventory from './game/inventory'
 import EditorInventory from './editor/inventory'
+import Overlay from './overlay'
 import { init_textures, get_material } from './texture_lookup'
 import { init_serializer } from './editor/level_serializer'
 import { obj_map } from './level_loader'
@@ -27,6 +28,7 @@ const renderer = new THREE.WebGLRenderer(assign({
 
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( width, height );
+renderer.autoClear=false;
 
 init_textures();
 
@@ -168,6 +170,10 @@ const skygeo = new THREE.CubeGeometry(500, 500, 500);
 const skymat = get_material('sky');
 let skybox = null;
 
+///overlay business is given to the player, and persisted
+const overlay = new Overlay(width, height);
+overlay.add('shoot');
+
 const switch_level = function(info) {
     if(player) player.destroy();
     player = null;
@@ -191,8 +197,13 @@ const switch_level = function(info) {
 
 switch_level({ to: 'entry_hall_update', player_pos: { x: 1, z: 2 }, player_facing: 2 });
 
+const startTime = new Date().getTime();
 function render() {
+    overlay.tick(new Date().getTime() - startTime);
     requestAnimationFrame( render );
+    renderer.clear();
     renderer.render( grid.scene, player.camera );
+    renderer.clearDepth();
+    renderer.render(overlay.scene, overlay.cam);
 }
 render();

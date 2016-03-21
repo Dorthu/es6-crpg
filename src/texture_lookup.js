@@ -11,8 +11,10 @@ function load_texture(file) {
 function make_material(texture, type) {
     if(type == 'sprites') {
         return new THREE.SpriteMaterial({map: texture, side: THREE.SingleSide});
+    } else if(type == 'overlay') {
+        return new THREE.SpriteMaterial({map: texture}); //these should be rendered by a different scene and overlayed
     } else if(type == 'doublesided') {
-        return  new THREE.MeshLambertMaterial({map: texture, side: THREE.DoubleSide, transparent: true});
+        return new THREE.MeshLambertMaterial({map: texture, side: THREE.DoubleSide, transparent: true});
     } else if(type == 'skybox') {
         return new THREE.MeshBasicMaterial({map: texture, side: THREE.BackSide});
     } else {

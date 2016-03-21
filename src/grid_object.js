@@ -25,6 +25,10 @@ class GridObject {
         }
     }
 
+    tick(delta) {
+        ///something to do on every frame?
+    }
+
     destroy() {
         for(let m of this.meshes) {
             this.grid.scene.remove(m);
