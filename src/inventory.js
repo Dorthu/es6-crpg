@@ -46,12 +46,19 @@ class Inventory {
     }
 
     remove(name) {
+        if(this.items.length == 1) {
+            if(this.items[0]['name'] && this.items[0].name == name) {
+                this.items = [];
+                this.selected = -1;
+            }
+        }
         for(let c=0; c<this.items.length; c++) {
             if(this.items[c]['name'] && this.items[c].name == name) {
                 this.items = this.items.splice(c, 1);
                 return;
             }
         }
+        this.update();
     }
 
     _get_item_html(item, selected=false) {
