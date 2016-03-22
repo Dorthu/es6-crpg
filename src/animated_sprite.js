@@ -21,13 +21,13 @@ class AnimatedSprite {
             console.log(_this.tex.image.width);
             _this.frames = _this.tex.image.width / 64;
             if(!_this.tex.image.width % 64) {
-                console.log("WARNING: Texture we are trying to animate is not an even number of frames somehow?"); 
+                console.log("WARNING: Texture we are trying to animate is not an even number of frames somehow?");
             }
             _this.tex.wrapS = _this.tex.wrapT = THREE.RepeatWrapping;
             _this.tex.repeat.set(1/_this.frames, 1);
 
             console.log("I have "+_this.frames+" frames");
-            _this.anim_rate = 300;
+            _this.anim_rate = 400; /// 60; is a more sane value, but 400 really shows off the below issue
 
             _this.sprite.scale.set(manager.width, manager.height, 1);
             _this.sprite.position.set(0, 0, 1);
@@ -39,8 +39,11 @@ class AnimatedSprite {
 
     tick(delta) {
         if(this.loaded) {
+            /// TODO:
+            ///as textures offsets become less precise, the texture gets blurrier.
+            ///this is an issue with floating point numbers I think, and that texture
+            ///offsets are from 0.0-1.0.  Not sure how to fix now, but come back to it later.
             this.tex.offset.x = Math.floor(delta/this.anim_rate) / this.frames;
-            console.log("This is "+Math.floor(delta/this.anim_rate)+" and "+this.tex.offset.x);
         }
     }
 }
