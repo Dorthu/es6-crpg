@@ -18,10 +18,7 @@ class Overlay {
     }
 
     add(sprite_mat) {
-        let sprite = new AnimatedSprite(sprite_mat);
-        sprite.sprite.scale.set(this.width, this.height, 1);
-        sprite.sprite.position.set(0, 0, 1);
-        this.scene.add(sprite.sprite);
+        let sprite = new AnimatedSprite(sprite_mat, this);
         this.objs.push(sprite);
     }
 

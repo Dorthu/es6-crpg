@@ -172,7 +172,7 @@ let skybox = null;
 
 ///overlay business is given to the player, and persisted
 const overlay = new Overlay(width, height);
-overlay.add('shoot');
+overlay.add('shoot-anim');
 
 const switch_level = function(info) {
     if(player) player.destroy();
