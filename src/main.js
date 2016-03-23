@@ -36,9 +36,9 @@ const levels = {
     entry_hall: [
         [ , { type: 'wall', mats: ['brick'] } ],
         [ {type: 'wall', mats: ['brick']},
-            { type: 'space', mats: ['debug-2', 'debug-2'], desc: 'The floor is a different color.',
-                extra: { object: { type: 'pickup', desc: "There's something here..", mats: ['revolver'],
-                    extra: { name: 'Revolver', equips_to: 'right_hand' } } }  },
+            { type: 'space', mats: ['woodfloor_rug'], desc: 'The floor is a different color.',
+                extra: { object: { type: 'pickup', desc: "There's something here..", mats: ['key'],
+                    extra: { name: 'Key' } } }  },
             { type: 'wall', mats: ['brick'] } ],
         [ {type: 'wall', mats: ['brick']}, { type: 'space', mats: ['woodfloor', 'debug-2']  },
             { type: 'wall', mats: ['brick'] } ],
@@ -50,7 +50,7 @@ const levels = {
             { type: 'space', mats: ['woodfloor', 'debug-2'] },
             { type: 'locked', mats: ['debug-door-locked', 'debug-door'], desc: "It's a locked door..",
                 extra: { to: 'forest',
-                player_pos: { x: 1, z: 4 }, player_facing: 0, key: 'Revolver' } } ],
+                player_pos: { x: 1, z: 4 }, player_facing: 0, key: 'Key' } } ],
         [ , { type: 'wall', mats: ['brick'] }, { type: 'wall', mats: ['brick'] },
             { type: 'wall', mats: ['brick'] }, { type: 'wall', mats: ['brick'] },
             { type: 'wall', mats: ['brick'] } ]
