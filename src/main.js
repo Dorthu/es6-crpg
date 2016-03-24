@@ -34,26 +34,26 @@ init_textures();
 
 const levels = {
     entry_hall: [
-        [ , { type: 'wall', mats: ['brick'] } ],
-        [ {type: 'wall', mats: ['brick']},
-            { type: 'space', mats: ['woodfloor_rug'], desc: 'The floor is a different color.',
+        [ , { type: 'wall', mats: ['wallpaper'] } ],
+        [ {type: 'wall', mats: ['wallpaper']},
+            { type: 'enclosed', mats: ['woodfloor_rug','pavement'], desc: 'The floor is a different color.',
                 extra: { object: { type: 'pickup', desc: "There's something here..", mats: ['key'],
                     extra: { name: 'Key' } } }  },
-            { type: 'wall', mats: ['brick'] } ],
-        [ {type: 'wall', mats: ['brick']}, { type: 'space', mats: ['woodfloor', 'debug-2']  },
-            { type: 'wall', mats: ['brick'] } ],
-        [ {type: 'wall', mats: ['brick']}, { type: 'space', mats: ['woodfloor', 'debug-2'] },
-            { type: 'wall', mats: ['brick'] }, { type: 'wall', mats: ['brick'] },
-            { type: 'wall', mats: ['brick'] } ],
-        [ {type: 'wall', mats: ['brick']}, { type: 'space', mats: ['woodfloor', 'debug-2'] },
-            { type: 'space', mats: ['woodfloor', 'debug-2'] }, { type: 'space', mats: ['woodfloor', 'debug-2'] },
-            { type: 'space', mats: ['woodfloor', 'debug-2'] },
+            { type: 'wall', mats: ['wallpaper'] } ],
+        [ {type: 'wall', mats: ['wallpaper']}, { type: 'enclosed', mats: ['woodfloor','pavement', 'debug-2']  },
+            { type: 'wall', mats: ['wallpaper'] } ],
+        [ {type: 'wall', mats: ['wallpaper']}, { type: 'enclosed', mats: ['woodfloor','pavement', 'debug-2'] },
+            { type: 'wall', mats: ['wallpaper'] }, { type: 'wall', mats: ['wallpaper'] },
+            { type: 'wall', mats: ['wallpaper'] } ],
+        [ {type: 'wall', mats: ['wallpaper']}, { type: 'enclosed', mats: ['woodfloor','pavement', 'debug-2'] },
+            { type: 'enclosed', mats: ['woodfloor','pavement', 'debug-2'] }, { type: 'enclosed', mats: ['woodfloor','pavement', 'debug-2'] },
+            { type: 'enclosed', mats: ['woodfloor','pavement', 'debug-2'] },
             { type: 'locked', mats: ['debug-door-locked', 'debug-door'], desc: "It's a locked door..",
                 extra: { to: 'forest',
                 player_pos: { x: 1, z: 4 }, player_facing: 0, key: 'Key' } } ],
-        [ , { type: 'wall', mats: ['brick'] }, { type: 'wall', mats: ['brick'] },
-            { type: 'wall', mats: ['brick'] }, { type: 'wall', mats: ['brick'] },
-            { type: 'wall', mats: ['brick'] } ]
+        [ , { type: 'wall', mats: ['wallpaper'] }, { type: 'wall', mats: ['wallpaper'] },
+            { type: 'wall', mats: ['wallpaper'] }, { type: 'wall', mats: ['wallpaper'] },
+            { type: 'wall', mats: ['wallpaper'] } ]
     ],
     small_room: [
         [ {type: 'wall', mats: ['debug-2'] },{type: 'wall', mats: ['debug-2'] },
@@ -172,6 +172,7 @@ let skybox = null;
 
 ///overlay business is given to the player, and persisted
 const overlay = new Overlay(width, height);
+//overlay.add("shoot-anim-loop");
 
 const switch_level = function(info) {
     if(player) player.destroy();
