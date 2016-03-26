@@ -34,7 +34,7 @@ init_textures();
 
 const levels = {
     entry_hall: [
-        [ , { type: 'wall', mats: ['wallpaper'] } ],
+        [ , { type: 'wall', mats: ['wallpaper_window'], desc: "It's a dreary day.." } ],
         [ {type: 'wall', mats: ['wallpaper']},
             { type: 'enclosed', mats: ['woodfloor_rug','pavement'], desc: 'The floor is a different color.',
                 extra: { object: { type: 'pickup', desc: "There's something here..", mats: ['key'],
@@ -42,7 +42,7 @@ const levels = {
             { type: 'wall', mats: ['wallpaper'] } ],
         [ {type: 'wall', mats: ['wallpaper']}, { type: 'enclosed', mats: ['woodfloor','pavement', 'debug-2']  },
             { type: 'wall', mats: ['wallpaper'] } ],
-        [ {type: 'wall', mats: ['wallpaper']}, { type: 'enclosed', mats: ['woodfloor','pavement', 'debug-2'] },
+        [ {type: 'wall', mats: ['wallpaper_tear']}, { type: 'enclosed', mats: ['woodfloor','pavement', 'debug-2'] },
             { type: 'wall', mats: ['wallpaper'] }, { type: 'wall', mats: ['wallpaper'] },
             { type: 'wall', mats: ['wallpaper'] } ],
         [ {type: 'wall', mats: ['wallpaper']}, { type: 'enclosed', mats: ['woodfloor','pavement', 'debug-2'] },
