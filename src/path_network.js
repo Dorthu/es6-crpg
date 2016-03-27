@@ -1,4 +1,41 @@
+import { PriorityQueue } from 'priorityqueuejs'
+
 const dirs = [ {x:1, z:0}, {x:0, z: 1}, {x:-1, z:0}, {x:0, z:-1} ];
+
+function path_to_point(graph, start, goal) {
+    /*
+        This is an implementation of A* based on
+        http://www.redblobgames.com/pathfinding/a-star/implementation.html
+        Super special thanks to those guys!
+    */
+    console.log("This is it:");
+    console.log(PriorityQueue);
+    let frontier = PriorityQueue(function(a, b) { return a.priority - b.priority; });
+    frontier.push({ val: start, priority: 1 });
+    came_from = {};
+    cost_so_far = {};
+    came_from[start.x+';'+start.z] = null;
+    cost_so_far[start.x+';'+start.z] = 0;
+    
+    while(frontier.length) {
+        let cur = frontier.shift().val;
+
+        if(cur.x == goal.x && cur.z == goal.z) { break; }
+
+        for(let next of _get_neightbors(cur.x, cur.z)) {
+            let new_cost = cost_so_far[cur.x+';'+cur.z] ? cost_so_far[cur.x+';'+cur.z] + 1 : 1;
+            if(!cost_so_far[next.x+';'+next.z] || new_cost < cost_so_far[next.x+';'+next.z]) {
+                cost_so_far[next.x+';'+next.z] = new_cost;
+                let priority = new_cost + ( Math.abs(goal.x - next.x) + Math.abs(goal.y - next.y) );
+                frontier.push({ val: next, priority: priority });
+                came_from[next.x+';'+next.z] = cur;
+
+            }
+        }
+    }
+
+    return { path: came_from, cost: cost_so_far };
+}
 
 class PathNode {
     constructor(x, z) {
@@ -13,7 +50,7 @@ class PathNetwork {
         this.grid = grid;
         this.network = null;
         this.first_movable_space = null;
-        this.rebuild_network();
+//        this.rebuild_network();
     }
 
     rebuild_network(hard=false) {
@@ -28,7 +65,7 @@ class PathNetwork {
             this.first_movable_space = null;
             ///find starting point and save it
             for(let x=0; x<this.grid.grid.length; x++) {
-                for(let z=0; z<this.grid.grid[x].length, z++) {
+                for(let z=0; z<this.grid.grid[x].length; z++) {
                     if(this.grid.can_move_to(x, z)) {
                         this.first_movable_space = {x: x, z: z};
                         break;
@@ -45,31 +82,10 @@ class PathNetwork {
         
     }
 
-    path_to_point(graph, start, goal) {
-        /*
-            This is an implementation of A* based on
-            http://www.redblobgames.com/pathfinding/a-star/implementation.html
-            Super special thanks to those guys!
-
-            Takes: point - { x: int, y: int }
-            Returns: an array of points (as above), null if point is unreachable
-        */
-/*        if(!this.network) {
-            console.log("WARNING: PathNetwork was never built (or no movable spaces in grid)!");
-            return null;
-        }
-*/
-        let frontier = [];
-        frontier.push(start);
-        came_from = {};
-        cost_so_far = {};
-        came_from[start.x+';'+start.z] = null;
-        cost_so_far[start.x+';'+start.z = 0;
-        
-        while(frontier.length) {
-            let cur = frontier.shift();
-        }
+    path_to_player(from_me) {
+        return path_to_point(this.grid, from_me.loc, this.grid.player.loc);
     }
+
 
     _get_neighbors(x, z) {
         let ret = [];
@@ -91,3 +107,5 @@ class PathNetwork {
         */
     }
 }
+
+export default PathNetwork;

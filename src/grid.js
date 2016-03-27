@@ -1,5 +1,6 @@
 import { THREE } from './Three'
 import EventManager from './event_manager'
+import PathNetwork from './path_network'
 
 class Grid {
     constructor() {
@@ -9,6 +10,7 @@ class Grid {
         this.event_manager.subscribe('transition_level', ent => this.transition(ent));
         this.scene_change_callback = null;
         this.player = null;
+        this.path_network = new PathNetwork(this);
     }
 
     create(cls, loc, mats, desc, extra) {
