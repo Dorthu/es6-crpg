@@ -1,40 +1,57 @@
-import { PriorityQueue } from 'priorityqueuejs'
+import PriorityQueue from 'priorityqueuejs'
 
 const dirs = [ {x:1, z:0}, {x:0, z: 1}, {x:-1, z:0}, {x:0, z:-1} ];
 
-function path_to_point(graph, start, goal) {
+function _extract_path(start, goal, came_from) {
+    /*
+        This bit is based on TracePath from TrueCraft.  Check them out, they're
+        cool poeple (and they recommended me the below blog entry):
+        https://truecraft.io/
+    */
+    let result = [];
+    let current = goal;
+    while(current !== start) {
+        current = came_from[current.x+';'+current.z];
+        result.unshift(current);
+    }
+    result.push(goal);
+    return result;
+}
+
+function path_to_point(graph, start, goal, neighbor_func) {
     /*
         This is an implementation of A* based on
         http://www.redblobgames.com/pathfinding/a-star/implementation.html
         Super special thanks to those guys!
     */
-    console.log("This is it:");
-    console.log(PriorityQueue);
-    let frontier = PriorityQueue(function(a, b) { return a.priority - b.priority; });
-    frontier.push({ val: start, priority: 1 });
-    came_from = {};
-    cost_so_far = {};
+    let frontier = new PriorityQueue(function(a, b) { return a.priority - b.priority; });
+    frontier.enq({ val: start, priority: 1 });
+    let came_from = {};
+    let cost_so_far = {};
     came_from[start.x+';'+start.z] = null;
     cost_so_far[start.x+';'+start.z] = 0;
     
-    while(frontier.length) {
-        let cur = frontier.shift().val;
+    while(frontier.size()) {
+        let cur = frontier.deq().val;
 
-        if(cur.x == goal.x && cur.z == goal.z) { break; }
+        if(cur.x == goal.x && cur.z == goal.z) {
+            ///we got there!
+            return _extract_path(start, goal, came_from);
+        }
 
-        for(let next of _get_neightbors(cur.x, cur.z)) {
+        for(let next of neighbor_func(cur.x, cur.z)) {
             let new_cost = cost_so_far[cur.x+';'+cur.z] ? cost_so_far[cur.x+';'+cur.z] + 1 : 1;
             if(!cost_so_far[next.x+';'+next.z] || new_cost < cost_so_far[next.x+';'+next.z]) {
                 cost_so_far[next.x+';'+next.z] = new_cost;
                 let priority = new_cost + ( Math.abs(goal.x - next.x) + Math.abs(goal.y - next.y) );
-                frontier.push({ val: next, priority: priority });
+                frontier.enq({ val: next, priority: priority });
                 came_from[next.x+';'+next.z] = cur;
 
             }
         }
     }
 
-    return { path: came_from, cost: cost_so_far };
+    return null; ///{ path: came_from, cost: cost_so_far };
 }
 
 class PathNode {
@@ -83,14 +100,14 @@ class PathNetwork {
     }
 
     path_to_player(from_me) {
-        return path_to_point(this.grid, from_me.loc, this.grid.player.loc);
+        return path_to_point(this.grid, from_me.loc, this.grid.player.loc, (x,z) => this._get_neighbors(x,z));
     }
 
 
     _get_neighbors(x, z) {
         let ret = [];
         for(let d of dirs) {
-            if(this.grid.can_move_to(x+d.x, z+d.z)) {
+            if(this.grid.can_move_to({x: x+d.x, z: z+d.z}, true)) {
                 ret.push({x: x+d.x, z: z+d.z});
             }
         }

@@ -40,10 +40,11 @@ class Grid {
         this.put(x, y, null);
     }
 
-    can_move_to(pos) {
+    can_move_to(pos, ignore_player=false) {
         let loc = this.get(pos.x, pos.z);
         if(!loc) { return false; }
-        if(this.player && this.player.loc.x == pos.x
+        if(!ignore_player && this.player
+                && this.player.loc.x == pos.x
                 && this.player.loc.z == pos.z)
             return false;
         if(loc['object'])
