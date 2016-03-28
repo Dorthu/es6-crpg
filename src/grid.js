@@ -1,5 +1,6 @@
 import { THREE } from './Three'
 import EventManager from './event_manager'
+import PathNetwork from './path_network'
 
 class Grid {
     constructor() {
@@ -9,6 +10,7 @@ class Grid {
         this.event_manager.subscribe('transition_level', ent => this.transition(ent));
         this.scene_change_callback = null;
         this.player = null;
+        this.path_network = new PathNetwork(this);
     }
 
     create(cls, loc, mats, desc, extra) {
@@ -38,10 +40,11 @@ class Grid {
         this.put(x, y, null);
     }
 
-    can_move_to(pos) {
+    can_move_to(pos, ignore_player=false) {
         let loc = this.get(pos.x, pos.z);
         if(!loc) { return false; }
-        if(this.player && this.player.loc.x == pos.x
+        if(!ignore_player && this.player
+                && this.player.loc.x == pos.x
                 && this.player.loc.z == pos.z)
             return false;
         if(loc['object'])

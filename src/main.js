@@ -193,6 +193,8 @@ const switch_level = function(info) {
     grid.scene.add(skybox);
 
     grid.set_scene_change_callback(switch_level);
+
+    console.log(grid.path_network.path_to_player({ loc: { x: 1, z: 1 } }));
 };
 
 switch_level({ to: 'entry_hall_update', player_pos: { x: 1, z: 2 }, player_facing: 2 });
