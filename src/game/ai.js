@@ -3,6 +3,8 @@ import SolidItem from '../solid_item'
 class AI extends SolidItem {
     constructor(grid, loc, mats, desc, extra) {
         super(grid, loc, mats, desc, extra);
+        this.path = null;
+        this.path_step = 0;
 
         this.grid.event_manager.subscribe('pass_turn', e => this.step(e));
     }
@@ -12,7 +14,47 @@ class AI extends SolidItem {
             This is where AI behavior happens.
             In the base AI class, this will do nothing.
         */
-        this.ai_wander();
+        if(!this.ai_follow_player()) {
+//            this.ai_wander();
+                console.log("at player or can't see them");
+        }
+    }
+
+    /*
+        These methods are generic helpers for common AI concerns
+    */
+    has_los_to_player() {
+        /*
+            Returns true if this AI has Line of Sight to the player
+            TODO: right now, this won't let AIs see you in a 4x4 room if you're
+            on a diagnal
+        */
+        let los_dir = {x: 0, z: 0};
+        let mag = 0;
+        if(this.loc.x == this.grid.player.loc.x) {
+            los_dir.z = Math.sign(this.loc.z - this.grid.player.loc.z);
+            mag  = Math.abs(this.loc.z - this.grid.player.loc.z);
+        } else if(this.loc.z == this.grid.player.loc.z) {
+            los_dir.x = Math.sign(this.loc.x - this.grid.player.loc.x);
+            mag  = Math.abs(this.loc.x - this.grid.player.loc.x);
+        }
+
+        if(!los_dir.x || los_dir.z) {
+            return false;
+        }
+
+        for(let c = 0; c < mag; c++) {
+            let o = this.grid.get(this.loc.x + los_dir.x * c, this.loc.z + los_dir.z * c);
+            if(o && o.solid && !o.transparent) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    update_path_to_player() {
+        this.path = this.grid.path_network.path_to_player(this);
+        this.path_step = 0;
     }
 
     /*
@@ -35,7 +77,50 @@ class AI extends SolidItem {
         let choice = options[Math.floor(Math.random() * options.length)];
         if(choice.x || choice.z) {
             this.grid.object_move(this, { x: this.loc.x + choice.x, y: this.loc.y, z: this.loc.z + choice.z });
+            return true;
         }
+        return false; //no action
+    }
+
+    ai_follow_path() {
+        /*
+            This behavior follows the path the AI has already gotten.
+        */
+        console.log("following path..");
+        if(!this.path || this.path_step > this.path.length) {
+            console.log("not enough path");
+            return false;
+        }
+
+        let next = this.path[this.path_step++];
+        if(this.grid.can_move_to({x: next.x, y: this.loc.y, z: next.z})) {
+            console.log("moving!");
+            this.grid.object_move(this, { x: next.x, y: this.loc.y, z: next.z });
+            return true;
+        }
+        console.log("could not move to point");
+        return false;
+    }
+
+    ai_follow_player() {
+        console.log("Following player..");
+        if(this.has_los_to_player()) {
+            this.update_path_to_player();
+            console.log("path updated!");
+        }
+
+        if(this.path) {
+            console.log("attempting to move..");
+            console.log(this.path);
+            if(this.ai_follow_path()) {
+                console.log("moved toward player");
+                return true;
+            }
+        }
+        console.log("no action");
+
+        ///no aciton was taken
+        return false;
     }
 }
 
