@@ -29,32 +29,39 @@ class AI extends SolidItem {
             TODO: right now, this won't let AIs see you in a 4x4 room if you're
             on a diagnal
         */
+        console.log("has los?");
         let los_dir = {x: 0, z: 0};
         let mag = 0;
         if(this.loc.x == this.grid.player.loc.x) {
-            los_dir.z = Math.sign(this.loc.z - this.grid.player.loc.z);
+            los_dir.z = -1 *  Math.sign(this.loc.z - this.grid.player.loc.z);
             mag  = Math.abs(this.loc.z - this.grid.player.loc.z);
         } else if(this.loc.z == this.grid.player.loc.z) {
-            los_dir.x = Math.sign(this.loc.x - this.grid.player.loc.x);
+            los_dir.x = -1 * Math.sign(this.loc.x - this.grid.player.loc.x);
             mag  = Math.abs(this.loc.x - this.grid.player.loc.x);
         }
 
-        if(!los_dir.x || los_dir.z) {
+        console.log('los_dir is x: '+los_dir.x+' z: '+los_dir.z);
+        console.log('mag is: '+mag);
+        if(!(los_dir.x || los_dir.z)) {
             return false;
         }
 
         for(let c = 0; c < mag; c++) {
             let o = this.grid.get(this.loc.x + los_dir.x * c, this.loc.z + los_dir.z * c);
+            console.log(o);
             if(o && o.solid && !o.transparent) {
+                console.log("no los to player: blocked by:");
+                console.log(o);
                 return false;
             }
         }
+        console.log("has los to player: true");
         return true;
     }
 
     update_path_to_player() {
         this.path = this.grid.path_network.path_to_player(this);
-        this.path_step = 0;
+        this.path_step = 1;
     }
 
     /*
@@ -87,18 +94,22 @@ class AI extends SolidItem {
             This behavior follows the path the AI has already gotten.
         */
         console.log("following path..");
-        if(!this.path || this.path_step > this.path.length) {
-            console.log("not enough path");
+        if(!this.path || this.path_step >= this.path.length) {
+            console.log(this.path);
+            console.log("not enough path "+ this.path_step);
             return false;
         }
 
         let next = this.path[this.path_step++];
+        console.log("moving to next place from index "+(this.path_step-1));
+        console.log(next);
         if(this.grid.can_move_to({x: next.x, y: this.loc.y, z: next.z})) {
             console.log("moving!");
             this.grid.object_move(this, { x: next.x, y: this.loc.y, z: next.z });
             return true;
         }
         console.log("could not move to point");
+        this.path_step--;
         return false;
     }
 
