@@ -43,8 +43,8 @@ function path_to_point(graph, start, goal, neighbor_func) {
             let new_cost = cost_so_far[cur.x+';'+cur.z] ? cost_so_far[cur.x+';'+cur.z] + 1 : 1;
             if(!cost_so_far[next.x+';'+next.z] || new_cost < cost_so_far[next.x+';'+next.z]) {
                 cost_so_far[next.x+';'+next.z] = new_cost;
-                let priority = new_cost + ( Math.abs(goal.x - next.x) + Math.abs(goal.y - next.y) );
-                frontier.enq({ val: next, priority: priority });
+                let priority = new_cost + ( Math.abs(goal.x - next.x) + Math.abs(goal.z - next.z) );
+                frontier.enq({ val: next, priority: -1 * priority });
                 came_from[next.x+';'+next.z] = cur;
 
             }

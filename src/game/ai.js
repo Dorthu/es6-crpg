@@ -5,6 +5,8 @@ class AI extends SolidItem {
         super(grid, loc, mats, desc, extra);
         this.path = null;
         this.path_step = 0;
+        this.act_on = 2;
+        this.turns = 0;
 
         this.grid.event_manager.subscribe('pass_turn', e => this.step(e));
     }
@@ -14,9 +16,12 @@ class AI extends SolidItem {
             This is where AI behavior happens.
             In the base AI class, this will do nothing.
         */
-        if(!this.ai_follow_player()) {
-//            this.ai_wander();
-                console.log("at player or can't see them");
+        console.log(this.turns % this.act_on);
+        if(!(this.turns++ % this.act_on)) {
+            if(!this.ai_follow_player()) {
+    //            this.ai_wander();
+                    console.log("at player or can't see them");
+            }
         }
     }
 
