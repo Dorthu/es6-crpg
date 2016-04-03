@@ -14,6 +14,11 @@ class GamePlayer extends Player {
         this.status_ui.update();
     }
 
+    suffer_attack() {
+        this.stats[0].value -= 7;
+        this.status_ui.update();
+    }
+
     input(event) {
         if(event.keyCode == 81) {
             this.stats[0].value -= 4;

@@ -21,6 +21,9 @@ class AI extends SolidItem {
             if(!this.ai_follow_player()) {
     //            this.ai_wander();
                     console.log("at player or can't see them");
+                if(this.is_beside_player()) {
+                    this.ai_attack();
+                }
             }
         }
     }
@@ -67,6 +70,11 @@ class AI extends SolidItem {
     update_path_to_player() {
         this.path = this.grid.path_network.path_to_player(this);
         this.path_step = 1;
+    }
+
+    is_beside_player() {
+        return Math.abs(this.loc.x - this.grid.player.loc.x) + Math.abs(this.loc.z - this.grid.player.loc.z)
+                === 1;
     }
 
     /*
@@ -137,6 +145,12 @@ class AI extends SolidItem {
 
         ///no aciton was taken
         return false;
+    }
+
+    ai_attack() {
+        if(this.grid.player['suffer_attack']) {
+            this.grid.player.suffer_attack();
+        }
     }
 }
 
