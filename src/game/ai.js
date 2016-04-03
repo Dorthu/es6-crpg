@@ -149,7 +149,7 @@ class AI extends SolidItem {
 
     ai_attack() {
         if(this.grid.player['suffer_attack']) {
-            this.grid.player.suffer_attack();
+            this.grid.player.suffer_attack({damage: 5});
         }
     }
 }

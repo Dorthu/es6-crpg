@@ -2,27 +2,31 @@ import Player from '../player'
 import PlayerStatus from './status'
 
 class GamePlayer extends Player {
-    constructor(grid, loc, inventory, facing=0, health=100) {
+    constructor(grid, loc, inventory, facing=0, stats) {
         super(grid, loc, inventory, facing=facing);
 
-        this.stats = [
-            { name: 'Health', value: health, max: 100, color: 'green' },
-            { name: 'Mana', value: 16, max: 30, color: 'blue' }
-        ];
-
-        this.status_ui = new PlayerStatus(this);
-        this.status_ui.update();
+        this.stats = stats;
+        this.stats.update();
     }
 
-    suffer_attack() {
-        this.stats[0].value -= 7;
-        this.status_ui.update();
+    check_status() {
+        this.stats.update();
+        if(this.stats.health.value < 1) {
+            this.logbox.add_message('it hurts');
+        }
+    }
+
+    suffer_attack(attack) {
+        if(attack['damage']) {
+            this.stats.health.value -= attack.damage;
+        }
+        this.check_status();
     }
 
     input(event) {
         if(event.keyCode == 81) {
-            this.stats[0].value -= 4;
-            this.status_ui.update();
+            this.stats.health.value -= 4;
+            this.stats.update();
         }
         super.input(event);
     }

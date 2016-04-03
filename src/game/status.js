@@ -8,14 +8,18 @@ const color_map = {
 };
 
 class PlayerStatus {
-    constructor(player) {
-        this.player = player;
+    constructor(health) {
         this.section = document.getElementById('player_status');
+        this.health = { name: 'Health', value: health, max: 100, color: 'green' };
+        this.stats = [
+            this.health,
+            { name: 'Mana', value: 16, max: 30, color: 'blue' }
+        ];
     }
 
     update() {
         let html = '';
-        for(let stat of this.player.stats) {
+        for(let stat of this.stats) {
             html += this._get_status_bar(stat.name, 100*(stat.value/stat.max), stat.color);
         }
         this.section.innerHTML = html;

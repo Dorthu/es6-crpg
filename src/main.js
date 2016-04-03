@@ -9,6 +9,7 @@ import LevelLoader from './level_loader'
 import Grid from './grid'
 import Inventory from './game/inventory'
 import EditorInventory from './editor/inventory'
+import PlayerStatus from './game/status'
 import Overlay from './overlay'
 import { init_textures, get_material } from './texture_lookup'
 import { init_serializer } from './editor/level_serializer'
@@ -250,6 +251,7 @@ if(editor_mode) {
     init_serializer(obj_map);
     player_class = EditorPlayer;
 }
+const stats = new PlayerStatus(100);
 
 ///tmp for testing
 const skygeo = new THREE.CubeGeometry(500, 500, 500);
@@ -273,7 +275,7 @@ const switch_level = function(info) {
     grid = new LevelLoader().load_level(levels[info.to]);
     console.log("Player class:" );
     console.log(player_class);
-    player = new player_class(grid, info.player_pos, inventory, info.player_facing);
+    player = new player_class(grid, info.player_pos, inventory, info.player_facing, stats);
     light = new THREE.AmbientLight( 0xA9BEA9 );
     grid.scene.add( light );
     skybox = new THREE.Mesh(skygeo, skymat);
