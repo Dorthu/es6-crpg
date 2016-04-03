@@ -4,6 +4,7 @@ import assign from 'object-assign'
 
 import Player from './player'
 import EditorPlayer from './editor/player'
+import GamePlayer from './game/player'
 import LevelLoader from './level_loader'
 import Grid from './grid'
 import Inventory from './game/inventory'
@@ -242,7 +243,7 @@ let light = null;
 
 let inventory = new Inventory();
 
-let player_class = Player;
+let player_class = GamePlayer;
 const editor_mode = window.location.href.indexOf('editor') > -1;
 if(editor_mode) {
     inventory = new EditorInventory();
@@ -270,6 +271,8 @@ const switch_level = function(info) {
     skybox = null;
 
     grid = new LevelLoader().load_level(levels[info.to]);
+    console.log("Player class:" );
+    console.log(player_class);
     player = new player_class(grid, info.player_pos, inventory, info.player_facing);
     light = new THREE.AmbientLight( 0xA9BEA9 );
     grid.scene.add( light );
