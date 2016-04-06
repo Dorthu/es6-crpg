@@ -183,7 +183,7 @@ const levels = {
             {"type":"enclosed","mats":["woodfloor","ceiling"]},
             {"type":"wall","mats":["wallpaper_top","ceiling"]},
             {"type":"enclosed","mats":["woodfloor","ceiling"],
-                extra: { object: { type: 'fobj', mats: ['treewall'], desc: 'A flat object' } } },
+                extra: { object: { type: 'fobj', mats: ['dresser'], desc: 'An old dresser' } } },
             {"type":"wall","mats":["wallpaper_top","ceiling"]},
             {"type":"enclosed","mats":["woodfloor","ceiling"], extra: { object: {
                     type: 'ai', mats: ['baddie'] } }},

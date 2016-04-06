@@ -4,20 +4,12 @@ import GridObject from './grid_object'
 import SpriteObject from './sprite_object'
 import { get_material } from './texture_lookup'
 import Pickup from './pickup'
-import { obj_map } from './level_loader'
 
 class Space extends GridObject {
     constructor(grid, loc, mats, desc, extra) {
         super(grid, loc, mats, desc, extra);
 
         this.meshes = [ new THREE.Mesh(geo, get_material(mats[0], pos=this.loc)) ];
-        this.object = null;
-
-        if(extra && extra['object']) { 
-            this.object = new obj_map[this.extra.object.type](this.grid, this.loc,
-                extra.object['mats'], extra.object['desc'], 
-                extra.object['extra']);
-        }
 
         let pos = {y: 0};
         assign(pos, this.loc);
@@ -33,7 +25,6 @@ class Space extends GridObject {
     }
 
     destroy() {
-        if(this.object) { this.object.destroy(); }
         super.destroy();
     }
 }

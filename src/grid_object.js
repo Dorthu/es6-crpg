@@ -1,4 +1,5 @@
 import assign from 'object-assign'
+import { obj_map } from './level_loader'
 
 class GridObject {
     constructor(grid, loc, mats, desc, extra) {
@@ -10,6 +11,13 @@ class GridObject {
         this.usable = false;
         this.meshes = [];
         this._mats = mats;
+        this.object = null;
+
+        if(extra && extra['object']) {
+            this.object = new obj_map[this.extra.object.type](this.grid, this.loc,
+                extra.object['mats'], extra.object['desc'],
+                extra.object['extra']);
+        }
     }
 
     update_meshes() {
@@ -33,6 +41,7 @@ class GridObject {
         for(let m of this.meshes) {
             this.grid.scene.remove(m);
         }
+        if(this.object) { this.object.destroy(); }
     }
 }
 

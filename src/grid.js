@@ -47,8 +47,9 @@ class Grid {
                 && this.player.loc.x == pos.x
                 && this.player.loc.z == pos.z)
             return false;
-        if(loc['object'])
+        if(loc['object']) {
             return !loc.solid && !loc.object.solid;
+        }
         return !loc.solid;
     }
 

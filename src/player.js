@@ -43,6 +43,7 @@ class Player {
             nloc.x += 1 * mult;
         }
         if(this.grid.can_move_to(nloc)) {
+            console.log("can move");
             this.loc = nloc;
             if(!back) {
                 this.logbox.add_message('moves '+dirs[this.facing]);
