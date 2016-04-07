@@ -14,10 +14,13 @@ class GridObject {
         this.object = null;
 
         if(extra && extra['object']) {
-            this.object = new obj_map[this.extra.object.type](this.grid, this.loc,
-                extra.object['mats'], extra.object['desc'],
-                extra.object['extra']);
+            this.object = this.make_object(this.extra.object.type,
+                    extra.object['mats'], extra.object['desc'], extra.object['extra']);
         }
+    }
+
+    make_object(cname, mats, desc, extra) {
+        return new obj_map[cname](this.grid, this.loc, mats, desc, extra);
     }
 
     update_meshes() {
@@ -43,6 +46,8 @@ class GridObject {
         }
         if(this.object) { this.object.destroy(); }
     }
+
+    static occupies() { return false; }
 }
 
 export default GridObject;

@@ -1,59 +1,93 @@
+import Awesomplete from 'awesomplete'
 import Inventory from '../inventory'
 import { obj_map } from '../level_loader'
 import { mat_map } from '../texture_lookup'
+
+let editor_options = [];
+
+for(let c of Object.keys(obj_map)) {
+    editor_options.push({ label: c, value: 'obj::'+c });
+}
 
 class EditorInventory extends Inventory {
     constructor() {
         super();
 
-        this.equipped = {
-            tile: null,
-            mat_1: null,
-            mat_2: null,
-            object: null
-
-        };
-
-        for(let c of Object.keys(obj_map)) {
-            this.add_item({ name: c, equips_to: 'tile'});
-        }
         for(let c of Object.keys(mat_map)) {
-           this.add_item({ name: c, equips_to: 'mat_1', icon: c });
+            editor_options.push({ label: c, value: 'mat::'+c});
+        }
+
+        this.searchbox = null;
+        this.player = null;
+        this.current = null;
+        this.cmat1 = null;
+    }
+
+    update() {
+        let serial = '';
+        serial += '<p>Current: ' + (this.current ? this.current : 'None') + '</p>';
+        serial += '<p>Material: ' + (this.cmat1 ? this.cmat1 : 'None') + '</p>';
+
+        this.equipe.innerHTML=serial;
+    }
+
+    search_macro(player) {
+        this.player = player;
+
+        let i = document.createElement('input');
+        i.id = 'searchbox';
+        i.className = 'input-lg';
+        i.type = 'text';
+        i.placeholder = 'Search for Entites or Materials';
+        i.onkeydown = ent => this.searchbox_keydown(ent);
+        i.addEventListener('awesomplete-selectcomplete', ent => this.accept_search());
+        console.log("doing the do");
+
+        let s = document.createElement('span');
+        s.className = 'editor-search';
+        s.appendChild(i);
+        document.body.appendChild(s);
+        new Awesomplete(i, { list: editor_options, autoFirst: true });
+        i.focus();
+
+        this.searchbox = s;
+    }
+
+    hide_search() {
+        document.body.removeChild(this.searchbox);
+        this.searchbox = null;
+        if(this.player) {
+            this.player.inv_mode = false;
+            this.player = null;
         }
     }
 
-    _mat_2_equip() {
-        let i = this.items[this.selected];
-        if (i['equips_to'] && i.equips_to === 'mat_1') {
-            let tmp = this.equipped['mat_2'];
-            this.equipped['mat_2'] = i;
-            if(tmp) {
-                this.items[this.selected] = tmp;
-            } else {
-                this.items.splice(this.selected, 1);
-                this.selected--;
-                if(this.selected == -1 && this.items.length) {
-                    this.selected = 0;
+    accept_search() {
+        let i = document.getElementById('searchbox');
+        let res = i.value;
+
+        console.log(res);
+        if(res) {
+            let parts = res.split("::");
+            console.log(parts);
+            if(parts && parts.length == 2) {
+                if(parts[0] == 'obj') {
+                    ///selected an object class
+                    this.current = parts[1];
+                } else if(parts[0] == 'mat') {
+                    ///selected a material
+                    this.cmat1 = parts[1];
                 }
+                this.update();
             }
-            console.log("Equipped");
         }
-        this.update();
+
+        ///nomatter what, they hit enter - we're done here
+        this.hide_search();
     }
 
-    _get_icon_for_item(item) {
-        if(item['icon']) {
-            return '<img src="/resources/textures/'+item.icon+'.png"/>';
-        }
-        return '<img src="/resources/inventory/_not_found.png"/>';
-    }
-
-    input(event) {
-        if(event.keyCode == 82) {
-            this._mat_2_equip();
-        } else {
-            super.input(event);
-        }
+    searchbox_keydown(event) {
+        ///don't need this?
     }
 }
 
