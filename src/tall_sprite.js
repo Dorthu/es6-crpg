@@ -6,9 +6,9 @@ class TallSprite extends SpriteObject {
         super(grid, loc, mats, desc, extra);
 
         this.meshes[0].scale.set(6, 12, 1);
-        let pos = {y: 1.5};
+        let pos = {};
         assign(pos, this.loc);
-        pos.y -= 1;
+        pos.y += .5;
         pos = this.grid.translate(pos);
 
         this.meshes[0].position.y = pos.y;

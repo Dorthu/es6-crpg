@@ -86,6 +86,7 @@ class Player {
     _point_in_front() {
         let target = {};
         assign(target, this.loc);
+        target.y = 0;
 
         this.facing == 0 ? target.z -= 1 :
         this.facing == 1 ? target.x -= 1 :

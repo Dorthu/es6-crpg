@@ -3,10 +3,32 @@ import { obj_map } from '../level_loader'
 import LevelSerializer from './level_serializer'
 import SpriteObject from '../sprite_object'
 
+const command_keys = [ '1','2','3','4','5','6','7','8','9','0' ];
+let command_keycodes = [];
+for(let k of command_keys) {
+    command_keycodes.push(k.charCodeAt(0));
+}
+
 class EditorPlayer extends Player {
 
-    make() {
-        let target = this._point_in_front();
+    constructor(grid, loc, inventory, facing=0) {
+        super(grid, loc, inventory, facing);
+
+        this.command = [];
+    }
+
+    do_command(command) {
+        let amount = Number.parseInt(this.command.join(''));
+        let lead = this._point_in_front();
+        let dir = { x: lead.x - this.loc.x, z: lead.z - this.loc.z };
+        for(let mag=1; mag<=amount; mag++) {
+           command({x: this.loc.x + dir.x * mag, y: 0, z: this.loc.z + dir.z * mag }); 
+        }
+        this.command = [];
+    }
+
+    make(target) {
+        console.log("making at "+target);
         let ci = this.inventory.current;
         if(!ci) { console.log('no tiles selected'); return; }
         let mats = [ this.inventory.cmat1, null ];
@@ -40,10 +62,13 @@ class EditorPlayer extends Player {
             }
             return;
         }
-        if(event.keyCode == 85) {
-            this.make();
+        if(command_keycodes.includes(event.keyCode)) {
+            this.command.push(String.fromCharCode(event.keyCode));
+            console.log(this.command);
+        }else if(event.keyCode == 85) {
+            this.do_command(e => this.make(e));
         } else if(event.keyCode == 68) {
-            this.remove();
+            this.do_command(this.remove(e));
         } else if(event.keyCode == 83) {
             new LevelSerializer(this.grid).serialize_level();
         } else if(event.keyCode == 69) {

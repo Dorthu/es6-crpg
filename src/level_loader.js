@@ -41,7 +41,7 @@ class LevelLoader {
             for(let j=0; j<curr.length; j++) {
                 let cur = curr[j];
                 if(cur) {
-                    grid.create(obj_map[cur.type], { x: j, z: i }, cur.mats, cur.desc, cur.extra);
+                    grid.create(obj_map[cur.type], { x: j, y: 0, z: i }, cur.mats, cur.desc, cur.extra);
                 }
             }
         }
