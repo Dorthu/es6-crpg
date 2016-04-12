@@ -18,7 +18,10 @@ class EditorPlayer extends Player {
     }
 
     do_command(command) {
-        let amount = Number.parseInt(this.command.join(''));
+        let amount = 1;
+        if(this.command.length) {
+            amount = Number.parseInt(this.command.join(''));
+        }
         let lead = this._point_in_front();
         let dir = { x: lead.x - this.loc.x, z: lead.z - this.loc.z };
         for(let mag=1; mag<=amount; mag++) {
@@ -49,9 +52,13 @@ class EditorPlayer extends Player {
         }
     }
 
-    remove() {
-        let target = this._point_in_front();
+    remove(target) {
         this.grid.remove(target.x, target.z);
+    }
+
+    set_desc(target) {
+        let i = window.prompt("Enter description");
+        this.grid.get(target.x, target.z).desc = i;
     }
 
     input(event) {
@@ -64,11 +71,12 @@ class EditorPlayer extends Player {
         }
         if(command_keycodes.includes(event.keyCode)) {
             this.command.push(String.fromCharCode(event.keyCode));
-            console.log(this.command);
         }else if(event.keyCode == 85) {
             this.do_command(e => this.make(e));
         } else if(event.keyCode == 68) {
-            this.do_command(this.remove(e));
+            this.do_command(e => this.remove(e));
+        } else if(event.keyCode == 84) {
+            this.do_command(e => this.set_desc(e));
         } else if(event.keyCode == 83) {
             new LevelSerializer(this.grid).serialize_level();
         } else if(event.keyCode == 69) {
