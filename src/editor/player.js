@@ -3,7 +3,8 @@ import { obj_map } from '../level_loader'
 import LevelSerializer from './level_serializer'
 import SpriteObject from '../sprite_object'
 
-const command_keys = [ '1','2','3','4','5','6','7','8','9','0' ];
+const edirs = [ { x: 1, z: 0 }, { x: 0, z: 1 }, { x: -1, z: 0 }, { x: 0, z: -1 } ];
+const command_keys = [ '1','2','3','4','5','6','7','8','9','0', 'F' ];
 let command_keycodes = [];
 for(let k of command_keys) {
     command_keycodes.push(k.charCodeAt(0));
@@ -18,6 +19,19 @@ class EditorPlayer extends Player {
     }
 
     do_command(command) {
+        if(this.command.length) {
+            switch(this.command[0]){
+                case 'F':
+                    let node = this._point_in_front();
+                    let o = this.grid.get(node.x, node.z);
+                    if(o) {
+                        this.flood_fill(node, o.constructor.name, o._mats[0]);
+                    }
+                    break;
+            }
+        }
+
+
         let amount = 1;
         if(this.command.length) {
             amount = Number.parseInt(this.command.join(''));
@@ -25,25 +39,32 @@ class EditorPlayer extends Player {
         let lead = this._point_in_front();
         let dir = { x: lead.x - this.loc.x, z: lead.z - this.loc.z };
         for(let mag=1; mag<=amount; mag++) {
-           command({x: this.loc.x + dir.x * mag, y: 0, z: this.loc.z + dir.z * mag }); 
+           command({x: this.loc.x + dir.x * mag, y: 0, z: this.loc.z + dir.z * mag });
         }
         this.command = [];
     }
 
+    flood_fill(node, target_obj, target_color) {
+        let o = this.grid.get(node.x, node.z);
+        if(!o || o.constructor.name != target_obj
+            || o._mats[0] == this.inventory.cmat1
+            || o._mats[0] != target_color) {
+                return;
+        }
+
+        this.make(node);
+        for(let d of edirs) {
+            this.flood_fill({ x: node.x + d.x, z: node.z + d.z }, target_obj, target_color);
+        }
+    }
+
     make(target) {
-        console.log("making at "+target);
         let ci = this.inventory.current;
         if(!ci) { console.log('no tiles selected'); return; }
         let mats = [ this.inventory.cmat1, null ];
-        console.log(obj_map[ci]);
-        console.log(typeof(obj_map[ci]));
-        console.log(obj_map[ci] instanceof SpriteObject);
         if(obj_map[ci] && obj_map[ci].occupies()) {
-            console.log("making object");
             let c = this.grid.get(target.x, target.z);
-            console.log(c);
             if(c) {
-                console.log("and here w are");
                 c.object = c.make_object(ci, mats, null, null);
             }
         } else {
