@@ -4,7 +4,7 @@ import LevelSerializer from './level_serializer'
 import SpriteObject from '../sprite_object'
 
 const edirs = [ { x: 1, z: 0 }, { x: 0, z: 1 }, { x: -1, z: 0 }, { x: 0, z: -1 } ];
-const command_keys = [ '1','2','3','4','5','6','7','8','9','0', 'F' ];
+const command_keys = [ '1','2','3','4','5','6','7','8','9','0','F','W' ];
 let command_keycodes = [];
 for(let k of command_keys) {
     command_keycodes.push(k.charCodeAt(0));
@@ -28,10 +28,11 @@ class EditorPlayer extends Player {
                         this.flood_fill(node, o.constructor.name, o._mats[0]);
                     }
                     break;
+                case 'W':
+                    this.wall_fill();
+                    break;
             }
         }
-
-
         let amount = 1;
         if(this.command.length) {
             amount = Number.parseInt(this.command.join(''));
@@ -56,6 +57,42 @@ class EditorPlayer extends Player {
         for(let d of edirs) {
             this.flood_fill({ x: node.x + d.x, z: node.z + d.z }, target_obj, target_color);
         }
+    }
+
+    wall_fill() {
+        /*
+            This runs as a flood fill, but fills all empty edge spaces.
+        */
+        let visited = [];
+        let self = this;
+
+        function outline(target, target_obj, target_mat) {
+            if(visited.indexOf(target.x+";"+target.z) != -1) { return; }
+            visited.push(target.x+";"+target.z);
+            let o = self.grid.get(target.x, target.z);
+
+            if(!o) {
+                self.make(target);
+                return;
+            }
+
+            if(o.constructor.name != target_obj || o._mats[0] != target_mat
+                    || o._mats[0] == self.inventory.cmat1) {
+                return;
+            }
+
+            for(let d of edirs) {
+                outline({ x: target.x + d.x, z: target.z + d.z }, target_obj, target_mat);
+            }
+        }
+
+        let target = this._point_in_front();
+        let to = this.grid.get(target.x, target.z);
+
+        if(to) {
+            outline(target, to.constructor.name, to._mats[0]);
+        }
+
     }
 
     make(target) {
