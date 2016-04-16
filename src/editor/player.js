@@ -4,7 +4,7 @@ import LevelSerializer from './level_serializer'
 import SpriteObject from '../sprite_object'
 
 const edirs = [ { x: 1, z: 0 }, { x: 0, z: 1 }, { x: -1, z: 0 }, { x: 0, z: -1 } ];
-const command_keys = [ '1','2','3','4','5','6','7','8','9','0','F','W' ];
+const command_keys = [ '1','2','3','4','5','6','7','8','9','0','F','W','R','X' ];
 let command_keycodes = [];
 for(let k of command_keys) {
     command_keycodes.push(k.charCodeAt(0));
@@ -30,6 +30,14 @@ class EditorPlayer extends Player {
                     break;
                 case 'W':
                     this.wall_fill();
+                    break;
+                case 'R':
+                    console.log("in do command");
+                    console.log(this.command);
+                    if(this.command.indexOf('X')!=-1) {
+                        console.log("yes");
+                        this.make_room();
+                    }
                     break;
             }
         }
@@ -95,6 +103,19 @@ class EditorPlayer extends Player {
 
     }
 
+    make_room() {
+        this.command = this.command.splice(1);
+        let [len, wid] = this.command.join('').split('X');
+        console.log("it is "+len+" and "+wid);
+        if(!len || !wid) {
+            return;
+        }
+        len = Number.parseInt(len);
+        wid = Number.parseInt(wid);
+        console.log(len, wid);
+        /// TODO - finish this
+    }
+
     make(target) {
         let ci = this.inventory.current;
         if(!ci) { console.log('no tiles selected'); return; }
@@ -119,6 +140,15 @@ class EditorPlayer extends Player {
         this.grid.get(target.x, target.z).desc = i;
     }
 
+    toggle_bit(bit) {
+        let target = this._point_in_front();
+        let o = this.grid.get(target.x, target.z);
+        if(o) {
+            if(o[bit]) { o[bit] = !o[bit] }
+            else { o[bit] = true; }
+        }
+    }
+
     input(event) {
         if(this.inv_mode) {
             if(event.keyCode == 27) {
@@ -129,12 +159,14 @@ class EditorPlayer extends Player {
         }
         if(command_keycodes.includes(event.keyCode)) {
             this.command.push(String.fromCharCode(event.keyCode));
-        }else if(event.keyCode == 85) {
+        }else if(event.keyCode == 32) {
             this.do_command(e => this.make(e));
         } else if(event.keyCode == 68) {
             this.do_command(e => this.remove(e));
-        } else if(event.keyCode == 84) {
+        } else if(event.keyCode == 90) {
             this.do_command(e => this.set_desc(e));
+        } else if(event.keyCode == 84) {
+            this.toggle_bit('solid');
         } else if(event.keyCode == 83) {
             new LevelSerializer(this.grid).serialize_level();
         } else if(event.keyCode == 69) {
