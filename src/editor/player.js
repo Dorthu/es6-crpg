@@ -32,23 +32,22 @@ class EditorPlayer extends Player {
                     this.wall_fill();
                     break;
                 case 'R':
-                    console.log("in do command");
-                    console.log(this.command);
                     if(this.command.indexOf('X')!=-1) {
-                        console.log("yes");
                         this.make_room();
                     }
                     break;
+                default:
+                    let amount = 1;
+                    if(this.command.length) {
+                        amount = Number.parseInt(this.command.join(''));
+                    }
+                    let lead = this._point_in_front();
+                    let dir = { x: lead.x - this.loc.x, z: lead.z - this.loc.z };
+                    for(let mag=1; mag<=amount; mag++) {
+                       command({x: this.loc.x + dir.x * mag, y: 0, z: this.loc.z + dir.z * mag });
+                    }
+                    break;
             }
-        }
-        let amount = 1;
-        if(this.command.length) {
-            amount = Number.parseInt(this.command.join(''));
-        }
-        let lead = this._point_in_front();
-        let dir = { x: lead.x - this.loc.x, z: lead.z - this.loc.z };
-        for(let mag=1; mag<=amount; mag++) {
-           command({x: this.loc.x + dir.x * mag, y: 0, z: this.loc.z + dir.z * mag });
         }
         this.command = [];
     }
@@ -106,14 +105,34 @@ class EditorPlayer extends Player {
     make_room() {
         this.command = this.command.splice(1);
         let [len, wid] = this.command.join('').split('X');
-        console.log("it is "+len+" and "+wid);
         if(!len || !wid) {
             return;
         }
         len = Number.parseInt(len);
         wid = Number.parseInt(wid);
-        console.log(len, wid);
-        /// TODO - finish this
+        //align with the player's facing
+        if(this.facing % 2) { [ len, wid ] = [ wid, len ]; }
+
+        let pos = this._point_in_front();
+
+        if(this.facing == 0) {
+            pos.x -= Math.floor(wid/2);
+            pos.z -= len - 1;
+        }
+        else if(this.facing == 1) {
+            pos.x -= wid - 1;
+            pos.z -= Math.floor(wid/2);
+        } else {
+            pos.x += Math.floor(wid/2) * edirs[this.facing].x;
+            pos.z += Math.floor(wid/2) * edirs[this.facing].z;
+        }
+
+
+        for(let c = pos.x; c<pos.x+wid; c++) {
+            for(let d = pos.z; d<pos.z+len; d++) {
+                this.make({x: c, z: d});
+            }
+        }
     }
 
     make(target) {
