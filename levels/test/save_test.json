@@ -1,0 +1,6 @@
+[
+    [ { "type": "wall", "mats": ["debug-2"] }, {"type": "space", "mats": ["debug"] },
+        {"type": "wall", "mats": ["debug-2"] } ],
+    [ { "type": "wall", "mats": ["debug-2"] } ],
+    [ , { "type": "wall", "mats": ["debug-2"] } ]
+]

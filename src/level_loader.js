@@ -30,10 +30,28 @@ export const obj_map = {
 ///why is this a class?
 class LevelLoader {
     constructor() {
-        //pass
+        this.level_json = {};
     }
 
-    load_level(data) {
+    _get_level(uri) {
+        console.log("requesting "+uri);
+        console.log(this.level_json);
+        if(!this.level_json[uri]) {
+            console.log('never seen it');
+            let req = new XMLHttpRequest();
+            req.open('GET', uri+'.json', false); ///run this synchronously
+            req.send(null);
+
+            if(!req.status == 200) { return {}; } ///bad things
+            this.level_json[uri] = JSON.parse(req.responseText);
+            console.log('set it');
+        }
+        return this.level_json[uri];
+    }
+
+    load_level(uri) {
+        let data = this._get_level(uri);
+
         let grid = new Grid();
 
         for(let i=0; i<data.length; i++) {

@@ -1,0 +1,22 @@
+[
+    [ null, { "type": "wall", "mats": ["wallpaper_window"], "desc": "It's a dreary day.." } ],
+    [ {"type": "wall", "mats": ["wallpaper_top"]},
+        { "type": "enclosed", "mats": ["woodfloor_rug","ceiling"], "desc": "The floor is a different color.",
+            "extra": { "object": { "type": "pickup", "desc": "There's something here..", "mats": ["key"],
+                "extra": { "name": "Key" } } }  },
+        { "type": "wall", "mats": ["wallpaper_top"] } ],
+    [ {"type": "wall", "mats": ["wallpaper_top"]}, { "type": "enclosed", "mats": ["woodfloor","ceiling", "debug-2"]  },
+        { "type": "wall", "mats": ["wallpaper_top"] } ],
+    [ {"type": "wall", "mats": ["wallpaper_tear"]}, { "type": "enclosed", "mats": ["woodfloor","ceiling", "debug-2"] },
+        { "type": "wall", "mats": ["wallpaper_top"] }, { "type": "wall", "mats": ["wallpaper_top"] },
+        { "type": "wall", "mats": ["wallpaper_top"] } ],
+    [ {"type": "wall", "mats": ["wallpaper_top"]}, { "type": "enclosed", "mats": ["woodfloor","ceiling", "debug-2"] },
+        { "type": "enclosed", "mats": ["woodfloor","ceiling", "debug-2"] }, { "type": "enclosed", "mats": ["woodfloor","ceiling", "debug-2"] },
+        { "type": "enclosed", "mats": ["woodfloor","ceiling", "debug-2"] },
+        { "type": "locked", "mats": ["wallpaper_door", "wallpaper_door"], "desc": "It's a locked door..",
+            "extra": { "to": "/levels/test/forest",
+            "player_pos": { "x": 1, "z": 4 }, "player_facing": 0, "key": "Key" } } ],
+    [ null, { "type": "wall", "mats": ["wallpaper_top"] }, { "type": "wall", "mats": ["wallpaper_top"] },
+        { "type": "wall", "mats": ["wallpaper_top"] }, { "type": "wall", "mats": ["wallpaper_top"] },
+        { "type": "wall", "mats": ["wallpaper_top"] } ]
+]
