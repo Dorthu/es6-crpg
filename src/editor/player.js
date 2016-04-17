@@ -1,3 +1,9 @@
+/*
+    Editor TODOs:
+    > "get" key to get the values of whatever is in front of you
+    > "cancel command" key (backspace?) to clear entered command, take no action
+    > material slots / make them work
+*/
 import Player from '../player'
 import { obj_map } from '../level_loader'
 import LevelSerializer from './level_serializer'
@@ -48,6 +54,10 @@ class EditorPlayer extends Player {
                     }
                     break;
             }
+        }
+        else {
+            let target = this._point_in_front();
+            command({ x: target.x, y: 0, z: target.z });
         }
         this.command = [];
     }
@@ -116,12 +126,12 @@ class EditorPlayer extends Player {
         let pos = this._point_in_front();
 
         if(this.facing == 0) {
-            pos.x -= Math.floor(wid/2);
+            pos.x += Math.floor(wid/2);
             pos.z -= len - 1;
         }
         else if(this.facing == 1) {
             pos.x -= wid - 1;
-            pos.z -= Math.floor(wid/2);
+            pos.z += Math.floor(wid/2);
         } else {
             pos.x += Math.floor(wid/2) * edirs[this.facing].x;
             pos.z += Math.floor(wid/2) * edirs[this.facing].z;
@@ -163,8 +173,11 @@ class EditorPlayer extends Player {
         let target = this._point_in_front();
         let o = this.grid.get(target.x, target.z);
         if(o) {
-            if(o[bit]) { o[bit] = !o[bit] }
-            else { o[bit] = true; }
+            let obj = o["object"];
+            if(obj) {
+                if(obj[bit]) { obj[bit] = !obj[bit] }
+                else { obj[bit] = true; }
+            }
         }
     }
 

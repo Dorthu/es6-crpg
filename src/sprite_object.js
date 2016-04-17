@@ -15,6 +15,7 @@ class SpriteObject extends GridObject {
         this.meshes[0].scale.set(6, 6, 1);
         let pos = {};
         assign(pos, this.loc);
+        pos.y = 0;
         pos = this.grid.translate(pos);
 
         this.meshes[0].position.x = pos.x;

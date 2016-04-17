@@ -6,7 +6,7 @@ import { mat_map } from '../texture_lookup'
 let editor_options = [];
 
 for(let c of Object.keys(obj_map)) {
-    editor_options.push({ label: c, value: 'obj::'+c });
+    editor_options.push({ label: "object::"+c, value: 'obj::'+c });
 }
 
 class EditorInventory extends Inventory {
@@ -14,7 +14,7 @@ class EditorInventory extends Inventory {
         super();
 
         for(let c of Object.keys(mat_map)) {
-            editor_options.push({ label: c, value: 'mat::'+c});
+            editor_options.push({ label: "material::"+c, value: 'mat::'+c});
         }
 
         this.searchbox = null;
