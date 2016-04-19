@@ -1,6 +1,5 @@
 /*
     Editor TODOs:
-    > "cancel command" key (backspace?) to clear entered command, take no action
 */
 import Player from '../player'
 import { obj_map } from '../level_loader'
@@ -215,6 +214,8 @@ class EditorPlayer extends Player {
             this.inventory.toggle_slot();
         } else if(event.keyCode == 71) {
             this.get();
+        } else if(event.keyCode == 27) {
+            this.command = [];
         } else if(event.keyCode == 69) {
             event.preventDefault();
             this.inv_mode = true;
