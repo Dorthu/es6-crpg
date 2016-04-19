@@ -17,6 +17,7 @@ class EditorInventory extends Inventory {
             editor_options.push({ label: "material::"+c, value: 'mat::'+c});
         }
 
+        this.slot2 = false;
         this.searchbox = null;
         this.player = null;
         this.current = null;
@@ -25,10 +26,16 @@ class EditorInventory extends Inventory {
 
     update() {
         let serial = '';
-        serial += '<p>Current: ' + (this.current ? this.current : 'None') + '</p>';
-        serial += '<p>Material: ' + (this.cmat1 ? this.cmat1 : 'None') + '</p>';
+        serial += '<p>Object: ' + (this.current ? this.current : 'None') + '</p>';
+        serial += '<p>' + (this.slot2 ? '' : '>') + 'Mat1: ' + (this.cmat1 ? this.cmat1 : 'None') + '</p>';
+        serial += '<p>' + (this.slot2 ? '>' : '') + 'Mat2: ' + (this.cmat2 ? this.cmat2 : 'None') + '</p>';
 
         this.equipe.innerHTML=serial;
+    }
+
+    toggle_slot() {
+        this.slot2 = !this.slot2;
+        this.update();
     }
 
     search_macro(player) {
@@ -76,7 +83,12 @@ class EditorInventory extends Inventory {
                     this.current = parts[1];
                 } else if(parts[0] == 'mat') {
                     ///selected a material
-                    this.cmat1 = parts[1];
+                    if(this.slot2) {
+                        this.cmat2 = parts[1];
+                        this.slot2 = false;
+                    } else {
+                        this.cmat1 = parts[1];
+                    }
                 }
                 this.update();
             }

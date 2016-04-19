@@ -2,7 +2,6 @@
     Editor TODOs:
     > "get" key to get the values of whatever is in front of you
     > "cancel command" key (backspace?) to clear entered command, take no action
-    > material slots / make them work
 */
 import Player from '../player'
 import { obj_map } from '../level_loader'
@@ -148,7 +147,7 @@ class EditorPlayer extends Player {
     make(target) {
         let ci = this.inventory.current;
         if(!ci) { console.log('no tiles selected'); return; }
-        let mats = [ this.inventory.cmat1, null ];
+        let mats = [ this.inventory.cmat1, this.inventory.cmat2 ];
         if(obj_map[ci] && obj_map[ci].occupies()) {
             let c = this.grid.get(target.x, target.z);
             if(c) {
@@ -201,6 +200,8 @@ class EditorPlayer extends Player {
             this.toggle_bit('solid');
         } else if(event.keyCode == 83) {
             new LevelSerializer(this.grid).serialize_level();
+        } else if(event.keyCode == 81) {
+            this.inventory.toggle_slot();
         } else if(event.keyCode == 69) {
             event.preventDefault();
             this.inv_mode = true;
