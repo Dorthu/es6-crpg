@@ -22,6 +22,7 @@ class EditorInventory extends Inventory {
         this.player = null;
         this.current = null;
         this.cmat1 = null;
+        this.cmat2 = null;
     }
 
     update() {

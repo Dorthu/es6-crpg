@@ -1,6 +1,5 @@
 /*
     Editor TODOs:
-    > "get" key to get the values of whatever is in front of you
     > "cancel command" key (backspace?) to clear entered command, take no action
 */
 import Player from '../player'
@@ -21,6 +20,18 @@ class EditorPlayer extends Player {
         super(grid, loc, inventory, facing);
 
         this.command = [];
+    }
+
+    get() {
+        let target = this._point_in_front();
+        let o = this.grid.get(target.x, target.z);
+        if(o) {
+            if(o['object']) { o = o.object; }
+            this.inventory.current = o.constructor.name.toLowerCase();
+            this.inventory.cmat1 = o._mats[0];
+            this.inventory.cmat2 = ( o._mats.lenght > 1 ? o._mats[1] : null );
+            this.inventory.update();
+        }
     }
 
     do_command(command) {
@@ -202,6 +213,8 @@ class EditorPlayer extends Player {
             new LevelSerializer(this.grid).serialize_level();
         } else if(event.keyCode == 81) {
             this.inventory.toggle_slot();
+        } else if(event.keyCode == 71) {
+            this.get();
         } else if(event.keyCode == 69) {
             event.preventDefault();
             this.inv_mode = true;
