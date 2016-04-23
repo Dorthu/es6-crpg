@@ -13,6 +13,12 @@ class EventManager {
         this.elm.addEventListener(event_name, function(e) { callback(e); } );
     }
 
+    unsubsribe(event_name, callback) {
+        ///this doesn't work, I assume because this creates a new function - store
+        ///functions seperately?
+        this.elm.removeEventListener(event_name, function(e) { callback(e); } );
+    }
+
     dispatchPlayerMoved(player) { 
         this.elm.dispatchEvent(new CustomEvent('player_moved', { loc: player.loc }));
     }

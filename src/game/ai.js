@@ -7,8 +7,24 @@ class AI extends SolidItem {
         this.path_step = 0;
         this.act_on = 2;
         this.turns = 0;
+        this.health = extra && extra['health'] ? extra.health : 10; /// TODO - arbitrary default
 
         this.grid.event_manager.subscribe('pass_turn', e => this.step(e));
+    }
+
+    suffer_attack(attack) {
+        if(attack['damage']) {
+            this.health -= attack.damage;
+            if(this.health < 1) {
+                this.destroy();
+            }
+        }
+    }
+
+    destroy() {
+        ///after this happens I am still on the grid and behaving
+        this.grid.event_manager.unsubsribe('pass_turn', e => this.step(e));
+        super.destroy();
     }
 
     step(event) {

@@ -47,6 +47,8 @@ class AnimatedSprite {
             ///UPDATE:
             ///with more thinking on this, the solution might just be to make sure that
             ///the number of frames rounds out to a nice offset (4 frames is .25 per frame, etc)
+            ///UPDATE:
+            ///making it 5 frames didn't appear to slove the problem..lame
             let new_offset = Math.floor(delta/this.anim_rate) / this.frames;
             if(new_offset >= 1) { ///animation completed
                 new_offset = 0;
