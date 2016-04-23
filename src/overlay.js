@@ -17,9 +17,14 @@ class Overlay {
         this.objs = [];
     }
 
-    add(sprite_mat) {
-        let sprite = new AnimatedSprite(sprite_mat, this);
+    add(sprite_mat, callback=null) {
+        let sprite = new AnimatedSprite(sprite_mat, this, false, callback);
         this.objs.push(sprite);
+    }
+
+    remove(sprite) {
+        let i = this.objs.indexOf(sprite);
+        ~i && this.objs.splice(i, 1);
     }
 
     tick(delta) {

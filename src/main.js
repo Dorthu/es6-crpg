@@ -72,7 +72,7 @@ const switch_level = function(info) {
     grid = level_loader.load_level(info.to);
     console.log("Player class:" );
     console.log(player_class);
-    player = new player_class(grid, info.player_pos, inventory, info.player_facing, stats);
+    player = new player_class(grid, info.player_pos, inventory, info.player_facing, stats, overlay);
     light = new THREE.AmbientLight( 0xA9BEA9 );
     grid.scene.add( light );
     skybox = new THREE.Mesh(skygeo, skymat);
