@@ -28,6 +28,11 @@ class SpriteObject extends GridObject {
 
     static occupies() { return true; }
 
+    destroy() {
+        let o = this.grid.get(this.loc.x, this.loc.z);
+        if(o) { o.object = null; } ///else wtf
+        super.destroy();
+    }
 }
 
 export default SpriteObject;
