@@ -1,6 +1,6 @@
 import Player from '../player'
 import PlayerStatus from './status'
-import { shoot } from './attacks'
+import { shoot, push } from './attacks'
 
 class GamePlayer extends Player {
     constructor(grid, loc, inventory, facing=0, stats, overlay) {
@@ -31,6 +31,8 @@ class GamePlayer extends Player {
             this.stats.update();
         } else if(event.keyCode == 32) {
             shoot(this);
+        } else if(event.keyCode == 80) {
+            push(this);
         }
         super.input(event);
     }

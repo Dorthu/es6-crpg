@@ -27,7 +27,6 @@ function shoot_lower(player) {
     ///do damage
     let pif = player._point_in_front();
     let hit = find_target_linear(player.grid, pif, { x: player.loc.x - pif.x, z: player.loc.z - pif.z });
-    console.log(hit);
     if(hit) {
         hit.suffer_attack({ damage: 100 });
     }
@@ -40,8 +39,14 @@ function shoot_complete(player) {
 
 ///push attack hook
 export function push(player) {
-    let hit = find_target_immediate(player.grid, player._point_in_front);
+    let hit = find_target_immediate(player.grid, player._point_in_front());
     if(hit) {
         ///do the attack
+        const pdir = { x:  hit.loc.x - player.loc.x, y: hit.loc.y, z: hit.loc.z - player.loc.z};
+        const gpos = { x: hit.loc.x + pdir.x, y: pdir.y, z: hit.loc.z + pdir.z };
+        let o = player.grid.get(gpos.x, gpos.z);
+        if(o && !o['object'] && player.grid.can_move_to(gpos)) {
+            player.grid.object_move(hit, gpos);
+        }
     }
 }
