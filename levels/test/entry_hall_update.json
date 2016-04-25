@@ -1,7 +1,7 @@
 [[null,{"type":"wall","mats":["brick"]}],
     [{"type":"wall","mats":["brick"]},
     {"type":"space","mats":["debug-2","debug-2"]},{"type":"wall","mats":["brick"]}],
-    [{"type":"door","mats":["debug-door"], "extra": { "to": "/levels/test/ai_test", "player_pos": { "x": 1, "z": 2 }, "player_facing": 3 } },{"type":"space","mats":["sidewalk","debug-2"]},{"type":"wall","mats":["brick"]}],
+    [{"type":"door","mats":["debug-door"], "extra": { "to": "/levels/test/pats-level", "player_pos": { "x": 1, "z": 2 }, "player_facing": 3 } },{"type":"space","mats":["sidewalk","debug-2"]},{"type":"wall","mats":["brick"]}],
     [{"type":"wall","mats":["brick"]},{"type":"space","mats":["sidewalk","debug-2"]},{"type":"wall","mats":["brick"]},{"type":"wall","mats":["brick"]},{"type":"wall","mats":["brick"]},null,null,null,{"type":"wall","mats":["brick","debug-2"]},{"type":"wall","mats":["brick","debug-2"]},
             {"type":"door","mats":["debug-door","debug-2"],
                 "extra": { "to": "/levels/test/outdoors", "player_pos": { "x": 1, "z": 0 }, "player_facing": 0 }}],
