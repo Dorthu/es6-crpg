@@ -6,6 +6,9 @@ import { obj_map } from '../level_loader'
 import LevelSerializer from './level_serializer'
 import SpriteObject from '../sprite_object'
 
+import { THREE } from '../Three'
+import assign from 'object-assign'
+
 const edirs = [ { x: 1, z: 0 }, { x: 0, z: 1 }, { x: -1, z: 0 }, { x: 0, z: -1 } ];
 const command_keys = [ '1','2','3','4','5','6','7','8','9','0','F','W','R','X' ];
 let command_keycodes = [];
@@ -19,6 +22,14 @@ class EditorPlayer extends Player {
         super(grid, loc, inventory, facing);
 
         this.command = [];
+
+        ///the EditorPlayer class manages the editor gridlines because I don't think that
+        ///that alone warrants making an EditorGrid class
+        this.visual_grid = new THREE.GridHelper(6*50, 6);
+        let vgp = { x: 49.5, z: 49.5, y: -.5 };
+        vgp = this.grid.translate(vgp);
+        this.visual_grid.position.set(vgp.x, vgp.y, vgp.z);
+        this.grid.scene.add(this.visual_grid);
     }
 
     get() {
@@ -214,6 +225,8 @@ class EditorPlayer extends Player {
             this.inventory.toggle_slot();
         } else if(event.keyCode == 71) {
             this.get();
+        } else if(event.keyCode == 76) {
+            this.visual_grid.visible = !this.visual_grid.visible;
         } else if(event.keyCode == 27) {
             this.command = [];
         } else if(event.keyCode == 69) {
