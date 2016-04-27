@@ -39,6 +39,10 @@ function shoot_complete(player) {
 
 ///push attack hook
 export function push(player) {
+    player.overlay.add('push-anim', e => push_activate(player), { anim_rate: 80 });
+}
+
+function push_activate(player) {
     let hit = find_target_immediate(player.grid, player._point_in_front());
     if(hit) {
         ///do the attack

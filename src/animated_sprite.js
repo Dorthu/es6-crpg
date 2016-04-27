@@ -2,7 +2,7 @@ import { THREE } from './Three'
 import { get_material } from './texture_lookup'
 
 class AnimatedSprite {
-    constructor(sprite_name, manager, loop=false, complete_callback=null) {
+    constructor(sprite_name, manager, loop=false, complete_callback=null, extra=null) {
         ///TODO: look at texture.clone to avoid having to load the image again?
         let file = 'resources/'+ 'overlay' + '/' + sprite_name + '.png';
         this.loaded = false;
@@ -10,6 +10,10 @@ class AnimatedSprite {
         this.idelta = -1;
         this.loop = loop;
         this.on_complete_callback = complete_callback;
+
+        this.anim_rate = extra && extra['anim_rate'] ? extra.anim_rate : 60;
+        console.log("added a thing");
+
         let _this = this;
         this.tex = new THREE.TextureLoader().load(file, function() {
             _this.tex.magFilter = THREE.NearestFilter;
@@ -24,8 +28,6 @@ class AnimatedSprite {
             }
             _this.tex.wrapS = _this.tex.wrapT = THREE.RepeatWrapping;
             _this.tex.repeat.set(1/_this.frames, 1);
-
-            _this.anim_rate = 60; //is a more sane value, but 400 really shows off the below issue
 
             _this.sprite.scale.set(manager.width, manager.height, 1);
             _this.sprite.position.set(0, 0, 1);

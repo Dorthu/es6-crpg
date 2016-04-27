@@ -17,8 +17,8 @@ class Overlay {
         this.objs = [];
     }
 
-    add(sprite_mat, callback=null) {
-        let sprite = new AnimatedSprite(sprite_mat, this, false, callback);
+    add(sprite_mat, callback=null, extra=null) {
+        let sprite = new AnimatedSprite(sprite_mat, this, false, callback, extra);
         this.objs.push(sprite);
     }
 
