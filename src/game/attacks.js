@@ -20,10 +20,18 @@ function find_target_linear(grid, start, dir) {
 
 /// shooting attack hook - below helpers are not exported
 export function shoot(player) {
-    player.overlay.add('shoot-up', e => shoot_lower(player));
+    if(player.stats.chambers.value > 0) {
+        player.overlay.add('shoot-up', e => shoot_lower(player));
+    } else {
+        player.logbox.add_message("no ammo");
+        player.stats.update(true);
+    }
 }
 
 function shoot_lower(player) {
+    ///decrease ammo and animate chambers
+    player.stats.chambers.value -= 1;
+    player.stats.update(true);
     ///do damage
     let pif = player._point_in_front();
     let hit = find_target_linear(player.grid, pif, { x: player.loc.x - pif.x, z: player.loc.z - pif.z });
