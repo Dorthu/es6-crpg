@@ -46,6 +46,12 @@ class Inventory {
     }
 
     remove(name) {
+        if(name instanceof Object) {
+            if(name['name'])
+                name = name['name'];
+            else
+                return;
+        }
         if(this.items.length == 1) {
             if(this.items[0]['name'] && this.items[0].name == name) {
                 this.items = [];
@@ -81,29 +87,13 @@ class Inventory {
             +'</div>';
     }
 
-    equip() {
-        let i = this.items[this.selected];
-        if(i['equips_to']) {
-            let tmp = this.equipped[i.equips_to];
-            console.log(tmp);
-            this.equipped[i.equips_to] = i;
-            if(tmp) {
-                this.items[this.selected] = tmp;
-            } else {
-                this.items.splice(this.selected, 1);
-                this.selected--;
-                if(this.selected == -1 && this.items.length) {
-                    this.selected = 0;
-                }
-            }
-            console.log("Equipped");
-        }
-        else {
-            console.log("Can't equip this");
+    use(player) {
+        if(this.items[this.selected]) {
+            this.items[this.selected].use(player);
         }
     }
 
-    input(event) {
+    input(event, player) {
         if(!this.items) { return; }
 
         if(event.keyCode == 37) {
@@ -127,7 +117,8 @@ class Inventory {
                 this.selected = nsel;
             }
         } else if(event.keyCode == 69) {
-            this.equip();
+            this.use(player);
+            this.update();
         }
 
         this.update();

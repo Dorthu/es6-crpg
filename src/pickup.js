@@ -1,4 +1,5 @@
 import SpriteObject from './sprite_object'
+import InventoryItem from './inventory_item'
 
 class Pickup extends SpriteObject {
     constructor(grid, loc, mats, desc, extra) {
@@ -14,14 +15,8 @@ class Pickup extends SpriteObject {
 
         this.grid.scene.remove(this.meshes[0]);
 
-        let inv_item = {
-            name: this.name,
-            icon: this._mats[0]
-        };
-        if(this.extra['equips_to']) {
-            inv_item['equips_to'] = this.extra.equips_to;
-        }
-
+        console.log(this.extra);
+        let inv_item = new InventoryItem(this.name, this._mats[0], this.extra['effects']);
         player.inventory.add_item(inv_item);
     }
 }

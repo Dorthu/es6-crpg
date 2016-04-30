@@ -9,7 +9,7 @@
         {"type":"wall","mats":["wallpaper","ceiling"]},
         {"type":"wall","mats":["brick","ceiling"],
             "extra": { "object": { "type": "pickup", "desc": "Coffee", "mats": ["coffee"],
-                "extra": { "name": "Coffee" } } }  },
+                "extra": { "name": "Coffee", "effects": [ { "type": "heal", "amount": 20 } ] } } }  },
         {"type":"wall","mats":["wallpaper","ceiling"]}],
     [{"type":"door","mats":["wallpaper_door",null], "extra":
         { "to": "/levels/test/entry_hall_update", "player_pos": { "x": 1, "z": 2 }, "player_facing": 3 } },

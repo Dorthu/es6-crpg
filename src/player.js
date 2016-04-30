@@ -141,7 +141,7 @@ class Player {
             if(event.keyCode == 73 || event.keyCode == 27) {
                 this.inv_mode = false;
             } else {
-                this.inventory.input(event);
+                this.inventory.input(event, this);
             }
             return;
         }
@@ -170,7 +170,7 @@ class Player {
             this._inv_hotbar(event.keyCode-48);
             console.log('the business');
         } else if(event.keyCode == 69) {
-            this.inventory.equip();
+            this.inventory.use(this);
             this.inventory.update();
         }
 
