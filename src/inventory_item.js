@@ -23,6 +23,12 @@ function remove_item(i, effect, inventory) {
     inventory.remove(i);
 }
 
+function reload(i, effect, player, inventory) {
+    player.stats.chambers.value = player.stats.chambers.max;
+    player.stats.update();
+    remove_item(i, effect, inventory);
+}
+
 class InventoryItem {
     constructor(name, icon, effects=null) {
         this.name = name;
@@ -39,6 +45,9 @@ class InventoryItem {
                     break;
                 case 'heal':
                     heal(this, e, player, player.inventory);
+                    break;
+                case 'reload':
+                    reload(this, e, player, player.inventory);
                     break;
                 case null:
                     break;

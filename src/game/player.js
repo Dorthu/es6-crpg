@@ -25,6 +25,14 @@ class GamePlayer extends Player {
         this.check_status();
     }
 
+    reload() {
+        if(this.stats.ammo.value > 0 && this.stats.chambers.value < this.stats.chambers.max) {
+            this.stats.chambers.value++;
+            this.stats.ammo.value--;
+            this.stats.update();
+        }
+    }
+
     input(event) {
         if(event.keyCode == 81) {
             this.stats.health.value -= 4;
@@ -33,6 +41,8 @@ class GamePlayer extends Player {
             shoot(this);
         } else if(event.keyCode == 80) {
             push(this);
+        } else if(event.keyCode == 82) {
+            this.reload();
         }
         super.input(event);
     }

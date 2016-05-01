@@ -1,11 +1,13 @@
 [[null,{"type":"wall","mats":["brick"]}],
     [{"type":"wall","mats":["brick"]},
     {"type":"space","mats":["pavement","pavement"], "extra": { "object": {
-        "type": "pickup", "mats": ["revolver"], "extra": { "name": "revolver",
-            "effects": [ {"type": "equip", "target": "right_hand" } ] } }}},
+        "type": "ammo", "mats": ["ammo_box"], "extra": { "name": "ammo" } }}},
     {"type":"wall","mats":["brick"]}],
     [{"type":"door","mats":["brick_door"], "extra": { "to": "/levels/test/ai_test", "player_pos": { "x": 1, "z": 2 }, "player_facing": 3 } },{"type":"space","mats":["sidewalk","pavement"]},{"type":"wall","mats":["brick"]}],
-    [{"type":"wall","mats":["brick"]},{"type":"space","mats":["sidewalk","pavement"]},{"type":"wall","mats":["brick"]},{"type":"wall","mats":["brick"]},{"type":"wall","mats":["brick"]},null,null,null,{"type":"wall","mats":["brick","pavement"]},{"type":"wall","mats":["brick","pavement"]},
+    [{"type":"wall","mats":["brick"]},
+    {"type":"space","mats":["sidewalk","pavement"], "extra": { "object":
+        { "type":"pickup", "mats": ["speedloader"], "extra": { "name": "speedloader", "effects":[ { "type": "reload" } ] } } } },
+    {"type":"wall","mats":["brick"]},{"type":"wall","mats":["brick"]},{"type":"wall","mats":["brick"]},null,null,null,{"type":"wall","mats":["brick","pavement"]},{"type":"wall","mats":["brick","pavement"]},
             {"type":"door","mats":["brick_door","pavement"],
                 "extra": { "to": "/levels/test/outdoors", "player_pos": { "x": 1, "z": 0 }, "player_facing": 0 }}],
     [{"type":"wall","mats":["brick"]},{"type":"space","mats":["sidewalk","pavement"]},{"type":"space","mats":["sidewalk","pavement"]},{"type":"space","mats":["sidewalk","pavement"]},{"type":"space","mats":["sidewalk","pavement"]},

@@ -27,6 +27,14 @@ body {
 
         #player_status {
             border-bottom: 1px solid black;
+
+            .ammobar {
+                vertical-align: middle;
+                margin-left: 4px;
+                img {
+                    height: 32px;
+                }
+            }
         }
 
         #equipped {
