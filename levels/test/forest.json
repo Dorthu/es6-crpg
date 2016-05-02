@@ -32,7 +32,7 @@
                 "type": "ai", "mats": ["baddie"] } } },
         {"type":"space","mats":["grass","debug-2"] },
         {"type":"twall","mats":["treewall",null] } ],
-    [ {"type":"wall","mats":["debug-2"] }, {"type":"door","mats":["debug-door"],
+    [ {"type":"wall","mats":["debug-2"] }, {"type":"tdoor","mats":["treewall-door"],
             "extra": { "to": "/levels/test/entry_hall", "player_pos": { "x": 4, "z": 4 }, "player_facing": 1 } },
         {"type":"twall","mats":["treewall",null] },
         {"type":"twall","mats":["treewall",null] },

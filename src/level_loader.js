@@ -14,6 +14,7 @@ import LockedDoor from './locked_door'
 import FlatObject from './fobj'
 import TallWall from './tall_wall'
 import AmmoPickup from './game/ammo_pickup'
+import TallDoor from './tall_door'
 
 export const obj_map = {
     'space':    Space,
@@ -28,7 +29,8 @@ export const obj_map = {
     'locked': LockedDoor,
     'fobj': FlatObject,
     'twall': TallWall,
-    'ammo': AmmoPickup
+    'ammo': AmmoPickup,
+    'tdoor': TallDoor
 }
 
 ///why is this a class?
