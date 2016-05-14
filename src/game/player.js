@@ -6,6 +6,7 @@ class GamePlayer extends Player {
     constructor(grid, loc, inventory, facing=0, stats, overlay) {
         super(grid, loc, inventory, facing=facing);
 
+        this.has_turn = true;
         this.stats = stats;
         this.stats.update();
         this.overlay = overlay;
@@ -34,6 +35,9 @@ class GamePlayer extends Player {
     }
 
     input(event) {
+        if(!this.has_turn) { return; }
+        this.has_turn = false;
+
         if(event.keyCode == 81) {
             this.stats.health.value -= 4;
             this.stats.update();

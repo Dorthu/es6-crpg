@@ -15,6 +15,7 @@ import { init_textures, get_material } from './texture_lookup'
 import { init_serializer } from './editor/level_serializer'
 import { obj_map } from './level_loader'
 import DialogBox from './dialog'
+import TurnController from './game/turn_controller'
 
 const width = 600;
 const height = 500;
@@ -59,6 +60,7 @@ let skybox = null;
 ///overlay business is given to the player, and persisted
 const overlay = new Overlay(width, height);
 //overlay.add("shoot-anim-loop");
+let tc = null;
 
 const switch_level = function(info) {
     if(player) player.destroy();
@@ -81,6 +83,9 @@ const switch_level = function(info) {
     grid.scene.add(skybox);
 
     grid.set_scene_change_callback(switch_level);
+
+    tc = null;
+    tc = new TurnController(grid);
 
     let chance = Math.random();
     let d = null;

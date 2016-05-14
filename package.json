@@ -19,6 +19,7 @@
     "awesomplete": "^1.1.0",
     "css-loader": "^0.23.1",
     "es6-promise": "^3.1.2",
+    "es6-sleep": "^2.0.2",
     "node-sass": "^3.4.2",
     "priorityqueuejs": "^1.0.0",
     "sass-loader": "^3.1.2",

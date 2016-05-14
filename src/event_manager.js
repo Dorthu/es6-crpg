@@ -10,6 +10,7 @@ class EventManager {
         this.elm.style.visibility = 'hidden';
         document.body.appendChild(this.elm);
         this.listeners = {};
+        this.lists = {};
     }
 
     subscribe(event_name, callback, obj) {
@@ -22,10 +23,32 @@ class EventManager {
         }
     }
 
-    unsubsribe(event_name, obj) {
+    subscribe_list(list_name, callback, obj) {
+        if(!this.lists[list_name]) {
+            this.lists[list_name] = [];
+        }
+        this.lists[list_name].push({ obj: obj, callback: e => callback(e) });
+    }
+
+    unsubscribe(event_name, obj) {
         if(this.listeners[obj]) {
             console.log("removed a thing");
             this.elm.removeEventListener(event_name, this.listeners[obj]);
+        }
+    }
+
+    unsubscribe_list(list_name, obj) {
+        if(this.lists[list_name]) {
+            let found = -1;
+            for(let c of this.lists[list_name]) {
+                if(c.obj === obj) {
+                    found = this.lists[list_name].indexOf(c);
+                    break;
+                }
+            }
+            if(found > -1) {
+                this.lists[list_name].splice(found, 1);
+            }
         }
     }
 
