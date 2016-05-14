@@ -18,6 +18,37 @@ body {
         canvas {
             margin-left: -15px;
         }
+
+        .dialog-box {
+            position: absolute;
+            width: 540px;
+            height: 100px;
+            color: white;
+            background-color: black;
+            padding: 5px;
+            top: 380px;
+            left: 20px;
+            zIndex: -100;
+
+            img {
+                display: block;
+                width: 90px;
+                height: 90px;
+                float: left;
+            }
+
+            .right {
+                float: right;
+            }
+
+            span {
+                display: block;
+                height: 100%;
+                float: left;
+                padding: 20px;
+                font-size: larger;
+            }
+        }
     }
 
     #right-side {

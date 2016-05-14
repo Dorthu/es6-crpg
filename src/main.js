@@ -14,6 +14,7 @@ import Overlay from './overlay'
 import { init_textures, get_material } from './texture_lookup'
 import { init_serializer } from './editor/level_serializer'
 import { obj_map } from './level_loader'
+import DialogBox from './dialog'
 
 const width = 600;
 const height = 500;
@@ -81,10 +82,23 @@ const switch_level = function(info) {
 
     grid.set_scene_change_callback(switch_level);
 
-    console.log(grid.path_network.path_to_player({ loc: { x: 1, z: 1 } }));
+    let chance = Math.random();
+    let d = null;
+    if(chance < .3) {
+        d = new DialogBox("You are the worst at this game.", 'creator');
+    } else if(chance < .6) {
+        d = new DialogBox("I believe in you!  You can do it!", null, 'player');
+    }
+
+    if(d) {
+        window.setTimeout(function() {
+            d.remove();
+        }, 1000);
+    }
 };
 
 switch_level({ to: '/levels/test/entry_hall_update', player_pos: { x: 1, z: 2 }, player_facing: 2 });
+
 
 const startTime = new Date().getTime();
 function render() {
