@@ -25,6 +25,14 @@ class DialogBox {
         self.parentNode.appendChild(self.root);
     }
 
+    static player_dialog(msg, emote) {
+        return new DialogBox(msg, null, 'player/'+emote);
+    }
+
+    static character_dialog(msg, character, emote) {
+        return new DialogBox(msg, character+'/'+emote);
+    }
+
     remove() {
         self.parentNode.removeChild(self.root);
     }

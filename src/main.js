@@ -90,9 +90,9 @@ const switch_level = function(info) {
     let chance = Math.random();
     let d = null;
     if(chance < .3) {
-        d = new DialogBox("You are the worst at this game.", 'creator');
+        d = DialogBox.character_dialog("You are the worst at this game.", 'creator', 'neutral');
     } else if(chance < .6) {
-        d = new DialogBox("I believe in you!  You can do it!", null, 'player');
+        d = DialogBox.player_dialog("I believe in you!  You can do it!", 'happy');
     }
 
     if(d) {
