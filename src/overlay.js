@@ -1,6 +1,7 @@
 import { THREE } from './Three'
 import { get_material } from './texture_lookup'
 import AnimatedSprite from './animated_sprite'
+import TextParticle from './text_particle'
 
 class Overlay {
     constructor(width, height) {
@@ -20,6 +21,10 @@ class Overlay {
     add(sprite_mat, callback=null, extra=null) {
         let sprite = new AnimatedSprite(sprite_mat, this, false, callback, extra);
         this.objs.push(sprite);
+    }
+
+    add_text_particle(msg, color) {
+        this.objs.push(new TextParticle(this, msg, color, {x: 300, z: 300}));
     }
 
     remove(sprite) {

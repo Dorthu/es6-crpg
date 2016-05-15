@@ -7,7 +7,7 @@ class AI extends SolidItem {
         this.path_step = 0;
         this.act_on = 2;
         this.turns = 0;
-        this.health = extra && extra['health'] ? extra.health : 10; /// TODO - arbitrary default
+        this.health = extra && extra['health'] ? extra.health : 50; /// TODO - arbitrary default
 
         this.grid.event_manager.subscribe_list('ai_turn', e => this.step(e), this);
     }
@@ -15,6 +15,7 @@ class AI extends SolidItem {
     suffer_attack(attack) {
         if(attack['damage']) {
             this.health -= attack.damage;
+            this.grid.player.overlay.add_text_particle(attack.damage, 'red');
             if(this.health < 1) {
                 this.destroy();
             }

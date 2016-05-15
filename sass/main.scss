@@ -19,6 +19,12 @@ body {
             margin-left: -15px;
         }
 
+        .text-particle {
+            position: absolute;
+            zIndex: -200;
+            font-size: xx-large;
+        }
+
         .dialog-box {
             position: absolute;
             width: 540px;

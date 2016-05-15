@@ -18,6 +18,12 @@ function find_target_linear(grid, start, dir) {
     }
 }
 
+///this came from here:
+/// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+}
+
 /// shooting attack hook - below helpers are not exported
 export function shoot(player) {
     if(player.stats.chambers.value > 0) {
@@ -36,7 +42,8 @@ function shoot_lower(player) {
     let pif = player._point_in_front();
     let hit = find_target_linear(player.grid, pif, { x: player.loc.x - pif.x, z: player.loc.z - pif.z });
     if(hit) {
-        hit.suffer_attack({ damage: 100 });
+        let damage = getRandomInt(0, 20);
+        hit.suffer_attack({ damage: damage });
     }
     player.overlay.add('shoot-down', e => shoot_complete(player));
 }
