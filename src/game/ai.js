@@ -39,9 +39,14 @@ class AI extends SolidItem {
                     console.log("at player or can't see them");
                 if(this.is_beside_player()) {
                     this.ai_attack();
+                    return true;
                 }
+            } else {
+                return true;
             }
         }
+
+        return false;
     }
 
     /*

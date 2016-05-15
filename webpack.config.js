@@ -13,7 +13,8 @@ module.exports = {
               loader: 'babel',
               exclude: /(node_modules|bower_components)/,
               query: {
-                  presets: ['es2015']
+                  plugins: ['transform-runtime'],
+                  presets: ['es2015', 'stage-0']
               }
             },
             {
