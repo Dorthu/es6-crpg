@@ -38,10 +38,7 @@ class GamePlayer extends Player {
         if(!this.has_turn) { return; }
         this.has_turn = false;
 
-        if(event.keyCode == 81) {
-            this.stats.health.value -= 4;
-            this.stats.update();
-        } else if(event.keyCode == 32) {
+        if(event.keyCode == 32) {
             shoot(this);
         } else if(event.keyCode == 80) {
             push(this);

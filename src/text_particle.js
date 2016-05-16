@@ -27,9 +27,12 @@ class TextParticle {
         else { delta = delta - this.startDelta; }
 
         this.lifetime += delta;
-        this.ele.style.top = this.ele.style.top + 5*delta;
+        let tval = this.ele.style.top;
+        tval = tval.substring(0, tval.length-2);
+        tval = parseInt(tval);
+        this.ele.style.top = (tval + delta/500) + "px";
 
-        if(this.lifetime > 5000 && Math.random() < .15) {
+        if(this.lifetime > 50000 && Math.random() < .15) {
             this.destroy();
         }
     }
