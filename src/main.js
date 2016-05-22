@@ -14,8 +14,8 @@ import Overlay from './overlay'
 import { init_textures, get_material } from './texture_lookup'
 import { init_serializer } from './editor/level_serializer'
 import { obj_map } from './level_loader'
-import DialogBox from './dialog'
-import TurnController from './game/turn_controller'
+import TurnController from './turn_controller'
+import GameTurnController from './game/turn_controller'
 
 const width = 600;
 const height = 500;
@@ -84,21 +84,12 @@ const switch_level = function(info) {
 
     grid.set_scene_change_callback(switch_level);
 
+    if(tc) tc.destroy();
     tc = null;
-    tc = new TurnController(grid);
-
-    let chance = Math.random();
-    let d = null;
-    if(chance < .3) {
-        d = DialogBox.character_dialog("You are the worst at this game.", 'creator', 'neutral');
-    } else if(chance < .6) {
-        d = DialogBox.player_dialog("I believe in you!  You can do it!", 'happy');
-    }
-
-    if(d) {
-        window.setTimeout(function() {
-            d.remove();
-        }, 1000);
+    if(editor_mode) {
+        tc = new TurnController(grid);
+    } else {
+        tc = new GameTurnController(grid);
     }
 };
 

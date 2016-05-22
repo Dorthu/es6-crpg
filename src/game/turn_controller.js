@@ -1,10 +1,21 @@
 import { promise as sleep } from 'es6-sleep'
+import TurnController from '../turn_controller'
 
-class TurnController {
+class GameTurnController extends TurnController {
     constructor(grid) {
-        this.grid = grid;
+        super(grid);
         this.event_manager = grid.event_manager;
         this.event_manager.subscribe("pass_turn", e => this.player_passed(e), this);
+    }
+
+    input(event) {
+        let p = this.grid.player.overlay.blocking();
+        if(p) {
+            p.input(event);
+        } else if(this.grid.player.has_turn) {
+            this.grid.player.input(event);
+        }
+        console.log("input");
     }
 
     async player_passed(event) {
@@ -21,4 +32,4 @@ class TurnController {
     }
 }
 
-export default TurnController;
+export default GameTurnController;

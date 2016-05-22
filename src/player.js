@@ -20,8 +20,6 @@ class Player {
         this.camera.position.z = this.loc.z;
 
         this.position_camera();
-        this.input_listener = ent => this.input(ent);
-        document.addEventListener('keydown', this.input_listener);
 
         this.logbox = new LogBox();
 
@@ -178,7 +176,7 @@ class Player {
     }
 
     destroy() {
-        document.removeEventListener('keydown', this.input_listener);
+        ///nothing for now?
     }
 }
 
