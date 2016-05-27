@@ -14,7 +14,7 @@ module.exports = function(source) {
     
     result = {};
     fs.readdirSync('resources').forEach(function(cdir) {
-        if(cdir =='inventory') ///list of dirs to no index
+        if(cdir == 'inventory' || cdir == 'dialog') ///list of dirs to no index
             return;
         result[cdir] = fs.readdirSync('resources/'+cdir);
     });

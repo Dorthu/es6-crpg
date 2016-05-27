@@ -9,9 +9,15 @@
     [ {"type": "wall", "mats": ["debug-2"] },{"type": "enclosed", "mats": ["debug", "debug-2"] },
         {"type": "enclosed", "mats": ["debug", "debug-2"],
             "extra": { "object": { "type": "npc", "desc": "An old tree", "mats": ["solidobj"],
-                "extra": { "dialog": [ "I am only a tree", "Why are you talking to a tree?",
-                    "I had a bird in my branches yesterday..", "It was most impolite",
-                    "It pecked at my bark all day long.", "But I could not stop it because.." ] } } } },
+                "extra": { "dialog": [
+                    { "speaker": "creator", "emote": "ugly", "msg": "HELP!" },
+                    { "speaker": "player", "emote": "sad", "msg": "huh?" },
+                    { "speaker": "creator", "emote": "ugly", "msg": "I'M TRAPPED IN THIS TREE!" },
+                    { "speaker": "player", "emote": "bored", "msg": "uh..." },
+                    { "speaker": "creator", "emote": "neutral", "msg": "Yeah, just kidding." },
+                    { "speaker": "creator", "emote": "neutral", "msg": "I just haven't finished these sprites yet." },
+                    { "speaker": "player", "emote": "sad", "msg": "*sigh*" }
+                ] } } } },
         {"type": "enclosed", "mats": ["debug", "debug-2"], "extra": { "object": { "type": "tall", "mats": ["tall"] } } },
         {"type": "enclosed", "mats": ["debug", "debug-2"]  },
         {"type": "wall", "mats": ["debug-2"] } ],
