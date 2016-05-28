@@ -72,9 +72,17 @@ const switch_level = function(info) {
     light = null;
     skybox = null;
 
+    console.log("Switching leve to "+info.to);
     grid = level_loader.load_level(info.to);
     console.log("Player class:" );
     console.log(player_class);
+
+    /// keep compatibility with simple level format (for now)
+    if(info.constructor != Array && info['initial']) {
+        info.player_pos = grid.level.player_start.pos;
+        info.player_facing = grid.level.player_start.facing;
+    }
+
     player = new player_class(grid, info.player_pos, inventory, info.player_facing, stats, overlay);
     light = new THREE.AmbientLight( 0xA9BEA9 );
     grid.scene.add( light );
@@ -93,7 +101,7 @@ const switch_level = function(info) {
     }
 };
 
-switch_level({ to: '/levels/test/entry_hall_update', player_pos: { x: 1, z: 2 }, player_facing: 2 });
+switch_level({ to: '/levels/test2/simple', player_pos: { x: 1, z: 2 }, player_facing: 2, initial: true });
 
 
 const startTime = new Date().getTime();

@@ -15,6 +15,7 @@ import FlatObject from './fobj'
 import TallWall from './tall_wall'
 import AmmoPickup from './game/ammo_pickup'
 import TallDoor from './tall_door'
+import Level from './game/level'
 
 export const obj_map = {
     'space':    Space,
@@ -56,7 +57,15 @@ class LevelLoader {
     }
 
     load_level(uri) {
-        let data = this._get_level(uri);
+        let all_data = this._get_level(uri);
+
+        let data = all_data;
+        console.log("level is this:");
+        console.log(data);
+        if(data.constructor != Array && all_data['level']) {
+            console.log("it was a complex level");
+            data = all_data.level;
+        }
 
         let grid = new Grid();
 
@@ -68,6 +77,10 @@ class LevelLoader {
                     grid.create(obj_map[cur.type], { x: j, y: 0, z: i }, cur.mats, cur.desc, cur.extra);
                 }
             }
+        }
+
+        if(all_data !== data) {
+            grid.level = new Level(all_data);
         }
 
         return grid;

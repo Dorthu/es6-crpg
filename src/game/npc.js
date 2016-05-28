@@ -11,7 +11,7 @@ class NPC extends SolidItem {
     }
 
     use(player) { 
-        player.overlay.add_dialog(this.dialog);
+        player.overlay.add_dialog(player.grid.level.get_dialog(this.dialog));
     }
 }
 
