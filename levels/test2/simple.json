@@ -43,7 +43,9 @@
         {"type":"space","mats":["sidewalk",null],"desc":"editor created this"},
         {"type":"space","mats":["sidewalk",null],"desc":"editor created this"},
         {"type":"space","mats":["sidewalk",null],"desc":"editor created this"},
-        {"type":"wall","mats":["brick_door",null],"desc":"editor created this"}],
+        {"type":"door","mats":["brick_door",null],"desc":"editor created this",
+            "extra": { "to": "/levels/test/entry_hall", "player_pos": { "x": 4, "z": 4 }, "player_facing": 1 }
+        }],
     [{"type":"twall","mats":["treewall",null],"desc":"editor created this"},
         {"type":"space","mats":["grass",null],"desc":"editor created this"},
         {"type":"twall","mats":["treewall",null],"desc":"editor created this"},
