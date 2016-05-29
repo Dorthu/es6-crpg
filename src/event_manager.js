@@ -63,6 +63,10 @@ class EventManager {
     dispatchTransitionLevel(to) {
         this.elm.dispatchEvent(new CustomEvent('transition_level', { detail: { data: to } }));
     }
+
+    dispatchArbitrary(name, extra={}) {
+        this.elm.dispatchEvent(new CustomEvent(name));
+    }
 }
 
 export default EventManager;

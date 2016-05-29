@@ -8,6 +8,8 @@ class LockedDoor extends Door {
         this.key_name = extra['key'];
         this.locked = true;
         this.unlocked_mat = get_material(mats[1]);
+
+        this.grid.event_manager.subscribe(this.key_name, () => this.unlock(), this);
     }
 
     use(player) {
@@ -18,7 +20,7 @@ class LockedDoor extends Door {
                 player.logbox.add_message('unlocked!');
             }
             else {
-                player.logbox.add_message('needs key');
+                player.logbox.add_message('locked');
             }
         } else {
             super.use(player);

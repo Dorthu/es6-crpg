@@ -22,8 +22,10 @@ class DialogController {
             if(result['type'] == 'goto') {
                 this.overlay.remove_dialog();
                 this.overlay.add_dialog(this.overlay.grid.level.get_dialog(result['target']));
+                return;
+            } else if(result['type'] == 'event') {
+                this.overlay.grid.event_manager.dispatchArbitrary(result['target']);
             }
-            return;
         }
 
         if(this.cur >= this.dialog.length) { this.overlay.remove_dialog(); return; }
