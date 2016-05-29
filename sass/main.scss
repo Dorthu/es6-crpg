@@ -56,6 +56,26 @@ body {
                 font-size: larger;
             }
         }
+
+        .dialog-choice {
+            position: absolute;
+            width: 200px;
+            height: 250px;
+            color: white;
+            background-color: black;
+            padding: 5px;
+            top: 120px;
+            left: 360px;
+            zIndex: -200;
+
+            .choice {
+                padding-left: 10px;
+            }
+
+            .selected::before {
+                content: ' > ';
+            }
+        }
     }
 
     #right-side {

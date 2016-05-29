@@ -1,28 +1,28 @@
 
 class DialogBox {
     constructor(msg, left_img=null, right_img=null) {
-        self.parentNode = document.getElementById("canvas_goes_here");
-        self.root = document.createElement("div");
-        self.root.className="dialog-box";
+        this.parentNode = document.getElementById("canvas_goes_here");
+        this.root = document.createElement("div");
+        this.root.className="dialog-box";
     
         if(left_img) {
             let i = document.createElement("img");
             i.src = "/resources/dialog/"+left_img+".png";
-            self.root.appendChild(i);
+            this.root.appendChild(i);
         }
 
         let s = document.createElement("span");
         s.textContent = msg;
-        self.root.appendChild(s);
+        this.root.appendChild(s);
     
         if(right_img) {
             let i = document.createElement("img");
             i.src = "/resources/dialog/"+right_img+".png";
             i.className="right";
-            self.root.appendChild(i);
+            this.root.appendChild(i);
         }
         
-        self.parentNode.appendChild(self.root);
+        this.parentNode.appendChild(this.root);
     }
 
     static player_dialog(msg, emote) {
@@ -34,7 +34,7 @@ class DialogBox {
     }
 
     remove() {
-        self.parentNode.removeChild(self.root);
+        this.parentNode.removeChild(this.root);
     }
 }
 

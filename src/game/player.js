@@ -47,7 +47,11 @@ class GamePlayer extends Player {
             this.reload();
         } else if(event.keyCode == 84) {
             this.overlay.add_dialog([
-                { 'speaker': 'player', 'emote': 'happy', 'msg': "So far, so good, huh?" },
+                { 'speaker': 'player', 'emote': 'happy', 'prompt': {
+                        'msg': "So far, so good, huh?",
+                        'choices': [ { 'title': "Yeah!" }, { 'title': "Eh.." }, { 'title': "Not at all" } ]
+                    }
+                },
                 { 'speaker': 'player', 'emote': 'bored', 'msg': "..." },
                 { 'speaker': 'player', 'emote': 'sad', 'msg': "I should stop talking to myself.." }
             ]);

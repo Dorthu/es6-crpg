@@ -16,6 +16,7 @@ import { init_serializer } from './editor/level_serializer'
 import { obj_map } from './level_loader'
 import TurnController from './turn_controller'
 import GameTurnController from './game/turn_controller'
+import DialogChoice from './game/dialog_choice'
 
 const width = 600;
 const height = 500;
@@ -102,7 +103,6 @@ const switch_level = function(info) {
 };
 
 switch_level({ to: '/levels/test2/simple', player_pos: { x: 1, z: 2 }, player_facing: 2, initial: true });
-
 
 const startTime = new Date().getTime();
 function render() {
