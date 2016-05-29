@@ -12,8 +12,6 @@ class TurnController {
     }
 
     input(event) {
-        event.preventDefault();
-
         if(this.grid.player) {
             this.grid.player.input(event);
         }
