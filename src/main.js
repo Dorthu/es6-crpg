@@ -68,6 +68,7 @@ const switch_level = function(info) {
     player = null;
     if(grid) {
         grid.scene = null;
+        overlay.grid = null;
         grid = null;
     }
     light = null;
@@ -77,6 +78,7 @@ const switch_level = function(info) {
     grid = level_loader.load_level(info.to);
     console.log("Player class:" );
     console.log(player_class);
+    overlay.grid = grid;
 
     /// keep compatibility with simple level format (for now)
     if(info.constructor != Array && info['initial']) {

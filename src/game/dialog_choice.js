@@ -41,6 +41,7 @@ class DialogChoice extends DialogBox {
     remove() {
         super.remove();
         this.parentNode.removeChild(this.croot);
+        return this.prompt.choices[this.selected]['effect'];
     }
 }
 

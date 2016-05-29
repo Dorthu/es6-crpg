@@ -18,6 +18,7 @@ class Overlay {
         this.cam.position.z = 10;
         this.objs = [];
         this.dialog_controller = null;
+        this.grid = null;
     }
 
     blocking() {

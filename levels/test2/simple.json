@@ -80,11 +80,24 @@
         "tree-talk": [
             { "speaker": "creator", "emote": "ugly", "msg": "HELP!" },
             { "speaker": "player", "emote": "sad", "msg": "huh?" },
-            { "speaker": "creator", "emote": "ugly", "msg": "I'M TRAPPED IN THIS TREE!" },
+            { "speaker": "creator", "emote": "ugly", "prompt": {
+                "msg": "I'M TRAPPED IN THIS TREE!",
+                "choices": [
+                    { "title": "uh.." }, { "title": "OH GAWD!", "effect": { "type": "goto", "target": "fooled" } }
+                ]
+            } },
             { "speaker": "player", "emote": "bored", "msg": "uh..." },
             { "speaker": "creator", "emote": "neutral", "msg": "Yeah, just kidding." },
             { "speaker": "creator", "emote": "neutral", "msg": "I just haven't finished these sprites yet." },
             { "speaker": "player", "emote": "sad", "msg": "*sigh*" }
+        ],
+        "fooled": [
+            { "speaker": "player", "emote": "scared", "msg": "OH GAWD!  WHAT HAPPENED!" },
+            { "speaker": "creator", "emote": "ugly", "msg": "I was walking through the woods when a magical gnome cursed me!" },
+            { "speaker": "creator", "emote": "ugly", "msg": "He trapped me inside this tree!  Now I'm stuck!" },
+            { "speaker": "player", "emote": "scared", "msg": "How do I break the curse?" },
+            { "speaker": "creator", "emote": "neutral", "msg": "You don't.  I made it up." },
+            { "speaker": "player", "emote": "sad", "msg": "Oh.. not funny" }
         ]
     }
 }

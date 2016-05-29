@@ -13,11 +13,20 @@ class DialogController {
     }
 
     show() {
+        let result = null;
         if(this.cbox) {
-            this.cbox.remove();
+            result = this.cbox.remove();
         }
 
-        if(this.cur >= this.dialog.length) { this.overlay.remove_dialog(); }
+        if(result) {
+            if(result['type'] == 'goto') {
+                this.overlay.remove_dialog();
+                this.overlay.add_dialog(this.overlay.grid.level.get_dialog(result['target']));
+            }
+            return;
+        }
+
+        if(this.cur >= this.dialog.length) { this.overlay.remove_dialog(); return; }
 
         let c = this.dialog[this.cur++];
         if(c['prompt']) {
