@@ -15,7 +15,8 @@ class GameTurnController extends TurnController {
         } else if(this.grid.player.has_turn) {
             this.grid.player.input(event);
         }
-        console.log("input");
+
+        event.preventDefault();
     }
 
     async player_passed(event) {

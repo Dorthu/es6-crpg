@@ -12,7 +12,8 @@ class TurnController {
     }
 
     input(event) {
-        console.log('super input');
+        event.preventDefault();
+
         if(this.grid.player) {
             this.grid.player.input(event);
         }

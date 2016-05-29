@@ -93,7 +93,9 @@
             { "speaker": "player", "emote": "bored", "msg": "uh..." },
             { "speaker": "creator", "emote": "neutral", "msg": "Yeah, just kidding." },
             { "speaker": "creator", "emote": "neutral", "msg": "I just haven't finished these sprites yet." },
-            { "speaker": "player", "emote": "sad", "msg": "*sigh*" }
+            { "speaker": "player", "emote": "sad", "msg": "*sigh*" },
+            { "speaker": "creator", "emote": "neutral", "msg": "I unlocked the door for you." },
+            { "speaker": "player", "emote": "happy", "msg": "Awesome, thanks!" }
         ],
         "fooled": [
             { "speaker": "player", "emote": "scared", "msg": "OH GAWD!  WHAT HAPPENED!" },
