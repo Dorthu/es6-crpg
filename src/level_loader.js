@@ -16,6 +16,7 @@ import TallWall from './tall_wall'
 import AmmoPickup from './game/ammo_pickup'
 import TallDoor from './tall_door'
 import Level from './game/level'
+import ConditionalPickup from './game/conditional_pickup'
 
 export const obj_map = {
     'space':    Space,
@@ -31,7 +32,8 @@ export const obj_map = {
     'fobj': FlatObject,
     'twall': TallWall,
     'ammo': AmmoPickup,
-    'tdoor': TallDoor
+    'tdoor': TallDoor,
+    'cpickup': ConditionalPickup
 }
 
 ///why is this a class?
@@ -56,7 +58,7 @@ class LevelLoader {
         return this.level_json[uri];
     }
 
-    load_level(uri) {
+    load_level(uri, persistence) {
         let all_data = this._get_level(uri);
 
         let data = all_data;
@@ -64,10 +66,16 @@ class LevelLoader {
         console.log(data);
         if(data.constructor != Array && all_data['level']) {
             console.log("it was a complex level");
+            data['level-uri'] = uri;
             data = all_data.level;
         }
 
-        let grid = new Grid();
+        let grid = new Grid(persistence);
+        /// we need this while loading up objects to check
+        /// conditionals
+        if(all_data !== data) {
+            grid.level = new Level(grid, all_data);
+        }
 
         for(let i=0; i<data.length; i++) {
             let curr = data[i];
@@ -79,8 +87,8 @@ class LevelLoader {
             }
         }
 
-        if(all_data !== data) {
-            grid.level = new Level(all_data);
+        for(let a of grid.post_load_actions) {
+            a();
         }
 
         return grid;

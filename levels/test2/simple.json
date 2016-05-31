@@ -16,7 +16,12 @@
         {"type":"space","mats":["grass",null],"desc":"editor created this"},
         {"type":"space","mats":["grass",null],"desc":"editor created this"},
         {"type":"space","mats":["grass",null],"desc":"editor created this"},
-        {"type":"space","mats":["grass",null],"desc":"editor created this"},
+        {"type":"space","mats":["grass",null],"desc":"editor created this",
+            "extra": { "object": { "type":"cpickup", "mats": ["speedloader"], 
+                "extra": { "name": "speedloader", "effects":[ { "type": "reload" } ], 
+                "if": "speedloader-present", "once": true }
+            } }
+        },
         {"type":"twall","mats":["treewall",null],"desc":"editor created this"},
         {"type":"wall","mats":["brick",null],"desc":"editor created this"},
         {"type":"space","mats":["pavement",null],"desc":"editor created this"},
@@ -105,5 +110,8 @@
             { "speaker": "creator", "emote": "neutral", "msg": "You don't.  I made it up." },
             { "speaker": "player", "emote": "sad", "msg": "Oh.. not funny" }
         ]
+    },
+    "persisted": {
+        "speedloader-present": true
     }
 }

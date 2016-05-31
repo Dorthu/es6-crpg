@@ -3,7 +3,7 @@ import EventManager from './event_manager'
 import PathNetwork from './path_network'
 
 class Grid {
-    constructor() {
+    constructor(persistence) {
         this.grid = [];
         this.scene = new THREE.Scene();
         this.event_manager = new EventManager();
@@ -11,6 +11,8 @@ class Grid {
         this.scene_change_callback = null;
         this.player = null;
         this.path_network = new PathNetwork(this);
+        this.persistence = persistence;
+        this.post_load_actions = [];
     }
 
     create(cls, loc, mats, desc, extra) {

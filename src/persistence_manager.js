@@ -1,4 +1,4 @@
-class PersistanceManager {
+class PersistenceManager {
     constructor(store_name) {
         this.store = localStorage;
         this.store_name = store_name;
@@ -25,4 +25,4 @@ class PersistanceManager {
     }
 }
 
-export default PersistanceManager;
+export default PersistenceManager;
