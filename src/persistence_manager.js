@@ -12,6 +12,10 @@ export function store_set_prefix(pref) {
     console.log("setting prefix to "+prefix);
 }
 
+export function store_get_prefix() {
+    return prefix;
+}
+
 function get_key(key) {
     if(!store_name || !prefix) throw "Accessing store without prefix!";
     return store_name + "::" + prefix + "::" + key;

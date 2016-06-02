@@ -1,3 +1,5 @@
+import { store_get, store_set, store_set_prefix, store_get_prefix } from './persistence_manager'
+import InventoryItem from './inventory_item'
 
 class Inventory {
     constructor() {
@@ -17,6 +19,7 @@ class Inventory {
     }
 
     update() {
+        this.serialize();
         let serial = '';
         let sel = this.selected < this.items.length ? this.items[this.selected] : null;
 
@@ -128,6 +131,28 @@ class Inventory {
         }
 
         this.update();
+    }
+
+    serialize() {
+        let pref = store_get_prefix();
+        store_set_prefix("inventory");
+        store_set("inventory", JSON.stringify(this.items));
+        store_set_prefix(pref);
+    }
+
+    deserialize() {
+        let pref = store_get_prefix();
+        store_set_prefix("inventory");
+        this.items = JSON.parse(store_get("inventory", '[]'));
+        store_set_prefix(pref);
+
+        let t = [];
+        for(let c of this.items) {
+            t.push(new InventoryItem(c['name'], c['icon'], c['effects']));
+        }
+        this.items = t;
+
+        this.selected = 0;
     }
 }
 

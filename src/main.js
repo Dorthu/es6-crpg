@@ -54,6 +54,7 @@ if(editor_mode) {
 }
 const stats = new PlayerStatus(100);
 store_init(editor_mode ? "editor" : "game");
+inventory.deserialize();
 
 ///tmp for testing
 const skygeo = new THREE.CubeGeometry(500, 500, 500);
