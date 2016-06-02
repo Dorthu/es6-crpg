@@ -1,45 +1,48 @@
 {
-  "name": "crpg",
-  "version": "0.0.1",
-  "description": "browser-based crpg in es6",
+  "name": "es6-crpg",
+  "version": "0.0.1-a",
+  "description": "A WebGL RPG",
   "main": "index.html",
   "dependencies": {
-    "babel-core": "^6.5.2",
     "babel-loader": "^6.2.3",
-    "babel-polyfill": "^6.8.0",
-    "babel-preset-es2015": "^6.5.0",
-    "babel-runtime": "^6.6.1",
-    "bootstrap": "^3.3.6",
-    "es6-loader": "^0.2.0",
-    "node-sass": "^3.4.2",
-    "object-assign": "^4.0.1",
-    "sass-loader": "^3.1.2",
-    "three": "^0.74.0",
-    "webpack": "^1.12.13"
-  },
-  "devDependencies": {
     "awesomplete": "^1.1.0",
-    "babel-plugin-transform-runtime": "^6.8.0",
+    "babel-preset-es2015": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
+    "babel-core": "^6.5.2",
+    "babel-runtime": "^6.6.1",
+    "babel-polyfill": "^6.8.0",
+    "es6-loader": "^0.2.0",
+    "es6-sleep": "^2.0.2",
+    "bootstrap": "^3.3.6",
     "css-loader": "^0.23.1",
     "es6-promise": "^3.1.2",
-    "es6-sleep": "^2.0.2",
-    "node-sass": "^3.4.2",
-    "priorityqueuejs": "^1.0.0",
+    "object-assign": "^4.0.1",
+    "style-loader": "^0.13.0",
+    "babel-plugin-transform-runtime": "^6.8.0",
+    "three": "^0.74.0",
+    "webpack": "^1.12.13",
     "sass-loader": "^3.1.2",
-    "style-loader": "^0.13.0"
+    "node-sass": "^3.4.2",
+    "priorityqueuejs": "^1.0.0"
   },
+  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo 'no tests'"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dorthu/es6-crpg.git"
+    "url": "https://github.com/Dorthu/es6-crpg.git"
   },
+  "keywords": [
+    "es6",
+    "rpg",
+    "webgl",
+    "hipster"
+  ],
   "author": "Dorthu",
-  "license": "GPL-3.0",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/Dorthu/es6-crpg/issues"
   },
-  "homepage": "https://github.com/Dorthu/es6-crpg#readme"
+  "homepage": "https://github.com/Dorthu/es6-crpg"
 }
