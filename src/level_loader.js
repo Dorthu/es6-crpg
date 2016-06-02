@@ -60,7 +60,7 @@ class LevelLoader {
         return this.level_json[uri];
     }
 
-    load_level(uri, persistence) {
+    load_level(uri) {
         let all_data = this._get_level(uri);
 
         let data = all_data;
@@ -72,7 +72,7 @@ class LevelLoader {
             data = all_data.level;
         }
 
-        let grid = new Grid(persistence);
+        let grid = new Grid();
         /// we need this while loading up objects to check
         /// conditionals
         if(all_data !== data) {

@@ -17,7 +17,7 @@ import { obj_map } from './level_loader'
 import TurnController from './turn_controller'
 import GameTurnController from './game/turn_controller'
 import DialogChoice from './game/dialog_choice'
-import PersistenceManager from './persistence_manager'
+import { store_init } from './persistence_manager'
 
 const width = 600;
 const height = 500;
@@ -53,7 +53,7 @@ if(editor_mode) {
     player_class = EditorPlayer;
 }
 const stats = new PlayerStatus(100);
-const persistence = new PersistenceManager(editor_mode ? "editor" : "game");
+store_init(editor_mode ? "editor" : "game");
 
 ///tmp for testing
 const skygeo = new THREE.CubeGeometry(500, 500, 500);
@@ -77,7 +77,7 @@ const switch_level = function(info) {
     skybox = null;
 
     console.log("Switching leve to "+info.to);
-    grid = level_loader.load_level(info.to, persistence);
+    grid = level_loader.load_level(info.to);
     console.log("Player class:" );
     console.log(player_class);
     overlay.grid = grid;
