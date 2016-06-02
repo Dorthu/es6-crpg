@@ -48,9 +48,9 @@
         {"type":"space","mats":["sidewalk",null],"desc":"editor created this"},
         {"type":"space","mats":["sidewalk",null],"desc":"editor created this"},
         {"type":"space","mats":["sidewalk",null],"desc":"editor created this"},
-        {"type":"locked","mats":["brick_door","brick_door"],"desc":"editor created this",
+        {"type":"clocked","mats":["brick_door","brick_door"],"desc":"editor created this",
             "extra": { "to": "/levels/test/entry_hall", "player_pos": { "x": 4, "z": 4 }, "player_facing": 1,
-                "key": "not-fooled" }
+                "key": "not-fooled", "if": "door-locked", "once": true }
         }],
     [{"type":"twall","mats":["treewall",null],"desc":"editor created this"},
         {"type":"space","mats":["grass",null],"desc":"editor created this"},
@@ -112,6 +112,7 @@
         ]
     },
     "persisted": {
-        "speedloader-present": true
+        "speedloader-present": true,
+        "door-locked": true
     }
 }
