@@ -30,3 +30,17 @@ export function store_get(key, def=null) {
     if(!r) return def;
     return r;
 }
+
+function global_key(key) {
+    return store_name+":::"+key;
+}
+
+export function store_set_global(key, value) {
+    store.setItem(global_key(key), value);
+}
+
+export function store_get_global(key, def=null) {
+    let r = store.getItem(global_key(key));
+    if(!r) return def;
+    return r;
+}

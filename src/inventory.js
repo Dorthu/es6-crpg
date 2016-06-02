@@ -1,4 +1,4 @@
-import { store_get, store_set, store_set_prefix, store_get_prefix } from './persistence_manager'
+import { store_get_global, store_set_global } from './persistence_manager'
 import InventoryItem from './inventory_item'
 
 class Inventory {
@@ -134,17 +134,11 @@ class Inventory {
     }
 
     serialize() {
-        let pref = store_get_prefix();
-        store_set_prefix("inventory");
-        store_set("inventory", JSON.stringify(this.items));
-        store_set_prefix(pref);
+        store_set_global("inventory", JSON.stringify(this.items));
     }
 
     deserialize() {
-        let pref = store_get_prefix();
-        store_set_prefix("inventory");
-        this.items = JSON.parse(store_get("inventory", '[]'));
-        store_set_prefix(pref);
+        this.items = JSON.parse(store_get_global("inventory", '[]'));
 
         let t = [];
         for(let c of this.items) {

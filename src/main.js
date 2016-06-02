@@ -17,7 +17,7 @@ import { obj_map } from './level_loader'
 import TurnController from './turn_controller'
 import GameTurnController from './game/turn_controller'
 import DialogChoice from './game/dialog_choice'
-import { store_init } from './persistence_manager'
+import { store_init, store_get_global} from './persistence_manager'
 
 const width = 600;
 const height = 500;
@@ -107,7 +107,8 @@ const switch_level = function(info) {
     }
 };
 
-switch_level({ to: '/levels/test2/simple', player_pos: { x: 1, z: 2 }, player_facing: 2, initial: true });
+let toLevel = store_get_global("clevel", 'levels/test2/simple');
+switch_level({ to: toLevel, player_pos: { x: 1, z: 2 }, player_facing: 2, initial: true });
 
 const startTime = new Date().getTime();
 function render() {
