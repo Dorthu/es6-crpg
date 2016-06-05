@@ -30,11 +30,11 @@
             {"type":"wall","mats":["wallpaper",null],"desc":"editor created this"},
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this","extra":{"object":{"type":"fobj","mats":["dresser",null],"desc":null,"extra": {"zways":true}}}},
             {"type":"espace","mats":["woodfloor","ceiling"],"desc":"editor created this", "extra": {
-                "event": "guardian-speak", "once": false, "key": "guardian-can-speak" }
+                "event": "guardian-speak", "once": true, "key": "guardian-can-speak" }
             },
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this","extra":{"object":{"type":"fobj","mats":["dresser",null],"desc":null,"extra": {"zways":true}}}},
             {"type":"wall","mats":["wallpaper_tear",null],"desc":"there's something here..", "extra": {
-                "object": { "type": "switch", "extra": { "event": "guardian-warn" } }
+                "object": { "type": "switch", "extra": { "event": "guardian-warn", "once": true, "key": "warn-button" } }
             } },
             {"type":"wall","mats":["wallpaper_light",null],"desc":"editor created this"},
             {"type":"wall","mats":["wallpaper",null],"desc":"editor created this"},null,null,{"type":"space","mats":["pavement",null],"desc":"editor created this"}],
@@ -114,7 +114,8 @@
             {"type":"space","mats":["pavement",null],"desc":"editor created this"}]
     ],
     "persisted": {
-        "guardian-can-speak": true
+        "guardian-can-speak": true,
+        "warn-button": true
     },
     "dialog": {
         "guardians-warning": [
