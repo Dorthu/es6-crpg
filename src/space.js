@@ -22,6 +22,21 @@ class Space extends GridObject {
         this.meshes[0].rotation.x = Math.PI / -2;
 
         this.grid.scene.add(this.meshes[0]);
+
+        if(mats.length > 0 && mats[1]) {
+            let pos = {y: 0};
+            assign(pos, this.loc);
+            pos.y += .5;
+            pos = this.grid.translate(pos);
+
+            this.meshes[1] = new THREE.Mesh(geo, get_material(mats[1]));
+            this.meshes[1].position.x = pos.x;
+            this.meshes[1].position.y = pos.y;
+            this.meshes[1].position.z = pos.z;
+            this.meshes[1].rotation.x = Math.PI / 2;
+
+            this.grid.scene.add(this.meshes[1]);
+        }
     }
 
     destroy() {

@@ -3,7 +3,6 @@ import { THREE, geo } from './Three'
 import Grid from './grid'
 import Wall from './wall'
 import Space from './space'
-import CeilingSpace from './ceiling_space'
 import Door from './door'
 import Pickup from './pickup'
 import SolidItem from './solid_item'
@@ -24,7 +23,7 @@ import Switch from './switch'
 export const obj_map = {
     'space':    Space,
     'wall':     Wall,
-    'enclosed': CeilingSpace,
+    'enclosed': Space,
     'door': Door,
     'pickup': Pickup,
     'solid': SolidItem,
