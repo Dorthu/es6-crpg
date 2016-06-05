@@ -16,7 +16,6 @@ class EventManager {
     subscribe(event_name, callback, obj) {
         if(obj) {
             this.listeners[obj] = e => callback(e);
-            console.log(this.listeners);
             this.elm.addEventListener(event_name, this.listeners[obj]);
         } else { //you can't unsubsribe
             this.elm.addEventListener(event_name, e => callback(e));
@@ -32,7 +31,6 @@ class EventManager {
 
     unsubscribe(event_name, obj) {
         if(this.listeners[obj]) {
-            console.log("removed a thing");
             this.elm.removeEventListener(event_name, this.listeners[obj]);
         }
     }
