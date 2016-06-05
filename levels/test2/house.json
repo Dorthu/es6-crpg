@@ -33,7 +33,9 @@
                 "event": "guardian-speak", "once": false, "key": "guardian-can-speak" }
             },
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this","extra":{"object":{"type":"fobj","mats":["dresser",null],"desc":null,"extra": {"zways":true}}}},
-            {"type":"wall","mats":["wallpaper_tear",null],"desc":"editor created this"},
+            {"type":"wall","mats":["wallpaper_tear",null],"desc":"there's something here..", "extra": {
+                "object": { "type": "switch", "extra": { "event": "guardian-warn" } }
+            } },
             {"type":"wall","mats":["wallpaper_light",null],"desc":"editor created this"},
             {"type":"wall","mats":["wallpaper",null],"desc":"editor created this"},null,null,{"type":"space","mats":["pavement",null],"desc":"editor created this"}],
         [null,null,null,null,{"type":"wall","mats":["wallpaper_window",null],"desc":"editor created this"},
@@ -124,12 +126,24 @@
             { "speaker": "player", "emote": "sad", "msg": "I have to do this." },
             { "speaker": "guardian", "emote": "default", "msg": "You know little.  Leave this place, I beg you." },
             { "speaker": "player", "emote": "bored", "msg": "No can do lady." }
+        ],
+        "guardians-warning-2": [
+            { "speaker": "guardian", "emote": "happy", "msg": "You always were curious.." },
+            { "speaker": "player", "emote": "bored", "msg": "You again?  Leave me alone." },
+            { "speaker": "guardian", "emote": "happy", "msg": "And driven.  You've searched this whole house." },
+            { "speaker": "guardian", "emote": "default", "msg": "What will you do now?  What is up there that you want?" },
+            { "speaker": "player", "emote": "sad", "msg": "This has nothing to do with you, leave me alone." },
+            { "speaker": "guardian", "emote": "default", "msg": "It is well beyond the time that I could stop you." }
         ]
     },
     "events": {
         "guardian-speak": {
             "type": "dialog",
             "dialog": "guardians-warning"
+        },
+        "guardian-warn": {
+            "type": "dialog",
+            "dialog": "guardians-warning-2"
         }
     }
 }
