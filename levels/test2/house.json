@@ -29,7 +29,9 @@
             {"type":"wall","mats":["wallpaper",null],"desc":"editor created this"},
             {"type":"wall","mats":["wallpaper",null],"desc":"editor created this"},
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this","extra":{"object":{"type":"fobj","mats":["dresser",null],"desc":null,"extra": {"zways":true}}}},
-            {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this"},
+            {"type":"espace","mats":["woodfloor","ceiling"],"desc":"editor created this", "extra": {
+                "event": "unlock-door", "once": true, "key": "unlock-door-espace" }   
+            },
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this","extra":{"object":{"type":"fobj","mats":["dresser",null],"desc":null,"extra": {"zways":true}}}},
             {"type":"wall","mats":["wallpaper_tear",null],"desc":"editor created this"},
             {"type":"wall","mats":["wallpaper_light",null],"desc":"editor created this"},
@@ -46,10 +48,11 @@
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this"},
             {"type":"wall","mats":["wallpaper",null],"desc":"editor created this"},null,{"type":"space","mats":["pavement",null],"desc":"editor created this"}],
         [null,null,null,null,
-            {"type":"door","mats":["wallpaper_door",null],"desc":"editor created this", 
-                "extra": { "to": "/levels/test2/simple", "player_pos": { "x": 9, "z": 3 }, "player_facing": 1 }
+            {"type":"clocked","mats":["wallpaper_door","wallpaper_door"],"desc":"editor created this", 
+                "extra": { "to": "/levels/test2/simple", "player_pos": { "x": 9, "z": 3 }, "player_facing": 1,
+                    "if": "door-locked", "key": "unlock-door", "once": true }
 
-        },
+        }   ,
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this"},
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this"},
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this"},
@@ -109,5 +112,9 @@
             {"type":"space","mats":["pavement",null],"desc":"editor created this"},
             {"type":"space","mats":["pavement",null],"desc":"editor created this"},
             {"type":"space","mats":["pavement",null],"desc":"editor created this"}]
-        ]
+        ],
+    "persisted": {
+        "door-locked": true,
+        "unlock-door-espace": true
+    }
 }

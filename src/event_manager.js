@@ -51,7 +51,7 @@ class EventManager {
     }
 
     dispatchPlayerMoved(player) { 
-        this.elm.dispatchEvent(new CustomEvent('player_moved', { loc: player.loc }));
+        this.elm.dispatchEvent(new CustomEvent('player_moved', { detail: { loc: player.loc } }));
     }
 
     dispatchPassTurn() { 

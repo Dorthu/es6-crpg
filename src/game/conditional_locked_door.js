@@ -20,6 +20,10 @@ class ConditionalLockedDoor extends LockedDoor {
         }
     }
 
+    use(player) {
+        super.use(player);
+    }
+
 }
 
 export default ConditionalLockedDoor;

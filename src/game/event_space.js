@@ -10,21 +10,21 @@ class EventSpace extends Space {
         this.key = this.extra['key'];
 
         if(this.once) {
-            if(this.grid.level.get_value(this.key)) {
-                this.skip = True;
+            if(this.grid.level.get_value(this.key) !== true) {
+                this.skip = true;
             }
         }
 
         if(!this.skip)
-            this.grid.event_manager.add_event_listener('player_moved', e => this.trigger(e), this);
+            this.grid.event_manager.subscribe('player_moved', e => this.trigger(e), this);
     }
 
     trigger(event) {
-        if(!this.skip && event.data.loc.x == this.loc.x && event.data.loc.y == this.loc.y) {
+        if(!this.skip && event.detail.loc.x == this.loc.x && event.detail.loc.z == this.loc.z) {
             this.grid.event_manager.dispatchArbitrary(this.event, this.event_data);
             
             if(this.once) {
-                this.grid.level.set_value(this.key);
+                this.grid.level.set_value(this.key, false);
                 this.skip = true;
                 this.grid.event_manager.unsubscribe(this.event, this);
             }
