@@ -108,7 +108,18 @@ const switch_level = function(info) {
 };
 
 let toLevel = store_get_global("clevel", 'levels/test2/simple');
-switch_level({ to: toLevel, player_pos: { x: 1, z: 2 }, player_facing: 2, initial: true });
+let initial = true;
+let player_pos = { x: 1, z: 1 };
+let player_facing = 2;
+if(store_get_global('player_x')) {
+    initial = false;
+    player_pos = {
+        x: Number.parseInt(store_get_global('player_x')),
+        z: Number.parseInt(store_get_global('player_z'))
+    };
+    player_facing = store_get_global('player_facing');
+}
+switch_level({ to: toLevel, player_pos: player_pos, player_facing: player_facing, initial: initial });
 
 const startTime = new Date().getTime();
 function render() {

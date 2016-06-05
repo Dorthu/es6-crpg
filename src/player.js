@@ -1,6 +1,7 @@
 import { THREE } from './Three'
 import assign from 'object-assign'
 import LogBox from './logbox'
+import { store_set_global } from './persistence_manager'
 
 const dirs = [ 'north', 'east', 'south', 'west' ];
 
@@ -41,7 +42,6 @@ class Player {
             nloc.x += 1 * mult;
         }
         if(this.grid.can_move_to(nloc)) {
-            console.log("can move");
             this.loc = nloc;
             if(!back) {
                 this.logbox.add_message('moves '+dirs[this.facing]);
@@ -53,13 +53,14 @@ class Player {
         } else if(!back) {
             ///attempt to use
             let o = this.grid.get(nloc.x, nloc.z);
-            if(o.usable) {
+            if(o && o.usable) {
                 this.logbox.add_message('uses');
                 o.use(this);
             }
         }
 
         this.position_camera();
+        this._save_move();
         this.grid.event_manager.dispatchPlayerMoved(this);
     }
 
@@ -125,12 +126,9 @@ class Player {
     }
 
     _inv_hotbar(slot) {
-        console.log(slot);
-        console.log(this.inventory.items.length);
         if(this.inventory.items.length >= slot) {
             this.inventory.selected = slot-1;
             this.inventory.update();
-            console.log("i did it");
         }
     }
 
@@ -149,6 +147,7 @@ class Player {
             if(this.facing > 3) { this.facing = 0; }
             this.logbox.add_message('faces '+dirs[this.facing]);
             this.position_camera();
+            this._save_move();
         } else if(event.keyCode == 38) {
             this.move();
         } else if(event.keyCode == 39) {
@@ -156,6 +155,7 @@ class Player {
             if(this.facing < 0) { this.facing = 3; }
             this.logbox.add_message('faces '+dirs[this.facing]);
             this.position_camera();
+            this._save_move();
         } else if(event.keyCode == 40) {
             this.move(true);
         } else if(event.keyCode == 76) {
@@ -166,7 +166,6 @@ class Player {
             this.use();
         } else if(event.keyCode > 48 && event.keyCode < 58) { ///number
             this._inv_hotbar(event.keyCode-48);
-            console.log('the business');
         } else if(event.keyCode == 69) {
             this.inventory.use(this);
             this.inventory.update();
@@ -177,6 +176,13 @@ class Player {
 
     destroy() {
         ///nothing for now?
+    }
+
+    _save_move() {
+        store_set_global('player_x', this.loc.x);
+        //store_set_global('player_y', this.loc.y); //we don't *really* use this..
+        store_set_global('player_z', this.loc.z);
+        store_set_global('player_facing', this.facing);
     }
 }
 
