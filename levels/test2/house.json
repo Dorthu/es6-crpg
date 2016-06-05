@@ -30,7 +30,7 @@
             {"type":"wall","mats":["wallpaper",null],"desc":"editor created this"},
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this","extra":{"object":{"type":"fobj","mats":["dresser",null],"desc":null,"extra": {"zways":true}}}},
             {"type":"espace","mats":["woodfloor","ceiling"],"desc":"editor created this", "extra": {
-                "event": "unlock-door", "once": true, "key": "unlock-door-espace" }   
+                "event": "guardian-speak", "once": false, "key": "guardian-can-speak" }
             },
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this","extra":{"object":{"type":"fobj","mats":["dresser",null],"desc":null,"extra": {"zways":true}}}},
             {"type":"wall","mats":["wallpaper_tear",null],"desc":"editor created this"},
@@ -48,11 +48,9 @@
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this"},
             {"type":"wall","mats":["wallpaper",null],"desc":"editor created this"},null,{"type":"space","mats":["pavement",null],"desc":"editor created this"}],
         [null,null,null,null,
-            {"type":"clocked","mats":["wallpaper_door","wallpaper_door"],"desc":"editor created this", 
-                "extra": { "to": "/levels/test2/simple", "player_pos": { "x": 9, "z": 3 }, "player_facing": 1,
-                    "if": "door-locked", "key": "unlock-door", "once": true }
-
-        }   ,
+            {"type":"door","mats":["wallpaper_door",null],"desc":"editor created this",
+                "extra": { "to": "/levels/test2/simple", "player_pos": { "x": 9, "z": 3 }, "player_facing": 1 }
+            },
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this"},
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this"},
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this"},
@@ -112,9 +110,26 @@
             {"type":"space","mats":["pavement",null],"desc":"editor created this"},
             {"type":"space","mats":["pavement",null],"desc":"editor created this"},
             {"type":"space","mats":["pavement",null],"desc":"editor created this"}]
-        ],
+    ],
     "persisted": {
-        "door-locked": true,
-        "unlock-door-espace": true
+        "guardian-can-speak": true
+    },
+    "dialog": {
+        "guardians-warning": [
+            { "speaker": "guardian", "emote": "happy", "msg": "Hello" },
+            { "speaker": "player", "emote": "scared", "msg": "Wha -? Who's talking?" },
+            { "speaker": "guardian", "emote": "happy", "msg": "Relax, I am a friend." },
+            { "speaker": "player", "emote": "scared", "msg": "Where are you?" },
+            { "speaker": "guardian", "emote": "default", "msg": "You are in grave danger, coming here.  You are reckless." },
+            { "speaker": "player", "emote": "sad", "msg": "I have to do this." },
+            { "speaker": "guardian", "emote": "default", "msg": "You know little.  Leave this place, I beg you." },
+            { "speaker": "player", "emote": "bored", "msg": "No can do lady." }
+        ]
+    },
+    "events": {
+        "guardian-speak": {
+            "type": "dialog",
+            "dialog": "guardians-warning"
+        }
     }
 }

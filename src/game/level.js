@@ -1,4 +1,5 @@
 import { store_get, store_set, store_set_prefix, store_set_global } from '../persistence_manager'
+import EventListener from './event_listener'
 
 class Level {
     constructor(grid, data) {
@@ -8,6 +9,10 @@ class Level {
 
         this.player_start = data['player_start'];
         this.persisted_values = data['persisted'];
+
+        if(data['events']) {
+            this.event_listener = new EventListener(this.grid, data['events']);
+        }
 
         store_set_global("clevel", data['level-uri']);
         store_set_prefix(data['level-uri']);
