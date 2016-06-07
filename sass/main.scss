@@ -105,7 +105,7 @@ body {
         }
 
         #inventory {
-            padding-top: 20px; 
+            padding-top: 20px;
 
             .invitem {
                 border: 1px solid black;
@@ -120,6 +120,25 @@ body {
 
             .invselected {
                 background-color: blue;
+            }
+        }
+    }
+
+    #menu-group {
+        position: fixed;
+        top: 5;
+        left: 5;
+        zIndex: -500;
+
+        a {
+            padding: 5px;
+            text-decoration: none;
+            color: black;
+            width: 100%;
+
+            &:hover {
+                background-color: grey;
+                color: white;
             }
         }
     }

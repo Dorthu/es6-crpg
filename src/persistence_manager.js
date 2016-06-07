@@ -44,3 +44,14 @@ export function store_get_global(key, def=null) {
     if(!r) return def;
     return r;
 }
+
+export function clear_store(st, pref = null) {
+    let to_clear = st + "::";
+    if(pref) to_clear += pref + "::";
+
+    for(let i of Object.keys(store)) {
+        if(i.startsWith(to_clear)) {
+            store.removeItem(i);
+        }
+    }
+}

@@ -17,7 +17,7 @@ import { obj_map } from './level_loader'
 import TurnController from './turn_controller'
 import GameTurnController from './game/turn_controller'
 import DialogChoice from './game/dialog_choice'
-import { store_init, store_get_global} from './persistence_manager'
+import { store_init, store_get_global, clear_store } from './persistence_manager'
 
 const width = 600;
 const height = 500;
@@ -27,6 +27,19 @@ canvas.width = width;
 canvas.height = height;
 
 document.getElementById("canvas_goes_here").appendChild(canvas);
+
+const but = document.createElement("a");
+but.className="dropdown-item";
+but.innerHTML="Delete Save";
+but.href="#";
+but.onclick=function() {
+    console.log('deleting save..');
+    clear_store("game");
+    location.reload();
+}
+const bli = document.createElement("li");
+bli.appendChild(but);
+document.getElementById("menu").appendChild(bli);
 
 const renderer = new THREE.WebGLRenderer(assign({
     canvas: canvas
