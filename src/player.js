@@ -25,6 +25,9 @@ class Player {
         this.logbox = new LogBox();
 
         this.grid.player = this;
+        this.loaded = true;
+
+        this._save_move();
     }
 
     move(back=false) {
@@ -175,10 +178,12 @@ class Player {
     }
 
     destroy() {
-        ///nothing for now?
+        this.loaded = false;
     }
 
     _save_move() {
+        if(!this.loaded) return;
+
         store_set_global('player_x', this.loc.x);
         //store_set_global('player_y', this.loc.y); //we don't *really* use this..
         store_set_global('player_z', this.loc.z);
