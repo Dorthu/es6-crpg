@@ -130,7 +130,7 @@ if(store_get_global('player_x')) {
         x: Number.parseInt(store_get_global('player_x')),
         z: Number.parseInt(store_get_global('player_z'))
     };
-    player_facing = store_get_global('player_facing');
+    player_facing = Number.parseInt(store_get_global('player_facing'));
 }
 switch_level({ to: toLevel, player_pos: player_pos, player_facing: player_facing, initial: initial });
 
