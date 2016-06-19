@@ -46,7 +46,9 @@
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this"},
             {"type":"wall","mats":["wallpaper",null],"desc":"editor created this"},
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this"},
-            {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this"},
+            {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this", "extra": { "object": {
+                "type": "ai", "mats": ["tentacle"] }
+            }},
             {"type":"enclosed","mats":["woodfloor","ceiling"],"desc":"editor created this"},
             {"type":"wall","mats":["wallpaper",null],"desc":"editor created this"},null,{"type":"space","mats":["pavement",null],"desc":"editor created this"}],
         [null,null,null,null,

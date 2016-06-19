@@ -46,6 +46,8 @@ class GamePlayer extends Player {
         } else if(event.keyCode == 82) {
             this.reload();
         } else if(event.keyCode == 84) {
+            this.overlay.add_text_particle("It worked", null);
+/*
             this.overlay.add_dialog([
                 { 'speaker': 'player', 'emote': 'happy', 'prompt': {
                         'msg': "So far, so good, huh?",
@@ -55,6 +57,7 @@ class GamePlayer extends Player {
                 { 'speaker': 'player', 'emote': 'bored', 'msg': "..." },
                 { 'speaker': 'player', 'emote': 'sad', 'msg': "I should stop talking to myself.." }
             ]);
+*/
         }
         super.input(event);
     }
