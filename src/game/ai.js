@@ -1,4 +1,5 @@
 import SolidItem from '../solid_item'
+import TextParticle from '../text_particle'
 
 class AI extends SolidItem {
     constructor(grid, loc, mats, desc, extra) {
@@ -12,10 +13,19 @@ class AI extends SolidItem {
         this.grid.event_manager.subscribe_list('ai_turn', e => this.step(e), this);
     }
 
+    _get_damage_momentum() {
+        return {
+            x: (this.grid.player.loc.x - this.loc.x) + Math.random() - .5,
+            y:-1,
+            z: (this.grid.player.loc.z - this.loc.z) + Math.random() - .5
+        }
+    }
+
     suffer_attack(attack) {
         if(attack['damage']) {
             this.health -= attack.damage;
-            this.grid.player.overlay.add_text_particle(attack.damage, 'red');
+            this.tp = new TextParticle(this.grid, attack.damage, 'red',
+                    this.grid.translate(this.loc), this._get_damage_momentum());
             if(this.health < 1) {
                 this.destroy();
             }
@@ -33,11 +43,9 @@ class AI extends SolidItem {
             This is where AI behavior happens.
             In the base AI class, this will do nothing.
         */
-        console.log(this.turns % this.act_on);
         if(!(this.turns++ % this.act_on)) {
             if(!this.ai_follow_player()) {
     //            this.ai_wander();
-                    console.log("at player or can't see them");
                 if(this.is_beside_player()) {
                     this.ai_attack();
                     return true;
@@ -59,7 +67,6 @@ class AI extends SolidItem {
             TODO: right now, this won't let AIs see you in a 4x4 room if you're
             on a diagnal
         */
-        console.log("has los?");
         let los_dir = {x: 0, z: 0};
         let mag = 0;
         if(this.loc.x == this.grid.player.loc.x) {
@@ -70,22 +77,16 @@ class AI extends SolidItem {
             mag  = Math.abs(this.loc.x - this.grid.player.loc.x);
         }
 
-        console.log('los_dir is x: '+los_dir.x+' z: '+los_dir.z);
-        console.log('mag is: '+mag);
         if(!(los_dir.x || los_dir.z)) {
             return false;
         }
 
         for(let c = 0; c < mag; c++) {
             let o = this.grid.get(this.loc.x + los_dir.x * c, this.loc.z + los_dir.z * c);
-            console.log(o);
             if(o && o.solid && !o.transparent) {
-                console.log("no los to player: blocked by:");
-                console.log(o);
                 return false;
             }
         }
-        console.log("has los to player: true");
         return true;
     }
 
@@ -128,42 +129,29 @@ class AI extends SolidItem {
         /*
             This behavior follows the path the AI has already gotten.
         */
-        console.log("following path..");
         if(!this.path || this.path_step >= this.path.length) {
-            console.log(this.path);
-            console.log("not enough path "+ this.path_step);
             return false;
         }
 
         let next = this.path[this.path_step++];
-        console.log("moving to next place from index "+(this.path_step-1));
-        console.log(next);
         if(this.grid.can_move_to({x: next.x, y: this.loc.y, z: next.z})) {
-            console.log("moving!");
             this.grid.object_move(this, { x: next.x, y: this.loc.y, z: next.z });
             return true;
         }
-        console.log("could not move to point");
         this.path_step--;
         return false;
     }
 
     ai_follow_player() {
-        console.log("Following player..");
         if(this.has_los_to_player()) {
             this.update_path_to_player();
-            console.log("path updated!");
         }
 
         if(this.path) {
-            console.log("attempting to move..");
-            console.log(this.path);
             if(this.ai_follow_path()) {
-                console.log("moved toward player");
                 return true;
             }
         }
-        console.log("no action");
 
         ///no aciton was taken
         return false;

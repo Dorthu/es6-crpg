@@ -136,6 +136,7 @@ switch_level({ to: toLevel, player_pos: player_pos, player_facing: player_facing
 
 const startTime = new Date().getTime();
 function render() {
+    grid.tick(new Date().getTime() - startTime);
     overlay.tick(new Date().getTime() - startTime);
     requestAnimationFrame( render );
     renderer.clear();

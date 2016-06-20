@@ -1,11 +1,13 @@
 import { THREE } from './Three'
+import { get_material } from './texture_lookup'
 
 class TextParticle {
-    constructor(overlay, text, color, pos) {
+    constructor(grid, text, color, pos, momentum={x:0,y:0,z:0}) {
         this.lifetime = 0;
         this.startDelta = -1;
 
-        this.overlay = overlay;
+        this.grid = grid;
+        this.momentum = momentum;
 
         /*
             You can't render text in Three.js, but the recommended
@@ -13,23 +15,32 @@ class TextParticle {
             and use that canvas as a texture for a sprite.
         */
         this.ele = document.createElement('canvas');
+        this.ele.width = 64;
+        this.ele.height = 64;
+
         let context = this.ele.getContext('2d');
-        context.font = "Bold 22px Ariel";
+        context.font = "Bold 32px Ariel";
         context.fillStyle = "#FF0000";
-        context.fillText(text, 0, 22);
+        context.textAlign="center";
+        context.fillText(text, 32, 32);
+
         this.texture = new THREE.Texture(this.ele);
         this.texture.needsUpdate = true;
-        this.mat = new THREE.SpriteMaterial({ map: this.texture });
-        this.sprite = new THREE.Sprite(this.mat);
-        this.sprite.scale.set(overlay.width, overlay.height, 1);
-        this.sprite.position.set(0, 0, 1);
 
-        this.overlay.scene.add(this.sprite);
+        this.mat = new THREE.SpriteMaterial({ map: this.texture });
+
+        this.sprite = new THREE.Sprite(this.mat);
+        this.sprite.scale.set(1,1, 1);
+        this.sprite.position.set(pos.x, pos['y'] ? pos.y : 0, pos.z);
+
+        this.grid.scene.add(this.sprite);
+        this.grid.tickers.push(this);
     }
 
     destroy() {
-        this.overlay.remove(this);
-        this.overlay.scene.remove(this.sprite);
+        let i = this.grid.tickers.indexOf(this);
+        ~i && this.grid.tickers.splice(i, 1);
+        this.grid.scene.remove(this.sprite);
         this.mat.dispose();
         this.texture.dispose();
     }
@@ -39,10 +50,9 @@ class TextParticle {
         else { delta = delta - this.startDelta; }
 
         this.lifetime += delta;
-        let tval = this.ele.style.top;
-        tval = tval.substring(0, tval.length-2);
-        tval = parseInt(tval);
-        this.ele.style.top = (tval + delta/500) + "px";
+        this.sprite.position.set(this.sprite.position.x + this.momentum.x / (.2 * delta),
+                this.sprite.position.y + this.momentum.y / (.2 * delta),
+                this.sprite.position.z + this.momentum.z / (.2 * delta));
 
         if(this.lifetime > 50000 && Math.random() < .15) {
             this.destroy();

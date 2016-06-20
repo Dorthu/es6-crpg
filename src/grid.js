@@ -12,6 +12,7 @@ class Grid {
         this.player = null;
         this.path_network = new PathNetwork(this);
         this.post_load_actions = [];
+        this.tickers = [];
     }
 
     create(cls, loc, mats, desc, extra) {
@@ -75,6 +76,12 @@ class Grid {
 
     set_scene_change_callback(func) {
         this.scene_change_callback = func;
+    }
+
+    tick(delta) {
+        for(let i of this.tickers) {
+            i.tick(delta);
+        }
     }
 }
 
