@@ -65,8 +65,8 @@ if(editor_mode) {
     init_serializer(obj_map);
     player_class = EditorPlayer;
 }
-const stats = new PlayerStatus(100);
 store_init(editor_mode ? "editor" : "game");
+const stats = new PlayerStatus(100);
 inventory.deserialize();
 
 ///tmp for testing
@@ -145,3 +145,10 @@ function render() {
     renderer.render(overlay.scene, overlay.cam);
 }
 render();
+
+/// exmaple of making a function callable from the web console - for testing use
+const global_func = function() {
+    console.log("it worked");
+}
+
+document.gfun = global_func;

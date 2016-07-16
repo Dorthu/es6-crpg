@@ -1,3 +1,5 @@
+import { store_set_global, store_get_global } from '../persistence_manager'
+
 const color_map = {
     grey: 'default',
     blue: 'primary',
@@ -8,7 +10,7 @@ const color_map = {
 };
 
 class PlayerStatus {
-    constructor(health) {
+    constructor(health, load=true) {
         this.section = document.getElementById('player_status');
         this.health = { name: 'Health', value: health, max: 100, color: 'green', type: 'bar' };
         this.chambers = { name: 'Chambers', value: 6, max: 6, type: 'chambers' };
@@ -16,9 +18,11 @@ class PlayerStatus {
         this.stats = [
             this.health,
         ];
+        if(load) { this.load(); }
     }
 
     update(show_anim=false) {
+        this.save();
         let html = '';
         for(let stat of this.stats) {
             html += this._get_status_bar(stat.name, 100*(stat.value/stat.max), stat.color);
@@ -54,6 +58,20 @@ class PlayerStatus {
         }
         ret += "</span>";
         return ret;
+    }
+
+    save() {
+        store_set_global("player-health", this.health.value);
+        store_set_global("player-chambers", this.chambers.value);
+        store_set_global("player-ammo", this.ammo.value);
+    }
+
+    load() {
+        if(store_get_global("player-health")) {
+            this.health.value = store_get_global("player-health");
+            this.chambers.value = store_get_global("player-chambers");
+            this.ammo.value = store_get_global("player-ammo");
+        }
     }
 }
 
