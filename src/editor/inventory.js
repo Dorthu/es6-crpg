@@ -49,7 +49,6 @@ class EditorInventory extends Inventory {
         i.placeholder = 'Search for Entites or Materials';
         i.onkeydown = ent => this.searchbox_keydown(ent);
         i.addEventListener('awesomplete-selectcomplete', ent => this.accept_search());
-        console.log("doing the do");
 
         let s = document.createElement('span');
         s.className = 'editor-search';
@@ -74,10 +73,8 @@ class EditorInventory extends Inventory {
         let i = document.getElementById('searchbox');
         let res = i.value;
 
-        console.log(res);
         if(res) {
             let parts = res.split("::");
-            console.log(parts);
             if(parts && parts.length == 2) {
                 if(parts[0] == 'obj') {
                     ///selected an object class

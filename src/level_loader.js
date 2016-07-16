@@ -48,17 +48,13 @@ class LevelLoader {
     }
 
     _get_level(uri) {
-        console.log("requesting "+uri);
-        console.log(this.level_json);
         if(!this.level_json[uri]) {
-            console.log('never seen it');
             let req = new XMLHttpRequest();
             req.open('GET', uri+'.json', false); ///run this synchronously
             req.send(null);
 
             if(!req.status == 200) { return {}; } ///bad things
             this.level_json[uri] = JSON.parse(req.responseText);
-            console.log('set it');
         }
         return this.level_json[uri];
     }
@@ -67,10 +63,7 @@ class LevelLoader {
         let all_data = this._get_level(uri);
 
         let data = all_data;
-        console.log("level is this:");
-        console.log(data);
         if(data.constructor != Array && all_data['level']) {
-            console.log("it was a complex level");
             data['level-uri'] = uri;
             data = all_data.level;
         }

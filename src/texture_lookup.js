@@ -25,18 +25,14 @@ function make_material(texture, type) {
 const resources = require('./loaders/directory_loader!./empty');
 
 export function init_textures() {
-    console.log(resources);
     mat_map={};
     for(let cdir of Object.keys(resources)) {
-        console.log("looking at "+cdir);
-        console.log(resources[cdir]);
         for(let cimg of resources[cdir]) {
             let ikey = cimg.substring(0, cimg.length-4); //lop off extension
             let tex = load_texture('resources/'+cdir+'/'+cimg);
             mat_map[ikey] = make_material(tex, cdir);
         }
     }
-    console.log(mat_map);
 }
 
 export function init_textures_old() {
@@ -92,10 +88,8 @@ export function get_material(name, pos={x: 0, z: 0}) {
     let m = mat_map[name];
     if(Array.isArray(m)) {
         let i = pos.x + pos.z;
-        console.log("pos is "+pos.x + ", "+pos.z);
         i = i % m.length;
         m = m[i];
-        console.log("it was an array..returning index "+i);
     }
     return m;
 };

@@ -11,8 +11,6 @@ class Inventory {
     }
 
     add_item(item) {
-        console.log("adding item to inventory..");
-        console.log(item);
         this.items.push(item);
         if(this.selected === -1) { this.selected = 0; }
         this.update();
@@ -31,7 +29,6 @@ class Inventory {
 
         ///equipped things
         serial = '';
-        console.log(Object.keys(this.equipped));
         for(let slot of Object.keys(this.equipped)) {
             serial += this._get_equipped_html(slot);
         }
@@ -72,7 +69,6 @@ class Inventory {
                 break;
             }
         }
-        console.log("done removing, selected is "+this.selected);
         this.update();
     }
 

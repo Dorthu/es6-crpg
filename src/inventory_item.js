@@ -10,7 +10,6 @@ function equip(i, effect, inventory) {
             inventory.selected = 0;
         }
     }
-    console.log("Equipped");
 }
 
 function heal(i, effect, player, inventory) {

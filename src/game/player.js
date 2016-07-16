@@ -35,7 +35,6 @@ class GamePlayer extends Player {
     }
 
     input(event) {
-        console.log("got input");
         if(!this.has_turn) { return; }
         this.has_turn = false;
 

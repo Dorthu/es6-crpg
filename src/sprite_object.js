@@ -7,8 +7,6 @@ class SpriteObject extends GridObject {
     constructor(grid, loc, mats, desc, extra) {
         super(grid, loc, mats, desc, extra);
 
-        console.log("making sprite object");console.log(this.grid);
-        console.log(mats);
         this.useable = false;
 
         this.meshes = [ new THREE.Sprite(get_material(mats[0])) ];
@@ -22,7 +20,6 @@ class SpriteObject extends GridObject {
         this.meshes[0].position.y = pos.y;
         this.meshes[0].position.z = pos.z;
 
-        console.log(this.meshes[0]);console.log(this.loc);
         this.grid.scene.add(this.meshes[0]);
     }
 

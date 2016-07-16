@@ -9,7 +9,6 @@ export function store_init(name) {
 
 export function store_set_prefix(pref) {
     prefix = pref;
-    console.log("setting prefix to "+prefix);
 }
 
 export function store_get_prefix() {

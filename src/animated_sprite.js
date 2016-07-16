@@ -12,7 +12,6 @@ class AnimatedSprite {
         this.on_complete_callback = complete_callback;
 
         this.anim_rate = extra && extra['anim_rate'] ? extra.anim_rate : 60;
-        console.log("added a thing");
 
         let _this = this;
         this.tex = new THREE.TextureLoader().load(file, function() {

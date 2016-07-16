@@ -4,7 +4,6 @@ export function init_serializer(map) {
     for(let e of Object.keys(map)) {
         rev_map[map[e].name] = e;
     }
-    console.log(rev_map);
 }
 
 class LevelSerializer {
@@ -13,7 +12,6 @@ class LevelSerializer {
     }
 
     serialize(obj) {
-        console.log(obj);
         let serial = {
             type: rev_map[obj.constructor.name],
             mats: obj._mats,
@@ -27,8 +25,6 @@ class LevelSerializer {
                     desc: obj.object.desc
                 }
             };
-            console.log("mats are this:");
-            console.log(serial.extra.object.mats);
         }
 
         return serial;
